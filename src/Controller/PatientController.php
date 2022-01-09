@@ -20,7 +20,7 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/patients")
+     * @Route("/patients", name="patients_list")
      */
     public function patients(): Response
     {
@@ -31,12 +31,23 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/patients/new")
+     * @Route("/patients/new", name="new_patient")
      */
     public function new(Request $request): Response
     {
         $patient = new Patient('', '', '', '');
         $form = $this->createForm(PatientType::class, $patient);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $patient = $form->getData();
+
+            $this->entityManager->persist($patient);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('patients_list');
+        }
 
         return $this->renderForm('patients/new.html.twig', [
             'form' => $form,

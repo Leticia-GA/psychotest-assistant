@@ -54,18 +54,46 @@ class Patient
         return $this->name;
     }
 
+    public function setName(string $name): Patient
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
     public function getSurnames(): string
     {
         return $this->surnames;
+    }
+
+    public function setSurnames(string $surnames): Patient
+    {
+        $this->surnames = $surnames;
+
+        return $this;
     }
 
     public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
+    
+    public function setPhoneNumber(string $phoneNumber): Patient
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
 
     public function getEmail(): string
     {
         return $this->email;
+    }
+
+    public function setEmail(string $email): Patient
+    {
+        $this->email = $email;
+
+        return $this;
     }
 }
