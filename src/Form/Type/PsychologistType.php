@@ -18,6 +18,7 @@ class PsychologistType extends AbstractType
             ->add('surnames', TextType::class, ['label' => 'Apellidos'])
             ->add('phoneNumber', TextType::class, ['label' => 'Teléfono'])
             ->add('email', TextType::class, ['label' => 'Email'])
+            ->add('password', TextType::class, ['label' => 'Contraseña'])
             ->add('education', TextType::class, ['label' => 'Estudios Universitarios'])
             ->add('specialization', TextType::class, ['label' => 'Especialización'])
             ->add('collegiateNumber', TextType::class, ['label' => 'Número de Colegiado/a']) 

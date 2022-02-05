@@ -7,15 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity()
  */
-class Psychologist
+class Psychologist extends User
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
     /**
      * @ORM\Column(type="string", length=100)
      */
@@ -34,11 +27,6 @@ class Psychologist
     /**
      * @ORM\Column(type="string", length=200)
      */
-    private $email;
-
-    /**
-     * @ORM\Column(type="string", length=200)
-     */
     private $education;
 
     /**
@@ -51,20 +39,14 @@ class Psychologist
      */
     private $collegiateNumber;
 
-    public function __construct(string $name, string $surnames, string $phoneNumber, string $email, string $education, string $specialization, string $collegiateNumber)
+    public function __construct(string $name, string $surnames, string $phoneNumber, string $education, string $specialization, string $collegiateNumber)
     {
         $this->name = $name;
         $this->surnames = $surnames;
         $this->phoneNumber = $phoneNumber;
-        $this->email = $email;
         $this->education = $education;
         $this->specialization = $specialization;
         $this->collegiateNumber = $collegiateNumber;  
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
     }
 
     public function getName(): string
@@ -99,18 +81,6 @@ class Psychologist
     public function setPhoneNumber(string $phoneNumber): Psychologist
     {
         $this->phoneNumber = $phoneNumber;
-
-        return $this;
-    }
-
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): Psychologist
-    {
-        $this->email = $email;
 
         return $this;
     }

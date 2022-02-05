@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Entity\User;
 use App\Form\Type\PatientType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PatientController extends AbstractController
@@ -21,6 +24,7 @@ class PatientController extends AbstractController
 
     /**
      * @Route("/patients", name="patients_list")
+     * 
      */
     public function patients(): Response
     {
@@ -32,8 +36,9 @@ class PatientController extends AbstractController
 
     /**
      * @Route("/patients/new", name="new_patient")
+     * 
      */
-    public function new(Request $request): Response
+    public function new(UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {
         $patient = new Patient('', '', '', '');
         $form = $this->createForm(PatientType::class, $patient);
@@ -42,6 +47,14 @@ class PatientController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $patient = $form->getData();
+
+            $hashedPassword = $passwordHasher->hashPassword(
+                $patient,
+                $patient->getPassword()
+            );
+
+            $patient->setPassword($hashedPassword);
+            $patient->setRoles([User::ROLE_USER]);
 
             $this->entityManager->persist($patient);
             $this->entityManager->flush();
