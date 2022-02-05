@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Psicólogos</h1>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellidos</th>
+            <th>Teléfono</th>
+            <th>Estudios</th>
+            <th>Especialización</th>
+            <th>Número de Colegiación</th>
+        </tr>
+
+        {% for psychologist in psychologists %}
+            <tr>
+                <td>{{ psychologist.name }}</td>
+                <td>{{ psychologist.surnames }}</td>
+                <td>{{ psychologist.phoneNumber }}</td>
+                <td>{{ psychologist.education }}</td>
+                <td>{{ psychologist.specialization }}</td>
+                <td>{{ psychologist.collegiateNumber }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href="{{ path('new_psychologist') }}">Añadir nuevo psicólogo</a>
+{% endblock %}

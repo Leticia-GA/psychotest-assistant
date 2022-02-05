@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Nuevo Psicólogo</h1>
+    {{ form(form) }}
+    <a href="{{ path('psychologists_list') }}">Listado de Psicoólogos</a>
+{% endblock %}
