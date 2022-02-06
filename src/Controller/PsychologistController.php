@@ -24,7 +24,7 @@ class PsychologistController extends AbstractController
 
     /**
      * @Route("/psychologists", name="psychologists_list")
-     * 
+     * @IsGranted(User::ROLE_ADMIN)
      */
     public function pshychologists(): Response
     {
@@ -36,7 +36,7 @@ class PsychologistController extends AbstractController
 
     /**
      * @Route("/psychologists/new", name="new_psychologist")
-     * 
+     * @IsGranted(User::ROLE_ADMIN)
      */
     public function new(UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {
@@ -54,7 +54,8 @@ class PsychologistController extends AbstractController
             );
 
             $psychologist->setPassword($hashedPassword);
-            $psychologist->setRoles([User::ROLE_USER]);
+            $psychologist->setRoles([User::ROLE_USER, User::ROLE_PSYC]);
+            
 
             $this->entityManager->persist($psychologist);
             $this->entityManager->flush();

@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\Type\PatientType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ class PatientController extends AbstractController
 
     /**
      * @Route("/patients", name="patients_list")
-     * 
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
      */
     public function patients(): Response
     {
@@ -36,7 +37,7 @@ class PatientController extends AbstractController
 
     /**
      * @Route("/patients/new", name="new_patient")
-     * 
+     * @IsGranted(User::ROLE_PSYC)
      */
     public function new(UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {
