@@ -1,8 +1,29 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Dashboard</h1>
-    <p><a href="{{ path('new_patient') }}">Añadir nuevo paciente</a></p>
-    <p><a href="{{ path('new_psychologist') }}">Añadir nuevo Psicólogo</a></p>
-    <p><a href="{{ path('app_logout') }}">Cerrar Sesión</a></p>
+   
+   <nav class="navbar navbar-light bg-light">
+      <a class="navbar-brand" href="#">
+
+         {# assets/images/logoLight.png was copied to public/build/images/logoLight.png #}
+         <img src="{{ asset('build/images/logoLight.png') }}" width="200" alt="PSY-A logo">
+      </a>
+   </nav>
+
+   <nav class="navbar navbar-light bg-light">
+      <span class="navbar-brand mb-0 h1">Navbar</span>
+   </nav>
+
+   <h1 class="">Dashboard</h1>
+    
+   {% if is_granted('ROLE_PSYC') %}
+      <p><a href="{{ path('new_patient') }}">Añadir nuevo paciente</a></p>
+   {% endif %}
+
+   {% if is_granted('ROLE_ADMIN') %}
+      <p><a href="{{ path('new_psychologist') }}">Añadir nuevo Psicólogo</a></p>
+   {% endif %}
+
+
+   <p><a href="{{ path('app_logout') }}">Cerrar Sesión</a></p>
 {% endblock %}
