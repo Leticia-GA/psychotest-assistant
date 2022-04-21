@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\Psychologist;
 use App\Entity\User;
+use App\Entity\Psychologist;
 use App\Form\Type\PsychologistType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class PsychologistController extends AbstractController
@@ -35,10 +36,50 @@ class PsychologistController extends AbstractController
     }
 
     /**
-     * @Route("/psychologists/new", name="new_psychologist")
+     * @Route("/psychologist/{id}", name="psychologist_details", requirements={"id"="\d+"})
      * @IsGranted(User::ROLE_ADMIN)
      */
-    public function new(UserPasswordHasherInterface $passwordHasher, Request $request): Response
+    public function pshychologist(int $id): Response
+    {
+        $repository = $this->entityManager->getRepository(Psychologist::class);
+        $psychologist = $repository->find($id);
+
+        if(!$psychologist) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('psychologists/details.html.twig', ['psychologist' => $psychologist]);
+    }
+
+    /**
+     * @Route("/psychologist/{id}", name="psychologist_update", requirements={"id"="\d+"})
+     * @IsGranted(User::ROLE_ADMIN)
+     */
+    public function update(int $id): Response
+    {
+        $repository = $this->entityManager->getRepository(Psychologist::class);
+        $psychologists = $repository->findAll();
+
+        return $this->render('psychologists/list.html.twig', ['psychologists' => $psychologists]);
+    }
+
+    /**
+     * @Route("/psychologist/{id}", name="psychologist_remove", requirements={"id"="\d+"})
+     * @IsGranted(User::ROLE_ADMIN)
+     */
+    public function remove(int $id): Response
+    {
+        $repository = $this->entityManager->getRepository(Psychologist::class);
+        $psychologists = $repository->findAll();
+
+        return $this->render('psychologists/list.html.twig', ['psychologists' => $psychologists]);
+    }
+
+    /**
+     * @Route("/psychologists/create", name="psychologist_create")
+     * @IsGranted(User::ROLE_ADMIN)
+     */
+    public function create(UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {
         $psychologist = new Psychologist('', '', '', '', '', '', '');
         $form = $this->createForm(PsychologistType::class, $psychologist);

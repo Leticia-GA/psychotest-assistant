@@ -2,13 +2,5 @@
 
 {% block content %}
    
-   <br>
-   {% if is_granted('ROLE_PSYC') %}
-      <p><a href="{{ path('new_patient') }}">Añadir nuevo paciente</a></p>
-   {% endif %}
-
-   {% if is_granted('ROLE_ADMIN') %}
-      <p><a href="{{ path('new_psychologist') }}">Añadir nuevo Psicólogo</a></p>
-   {% endif %}
 
 {% endblock %}

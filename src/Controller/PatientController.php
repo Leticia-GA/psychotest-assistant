@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\Patient;
 use App\Entity\User;
+use App\Entity\Patient;
 use App\Form\Type\PatientType;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class PatientController extends AbstractController
 {
@@ -36,10 +37,50 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/patients/new", name="new_patient")
+     * @Route("/patient/{id}", name="patient_details", requirements={"id"="\d+"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
+     */
+    public function patient(int $id): Response
+    {
+        $repository = $this->entityManager->getRepository(Patient::class);
+        $patient = $repository->find($id);
+
+        if(!$patient) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('patients/details.html.twig', ['patient' => $patient]);
+    }
+
+    /**
+     * @Route("/patient/{id}", name="patient_update", requirements={"id"="\d+"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
+     */
+    public function update(int $id): Response
+    {
+        $repository = $this->entityManager->getRepository(patient::class);
+        $patients = $repository->findAll();
+
+        return $this->render('patients/list.html.twig', ['patients' => $patients]);
+    }
+
+    /**
+     * @Route("/patient/{id}", name="patient_remove", requirements={"id"="\d+"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
+     */
+    public function remove(int $id): Response
+    {
+        $repository = $this->entityManager->getRepository(patient::class);
+        $patients = $repository->findAll();
+
+        return $this->render('patients/list.html.twig', ['patients' => $patients]);
+    }
+
+    /**
+     * @Route("/patients/create", name="patient_create")
      * @IsGranted(User::ROLE_PSYC)
      */
-    public function new(UserPasswordHasherInterface $passwordHasher, Request $request): Response
+    public function create(UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {
         $patient = new Patient('', '', '', '');
         $form = $this->createForm(PatientType::class, $patient);

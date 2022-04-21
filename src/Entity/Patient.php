@@ -24,6 +24,16 @@ class Patient extends User
      */
     private $phoneNumber;
 
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $diagnostic;
+
+    /**
+     * @ORM\Column(type="string", length=250)
+     */
+    private $caseHistory;
+
     public function __construct(string $name, string $surnames, string $phoneNumber)
     {
         $this->name = $name;
@@ -63,6 +73,30 @@ class Patient extends User
     public function setPhoneNumber(string $phoneNumber): Patient
     {
         $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getDiagnostic(): string
+    {
+        return $this->diagnostic;
+    }
+    
+    public function setDiagnostic(string $diagnostic): Patient
+    {
+        $this->diagnostic = $diagnostic;
+
+        return $this;
+    }
+
+    public function getCaseHistory(): string
+    {
+        return $this->caseHistory;
+    }
+    
+    public function setCaseHistory(string $caseHistory): Patient
+    {
+        $this->caseHistory = $caseHistory;
 
         return $this;
     }

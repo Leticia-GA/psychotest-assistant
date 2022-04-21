@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <main class="container">
+        <h1 class="mt-4 mb-4">Pacientes</h1>
+        <h2>Detalles</h2>
+        <hr>
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Diagnóstico</th>
+                    <th>Historial Clínico</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ patient.name }}</td>
+                    <td>{{ patient.surnames }}</td>
+                    <td>{{ patient.phoneNumber }}</td>
+                    <td>{{ patient.diagnostic }}</td>
+                    <td>{{ patient.caseHistory }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><a href="{{ path('patient_update', {id: patient.id}) }}">Editar</a></p>
+        <p><a href="{{ path('patient_remove', {id: patient.id}) }}">Eliminar</a></p>
+        <p><a href="{{ path('patients_list') }}">Volver al listado de Pacientes</a></p>
+    </main>
+{% endblock %}
