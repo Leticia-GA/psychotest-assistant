@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Psychologist;
 use App\Form\Type\PsychologistType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,13 +65,24 @@ class PsychologistController extends AbstractController
     }
 
     /**
-     * @Route("/psychologist/{id}", name="psychologist_remove", requirements={"id"="\d+"})
+     * @Route("/psychologist_remove/{id}", name="psychologist_remove", requirements={"id"="\d+"})
      * @IsGranted(User::ROLE_ADMIN)
      */
-    public function remove(int $id): Response
+    public function remove(int $id, ManagerRegistry $doctrine): Response
     {
-        $repository = $this->entityManager->getRepository(Psychologist::class);
-        $psychologists = $repository->findAll();
+        $entityManager = $doctrine->getManager();
+        $psychologist = $entityManager->getRepository(Psychologist::class)->find($id);
+
+        if (!$psychologist) {
+            throw $this->createNotFoundException(
+                'No se ha encontrado ningún Psicólogo para el ID: '.$id
+            );
+        }
+
+        $entityManager->remove($psychologist);
+        $entityManager->flush();
+
+        $psychologists = $this->entityManager->getRepository(Psychologist::class)->findAll();
 
         return $this->render('psychologists/list.html.twig', ['psychologists' => $psychologists]);
     }

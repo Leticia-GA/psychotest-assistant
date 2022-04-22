@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Entity\Patient;
 use App\Form\Type\PatientType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -65,20 +66,31 @@ class PatientController extends AbstractController
     }
 
     /**
-     * @Route("/patient/{id}", name="patient_remove", requirements={"id"="\d+"})
+     * @Route("/patient_remove/{id}", name="patient_remove", requirements={"id"="\d+"})
      * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
      */
-    public function remove(int $id): Response
+    public function remove(int $id, ManagerRegistry $doctrine): Response
     {
-        $repository = $this->entityManager->getRepository(patient::class);
-        $patients = $repository->findAll();
+        $entityManager = $doctrine->getManager();
+        $patient = $entityManager->getRepository(Patient::class)->find($id);
+
+        if (!$patient) {
+            throw $this->createNotFoundException(
+                'No se ha encontrado ningún Psicólogo para el ID: '.$id
+            );
+        }
+
+        $entityManager->remove($patient);
+        $entityManager->flush();
+
+        $patients = $this->entityManager->getRepository(Patient::class)->findAll();
 
         return $this->render('patients/list.html.twig', ['patients' => $patients]);
     }
 
     /**
      * @Route("/patients/create", name="patient_create")
-     * @IsGranted(User::ROLE_PSYC)
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
      */
     public function create(UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {

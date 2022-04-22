@@ -18,8 +18,11 @@ class PatientType extends AbstractType
             ->add('surnames', TextType::class, ['label' => 'Apellidos'])
             ->add('phoneNumber', TextType::class, ['label' => 'Teléfono'])
             ->add('email', TextType::class, ['label' => 'Email'])
+            ->add('diagnostic', TextType::class, ['label' => 'Diagnóstico'])
+            ->add('caseHistory', TextType::class, ['label' => 'Historial Clínico'])
             ->add('password', TextType::class, ['label' => 'Contraseña'])
             ->add('save', SubmitType::class, ['label' => 'Añadir'])
+            
         ;
     }
 
