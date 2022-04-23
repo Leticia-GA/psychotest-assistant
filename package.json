@@ -19,5 +19,6 @@
         "watch": "encore dev --watch",
         "build": "encore production --progress"
     },
-    "version": "v1.22.17"
+    "version": "v1.22.17",
+    "dependencies": {}
 }

@@ -15,46 +15,18 @@
                <li class="nav-item">
                   <a class="nav-link small" href="#">Notificaciones</a>
                </li>
-               <li class="nav-item">
-                  <a class="nav-link small" href="{{ path('app_logout') }}">Cerrar Sesión</a>
-               </li>
             </ul>
-
-            <ul class="navbar-nav">
-               <li class="nav-item">
-                  <a id="userDropdown" class="nav-link dropdown-toggle small" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     Nombre
-                     <img class="img-profile rounded-circle" src="{{ asset('build/images/undraw_profile.svg') }}" width="30">
-
-                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
-                           <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                              Perfil
-                        </a>
-                        <a class="dropdown-item" href="#">
-                           <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                              Ajustes
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{{ path('app_logout') }}" data-toggle="modal" data-target="#logoutModal">
-                           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                              Cerrar Sesión
-                        </a>
-                     </div>
-                  </a>
-                  {#  
-                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                     <li><a class="dropdown-item" href="#">Action</a></li>
-                     <li><a class="dropdown-item" href="#">Another action</a></li>
-                     <li>
-                     <hr class="dropdown-divider">
-                     </li>
-                     <li><a class="dropdown-item" href="#">Something else here</a></li>
-                  </ul>
-                  #}
-               </li>
-
-            </ul>
+            
+            <div class="dropdown">
+               <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{ app.user.name }}
+                  <img class="img-profile rounded-circle" src="{{ asset('build/images/undraw_profile.svg') }}" width="30">
+               </button>
+               
+               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item" href="{{ path('app_logout') }}">Cerrar Sesión</a></li>
+               </ul>
+            </div>
          </div>
       </div>
    </nav>
@@ -63,7 +35,7 @@
       <ul class="nav nav-pills nav-justified">
          {% if is_granted('ROLE_ADMIN') %}
             <li class="nav-item">
-               <a {% if (app.request.pathInfo == path('psychologists_list')) %} 
+               <a {% if (app.request.get('_route')  == 'psychologists_list' or app.request.get('_route') == 'psychologist_details') %} 
                      class="nav-link active" aria-current="page" 
                   {% else %} 
                      class="nav-link" href="{{ path('psychologists_list') }}" 
@@ -74,7 +46,7 @@
 
          {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
             <li class="nav-item">
-               <a {% if (app.request.pathInfo == path('patients_list')) %} 
+               <a {% if (app.request.get('_route')  == 'patients_list' or app.request.get('_route') == 'patient_details') %} 
                      class="nav-link active" aria-current="page" 
                   {% else %} 
                      class="nav-link" href="{{ path('patients_list') }}" 

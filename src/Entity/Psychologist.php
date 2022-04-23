@@ -10,16 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Psychologist extends User
 {
     /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=250)
-     */
-    private $surnames;
-
-    /**
      * @ORM\Column(type="string", length=20)
      */
     private $phoneNumber;
@@ -49,36 +39,12 @@ class Psychologist extends User
         $this->collegiateNumber = $collegiateNumber;  
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): Psychologist
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSurnames(): string
-    {
-        return $this->surnames;
-    }
-
-    public function setSurnames(string $surnames): Psychologist
-    {
-        $this->surnames = $surnames;
-
-        return $this;
-    }
-
     public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
     
-    public function setPhoneNumber(string $phoneNumber): Psychologist
+    public function setPhoneNumber(string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
 
@@ -90,7 +56,7 @@ class Psychologist extends User
         return $this->education;
     }
 
-    public function setEducation($education)
+    public function setEducation($education): self
     {
         $this->education = $education;
 
@@ -102,7 +68,7 @@ class Psychologist extends User
         return $this->specialization;
     }
 
-    public function setSpecialization($specialization)
+    public function setSpecialization($specialization): self
     {
         $this->specialization = $specialization;
 
@@ -114,7 +80,7 @@ class Psychologist extends User
         return $this->collegiateNumber;
     }
 
-    public function setCollegiateNumber($collegiateNumber)
+    public function setCollegiateNumber($collegiateNumber): self
     {
         $this->collegiateNumber = $collegiateNumber;
 

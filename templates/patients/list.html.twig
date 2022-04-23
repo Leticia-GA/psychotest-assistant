@@ -31,7 +31,8 @@
             </tbody>
         </table>
 
-        {% if is_granted('ROLE_PSYC') %}
+        {# {% if is_granted('ROLE_PSYC') %} #}
+        {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
             <a href="{{ path('patient_create') }}">Añadir nuevo paciente</a>
         {% endif %}
     </main>

@@ -22,10 +22,14 @@ class AppFixtures extends Fixture
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $admin,
-            "admin"
+            'admin'
         );
 
-        $admin->setPassword($hashedPassword);
+        $admin
+            ->setName('Leticia')
+            ->setSurnames('González Álvarez')
+            ->setPassword($hashedPassword)
+        ;
 
         $manager->persist($admin);
 

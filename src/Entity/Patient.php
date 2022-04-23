@@ -10,16 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Patient extends User
 {
     /**
-     * @ORM\Column(type="string", length=100)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="string", length=250)
-     */
-    private $surnames;
-
-    /**
      * @ORM\Column(type="string", length=20)
      */
     private $phoneNumber;
@@ -41,36 +31,12 @@ class Patient extends User
         $this->phoneNumber = $phoneNumber;
     }
 
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): Patient
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSurnames(): string
-    {
-        return $this->surnames;
-    }
-
-    public function setSurnames(string $surnames): Patient
-    {
-        $this->surnames = $surnames;
-
-        return $this;
-    }
-
     public function getPhoneNumber(): string
     {
         return $this->phoneNumber;
     }
     
-    public function setPhoneNumber(string $phoneNumber): Patient
+    public function setPhoneNumber(string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
 
@@ -82,7 +48,7 @@ class Patient extends User
         return $this->diagnostic;
     }
     
-    public function setDiagnostic(string $diagnostic): Patient
+    public function setDiagnostic(string $diagnostic): self
     {
         $this->diagnostic = $diagnostic;
 
@@ -94,7 +60,7 @@ class Patient extends User
         return $this->caseHistory;
     }
     
-    public function setCaseHistory(string $caseHistory): Patient
+    public function setCaseHistory(string $caseHistory): self
     {
         $this->caseHistory = $caseHistory;
 

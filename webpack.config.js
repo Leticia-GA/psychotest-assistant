@@ -21,6 +21,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('delete_confirmation', './assets/js/delete-confirmation.js')
     .addStyleEntry('app_style', './assets/styles/global.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
@@ -70,7 +71,8 @@ Encore
     //.enableIntegrityHashes(Encore.isProduction())
 
     // uncomment if you're having problems with a jQuery plugin
-    //.autoProvidejQuery()
+    .autoProvidejQuery()
+   
     .enableSassLoader()
 
     .copyFiles({
@@ -85,8 +87,6 @@ Encore
         // only copy files matching this pattern
         //pattern: /\.(png|jpg|jpeg)$/
     })
-
-    // .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();
