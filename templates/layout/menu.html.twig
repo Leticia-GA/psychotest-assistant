@@ -24,7 +24,11 @@
 
         {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
             <li class="nav-item">
-               <a class="nav-link" href="{{ path('test_list') }}">Tests</a>
+               <a c{% if (app.request.get('_route')  == 'test_list' or app.request.get('_route') == 'test_details') %} 
+                     class="nav-link active" aria-current="page" 
+                  {% else %} 
+                     class="nav-link" href="{{ path('test_list') }}" 
+                  {%endif%}>Test</a>
             </li>
         {% endif %}
     </ul>
