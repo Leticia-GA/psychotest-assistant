@@ -1,0 +1,28 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block content %}
+    <main class="container">
+        <h1 class="mt-4 mb-4">Test</h1>
+        <hr>
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for singleTest in test %}
+                    <tr>
+                        <td>{{ singleTest.name }}</td>
+                        <td>
+                            <a href="{{ path('test_details', {id: singleTest.id}) }}">Detalles</a>
+                            <a href="#">Asignar a paciente</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+{% endblock %}

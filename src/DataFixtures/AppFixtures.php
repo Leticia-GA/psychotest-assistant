@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Test;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -18,6 +19,11 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $this->adminFixtures($manager);
+        $this->testFixtures($manager);
+    }
+
+    public function adminFixtures(ObjectManager $manager): void {
         $admin = new User('admin@gmail.com', [User::ROLE_USER, User::ROLE_ADMIN]);
 
         $hashedPassword = $this->passwordHasher->hashPassword(
@@ -32,6 +38,16 @@ class AppFixtures extends Fixture
         ;
 
         $manager->persist($admin);
+
+        $manager->flush();
+    }
+
+    public function testFixtures(ObjectManager $manager): void {
+        for ($i = 1; $i < 6; $i++) {
+            $manager->persist(
+                new Test('Test de Prueba '.$i)
+            );
+        }
 
         $manager->flush();
     }

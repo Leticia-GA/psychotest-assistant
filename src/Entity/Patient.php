@@ -15,12 +15,12 @@ class Patient extends User
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="string", length=250)
+     * @ORM\Column(type="text")
      */
     private $diagnostic;
 
     /**
-     * @ORM\Column(type="string", length=250)
+     * @ORM\Column(type="text")
      */
     private $caseHistory;
 

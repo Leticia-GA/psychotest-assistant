@@ -1,0 +1,23 @@
+{% extends 'layout/layout.html.twig' %}
+
+{% block content %}
+    <main class="container">
+        <h1 class="mt-4 mb-4">Test</h1>
+        <h2>Detalles</h2>
+        <hr>
+        <table class="table">
+            <thead class="table-light">
+                <tr>
+                    <th>Nombre</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ test.name }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p><a href="#">Asignar a paciente</a></p>
+    </main>
+{% endblock %}
