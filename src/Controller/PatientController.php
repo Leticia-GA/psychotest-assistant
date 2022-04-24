@@ -76,7 +76,7 @@ class PatientController extends AbstractController
 
         if (!$patient) {
             throw $this->createNotFoundException(
-                'No se ha encontrado ningún Psicólogo para el ID: '.$id
+                'No se ha encontrado ningún Paciente para el ID: '.$id
             );
         }
 
