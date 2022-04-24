@@ -13,12 +13,12 @@ class Test
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=200)
      */
-    protected $name;
+    private $name;
 
     public function __construct(string $name)
     {

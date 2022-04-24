@@ -15,19 +15,22 @@ class Patient extends User
     private $phoneNumber;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $diagnostic;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     private $caseHistory;
 
-    public function __construct(string $name, string $surnames, string $phoneNumber)
-    {
-        $this->name = $name;
-        $this->surnames = $surnames;
+    public function __construct(
+        string $name, 
+        string $surnames, 
+        string $email,
+        string $phoneNumber
+    ) {
+        parent::__construct($name, $surnames, $email, [User::ROLE_USER]);
         $this->phoneNumber = $phoneNumber;
     }
 
@@ -45,7 +48,7 @@ class Patient extends User
 
     public function getDiagnostic(): string
     {
-        return $this->diagnostic;
+        return (string) $this->diagnostic;
     }
     
     public function setDiagnostic(string $diagnostic): self
@@ -57,7 +60,7 @@ class Patient extends User
 
     public function getCaseHistory(): string
     {
-        return $this->caseHistory;
+        return (string) $this->caseHistory;
     }
     
     public function setCaseHistory(string $caseHistory): self

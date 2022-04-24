@@ -29,17 +29,23 @@ class Psychologist extends User
      */
     private $collegiateNumber;
 
-    public function __construct(string $name, string $surnames, string $phoneNumber, string $education, string $specialization, string $collegiateNumber)
-    {
-        $this->name = $name;
-        $this->surnames = $surnames;
+    public function __construct(
+        string $name, 
+        string $surnames, 
+        string $email,
+        string $phoneNumber, 
+        string $education, 
+        string $specialization, 
+        string $collegiateNumber
+    ) {
+        parent::__construct($name, $surnames, $email, [User::ROLE_USER, User::ROLE_PSYC]);
         $this->phoneNumber = $phoneNumber;
         $this->education = $education;
         $this->specialization = $specialization;
         $this->collegiateNumber = $collegiateNumber;  
     }
 
-    public function getPhoneNumber(): string
+    public function getPhoneNumber(): string 
     {
         return $this->phoneNumber;
     }

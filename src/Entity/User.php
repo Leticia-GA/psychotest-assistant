@@ -51,8 +51,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     protected $password;
 
-    public function __construct(string $email, array $roles)
+    public function __construct(string $name, string $surnames, string $email, array $roles)
     {
+        $this->name = $name;
+        $this->surnames = $surnames;
         $this->email = $email;
         $this->roles = $roles;
     }
