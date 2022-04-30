@@ -17,8 +17,10 @@
                     <tr>
                         <td>{{ singleTest.name }}</td>
                         <td>
-                            <a href="{{ path('test_details', {id: singleTest.id}) }}">Detalles</a>
-                            <a href="#">Asignar a paciente</a>
+                            <a class="btn btn-secondary" href="{{ path('test_details', {id: singleTest.id}) }}">Detalles</a>
+                            {% if is_granted('ROLE_PSYC') %}
+                                <a class="btn btn-success" href="#">Asignar a paciente</a>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}

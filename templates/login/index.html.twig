@@ -1,10 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
     <div class="container">
         <div class="row vh-100 justify-content-center align-items-center">
             <div class="col-auto bg-light p-5">
@@ -12,6 +8,9 @@
                     <img src="{{ asset('build/images/logoDark.png') }}" class="img-fluid rounded d-block mx-auto pb-5" width="400" alt="PSY-A logo">
                     
                     <div class="mb-3">
+                        {% if error %}
+                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
                         <label for="username" class="form-label">Email:</label>
                         <input type="email" class="form-control" id="username" aria-describedby="emailHelp" name="_username" value="{{ last_username }}">
                         <div id="emailHelp" class="form-text">ejemplo@gmail.com</div>

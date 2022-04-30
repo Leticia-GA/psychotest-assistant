@@ -13,7 +13,7 @@
 
         {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
             <li class="nav-item">
-               <a {% if (app.request.get('_route')  == 'patients_list' or app.request.get('_route') == 'patient_details') %} 
+               <a {% if (app.request.get('_route')  == 'patients_list' or app.request.get('_route') == 'patient_details' or app.request.get('_route') == 'associated_test_create') %} 
                      class="nav-link active" aria-current="page" 
                   {% else %} 
                      class="nav-link" href="{{ path('patients_list') }}" 

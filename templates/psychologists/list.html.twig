@@ -28,8 +28,8 @@
                         <td>{{ psychologist.phoneNumber }}</td>
                         <td>{{ psychologist.specialization }}</td>
                         <td>
-                            <a href="{{ path('psychologist_details', {id: psychologist.id}) }}">Detalles</a>
-                            <a href="{{ path('psychologist_update', {id: psychologist.id}) }}">Editar</a>
+                            <a class="btn btn-secondary" href="{{ path('psychologist_details', {id: psychologist.id}) }}">Detalles</a>
+                            <a class="btn btn-warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}">Editar</a>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal">
                                 Eliminar
                             </button>

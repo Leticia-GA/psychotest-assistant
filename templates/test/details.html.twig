@@ -2,22 +2,39 @@
 
 {% block content %}
     <main class="container">
-        <h1 class="mt-4 mb-4">Test</h1>
-        <h2>Detalles</h2>
-        <hr>
-        <table class="table">
-            <thead class="table-light">
-                <tr>
-                    <th>Nombre</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ test.name }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <p class="display-6 mt-5 mb-5">{{ test.name }}</p>
 
-        <p><a href="#">Asignar a paciente</a></p>
+        <hr>
+
+        <div class="row m-2 pt-4">
+            <div class="col-5">
+                <span class="text-primary fw-bold">Categoría</span>
+                <p>---</p>
+            </div>
+            <div class="col-5">
+                <span class="text-primary fw-bold">Edad de aplicación</span>
+                <p>--</p>
+            </div>
+        </div>
+
+        <div class="row m-2 pt-4">
+            <div class="col">
+                <span class="text-primary fw-bold">Autor/es</span>
+                <p>--</p>
+
+                <span class="text-primary fw-bold">Descripción</span>
+                <p>--</p>
+            </div>
+        </div>
+
+        {% if is_granted('ROLE_PSYC') %}
+            <div class="row mt-4">
+                <p><a class="btn btn-success" href="#">Asignar a paciente</a></p>
+            </div>
+        {% endif %}
+        
+        <div class="row mt-4 text-end">
+            <p><a href="{{ path('test_list') }}">Volver al listado de Test</a></p>
+        </div>
     </main>
 {% endblock %}

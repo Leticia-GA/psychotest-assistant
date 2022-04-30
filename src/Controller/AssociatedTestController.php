@@ -48,6 +48,9 @@ class AssociatedTestController extends AbstractController
 
         $form->handleRequest($request);
 
-        return $this->render('associated_test/new.html.twig', ['form' => $form->createView()]);
+        return $this->render('associated_test/new.html.twig', [
+            'form' => $form->createView(), 
+            'patient' => $patient
+        ]);
     }  
 }
