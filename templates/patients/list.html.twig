@@ -27,8 +27,9 @@
                         <td>{{ patient.surnames }}</td>
                         <td>{{ patient.phoneNumber }}</td>
                         <td>
-                            <a href="{{ path('patient_details', {id: patient.id}) }}">Detalles</a>
-                            <a href="{{ path('patient_update', {id: patient.id}) }}">Editar</a>
+                            <a class="btn btn-primary" href="{{ path('patient_details', {id: patient.id}) }}">Detalles</a>
+                            <a class="btn btn-success" href="{{ path('associated_test_create', {id: patient.id}) }}">Asignar Test</a>
+                            <a class="btn btn-warning" href="{{ path('patient_update', {id: patient.id}) }}">Editar</a>
                             <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal">
                                 Eliminar
                             </button>

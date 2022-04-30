@@ -7,12 +7,12 @@ use App\Entity\Patient;
 use App\Form\Type\PatientType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Security\Core\Security as SecurityService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\Security as SecurityService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -63,8 +63,11 @@ class PatientController extends AbstractController
             $patient = $repository->find($id);
         }
 
-        if(in_array("ROLE_ADMIN", $userRoles)) {
-            $patient = $repository->findBy(["psychologist" => $user->getId()]);
+        if(in_array("ROLE_PSYC", $userRoles)) {
+            $patient = $repository->findOneBy([
+                "id" => $id, 
+                "psychologist" => $user->getId()
+            ]);
         }
 
         if(!$patient) {
@@ -100,8 +103,11 @@ class PatientController extends AbstractController
             $patient = $repository->find($id);
         }
 
-        if(in_array("ROLE_ADMIN", $userRoles)) {
-            $patient = $repository->findBy(["psychologist" => $user->getId()]);
+        if(in_array("ROLE_PSYC", $userRoles)) {
+            $patient = $repository->findOneBy([
+                "id" => $id, 
+                "psychologist" => $user->getId()
+            ]);
         }
 
         if(!$patient) {

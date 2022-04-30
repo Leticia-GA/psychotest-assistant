@@ -24,15 +24,17 @@ class AssociatedTest
 
     /**
      * @ORM\ManyToOne(targetEntity="Patient")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $patient;
 
     /**
      * @ORM\ManyToOne(targetEntity="Test")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $test;
 
-    public function __construct(Patient $patient, Test $test)
+    public function __construct(Patient $patient, ?Test $test = null)
     {
         $this->patient = $patient;
         $this->test = $test;
@@ -64,7 +66,7 @@ class AssociatedTest
         return $this;
     }
 
-    public function getTest(): Test {
+    public function getTest(): ?Test {
         return $this->test;
     }
 
