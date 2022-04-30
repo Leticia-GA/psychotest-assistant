@@ -62,6 +62,24 @@ class PsychologistController extends AbstractController
         $psychologists = $repository->findAll();
 
         return $this->render('psychologists/list.html.twig', ['psychologists' => $psychologists]);
+
+        /* 
+        $entityManager = $doctrine->getManager();
+        $psychologist = $entityManager->getRepository(Product::class)->find($id);
+
+        if (!$psychologist) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
+        $psychologist->setName('New product name!');
+        $entityManager->flush();
+
+        return $this->redirectToRoute('product_show', [
+            'id' => $psychologist->getId()
+        ]);
+        */
     }
 
     /**

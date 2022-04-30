@@ -7,6 +7,7 @@ use App\Entity\Patient;
 use App\Form\Type\PatientType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\Security as SecurityService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,10 +30,21 @@ class PatientController extends AbstractController
      * @Route("/patients", name="patients_list")
      * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
      */
-    public function patients(): Response
+    public function patients(SecurityService $security): Response
     {
+        $user = $security->getUser();
+        $userRoles = $user->getRoles();
         $repository = $this->entityManager->getRepository(Patient::class);
-        $patients = $repository->findAll();
+
+        $patients = [];
+
+        if(in_array("ROLE_ADMIN", $userRoles)) {
+            $patients = $repository->findAll();
+        }
+
+        if(in_array("ROLE_PSYC", $userRoles)) {
+            $patients = $repository->findBy(["psychologist" => $user->getId()]);
+        }
 
         return $this->render('patients/list.html.twig', ['patients' => $patients]);
     }
@@ -41,10 +53,19 @@ class PatientController extends AbstractController
      * @Route("/patient/{id}", name="patient_details", requirements={"id"="\d+"})
      * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
      */
-    public function patient(int $id): Response
+    public function patient(int $id, SecurityService $security): Response
     {
+        $user = $security->getUser();
+        $userRoles = $user->getRoles();
         $repository = $this->entityManager->getRepository(Patient::class);
-        $patient = $repository->find($id);
+
+        if(in_array("ROLE_ADMIN", $userRoles)) {
+            $patient = $repository->find($id);
+        }
+
+        if(in_array("ROLE_ADMIN", $userRoles)) {
+            $patient = $repository->findBy(["psychologist" => $user->getId()]);
+        }
 
         if(!$patient) {
             throw new NotFoundHttpException();
@@ -69,30 +90,35 @@ class PatientController extends AbstractController
      * @Route("/patient_remove/{id}", name="patient_remove", requirements={"id"="\d+"})
      * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
      */
-    public function remove(int $id, ManagerRegistry $doctrine): Response
+    public function remove(int $id, ManagerRegistry $doctrine, SecurityService $security): Response
     {
-        $entityManager = $doctrine->getManager();
-        $patient = $entityManager->getRepository(Patient::class)->find($id);
+        $user = $security->getUser();
+        $userRoles = $user->getRoles();
+        $repository = $this->entityManager->getRepository(Patient::class);
 
-        if (!$patient) {
-            throw $this->createNotFoundException(
-                'No se ha encontrado ningún Paciente para el ID: '.$id
-            );
+        if(in_array("ROLE_ADMIN", $userRoles)) {
+            $patient = $repository->find($id);
         }
 
-        $entityManager->remove($patient);
-        $entityManager->flush();
+        if(in_array("ROLE_ADMIN", $userRoles)) {
+            $patient = $repository->findBy(["psychologist" => $user->getId()]);
+        }
 
-        $patients = $this->entityManager->getRepository(Patient::class)->findAll();
+        if(!$patient) {
+            throw new NotFoundHttpException();
+        }
 
-        return $this->render('patients/list.html.twig', ['patients' => $patients]);
+        $this->entityManager->remove($patient);
+        $this->entityManager->flush();
+
+        return $this->forward('App\Controller\PatientController::patients');
     }
 
     /**
      * @Route("/patients/create", name="patient_create")
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
+     * @IsGranted(User::ROLE_PSYC)
      */
-    public function create(UserPasswordHasherInterface $passwordHasher, Request $request): Response
+    public function create(UserPasswordHasherInterface $passwordHasher, Request $request, SecurityService $security): Response
     {
         $patient = new Patient('', '', '', '');
         $form = $this->createForm(PatientType::class, $patient);
@@ -100,6 +126,7 @@ class PatientController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $security->getUser();
             $patient = $form->getData();
 
             $hashedPassword = $passwordHasher->hashPassword(
@@ -107,8 +134,11 @@ class PatientController extends AbstractController
                 $patient->getPassword()
             );
 
-            $patient->setPassword($hashedPassword);
-            $patient->setRoles([User::ROLE_USER]);
+            $patient
+                ->setPsychologist($user)
+                ->setPassword($hashedPassword)
+                ->setRoles([User::ROLE_USER])
+            ;
 
             $this->entityManager->persist($patient);
             $this->entityManager->flush();

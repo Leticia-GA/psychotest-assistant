@@ -1,35 +1,39 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/header.html.twig' %}
 
 {% block content %}
     <main class="container">
-        <h1 class="mt-4 mb-4">Psicólogos</h1>
-        <h2>Detalles</h2>
-        <hr>
-        <table class="table">
-            <thead class="table-light">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Teléfono</th>
-                    <th>Estudios</th>
-                    <th>Especialización</th>
-                    <th>Número de Colegiación</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ psychologist.name }}</td>
-                    <td>{{ psychologist.surnames }}</td>
-                    <td>{{ psychologist.phoneNumber }}</td>
-                    <td>{{ psychologist.education }}</td>
-                    <td>{{ psychologist.specialization }}</td>
-                    <td>{{ psychologist.collegiateNumber }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <p class="display-6 mt-5 mb-5">{{ psychologist.name~' '~psychologist.surnames}}</p>
 
-        <p><a href="{{ path('psychologist_update', {id: psychologist.id}) }}">Editar</a></p>
-        <p><a href="{{ path('psychologist_remove', {id: psychologist.id}) }}">Eliminar</a></p>
-        <p><a href="{{ path('psychologists_list') }}">Volver al listado de Psicólogos</a></p>
+        <hr>
+             
+        <div class="row m-2 pt-4">
+            <div class="col-5">
+                <span class="text-primary fw-bold">Teléfono</span>
+                <p>{{ psychologist.phoneNumber }}</p>
+            </div>
+            <div class="col-5">
+                <span class="text-primary fw-bold">Email</span>
+                <p>{{ psychologist.email }}</p>
+            </div>
+        </div>
+
+        <div class="row m-2 pt-4">
+            <div class="col">
+                <span class="text-primary fw-bold">Estudios</span>
+                <p>{{ psychologist.education }}</p>
+
+                <span class="text-primary fw-bold">Número de Colegiación</span>
+                <p>{{ psychologist.collegiateNumber }}</p>
+
+                <span class="text-primary fw-bold">Especialización</span>
+                <p>{{ psychologist.specialization }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-4 text-end">
+            <p><a href="{{ path('psychologist_update', {id: psychologist.id}) }}">Editar</a></p>
+            <p><a href="{{ path('psychologist_remove', {id: psychologist.id}) }}">Eliminar</a></p>
+            <p><a href="{{ path('psychologists_list') }}">Volver al listado de Psicólogos</a></p>
+        </div>
     </main>
 {% endblock %}

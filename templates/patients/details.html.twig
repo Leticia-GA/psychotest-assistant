@@ -1,33 +1,36 @@
-{% extends 'layout/layout.html.twig' %}
+{% extends 'layout/header.html.twig' %}
 
 {% block content %}
     <main class="container">
-        <h1 class="mt-4 mb-4">Pacientes</h1>
-        <h2>Detalles</h2>
-        <hr>
-        <table class="table">
-            <thead class="table-light">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Teléfono</th>
-                    <th>Diagnóstico</th>
-                    <th>Historial Clínico</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>{{ patient.name }}</td>
-                    <td>{{ patient.surnames }}</td>
-                    <td>{{ patient.phoneNumber }}</td>
-                    <td>{{ patient.diagnostic }}</td>
-                    <td>{{ patient.caseHistory }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <p class="display-6 mt-5 mb-5">{{ patient.name~' '~patient.surnames}}</p>
 
-        <p><a href="{{ path('patient_update', {id: patient.id}) }}">Editar</a></p>
-        <p><a href="{{ path('patient_remove', {id: patient.id}) }}">Eliminar</a></p>
-        <p><a href="{{ path('patients_list') }}">Volver al listado de Pacientes</a></p>
+        <hr>
+        
+        <div class="row m-2 pt-4">
+            <div class="col-5">
+                <span class="text-primary fw-bold">Teléfono</span>
+                <p>{{ patient.phoneNumber }}</p>
+            </div>
+            <div class="col-5">
+                <span class="text-primary fw-bold">Email</span>
+                <p>{{ patient.email }}</p>
+            </div>
+        </div>
+
+        <div class="row m-2 pt-4">
+            <div class="col">
+                <span class="text-primary fw-bold">Diagnóstico</span>
+                <p>{{ patient.diagnostic }}</p>
+
+                <span class="text-primary fw-bold">Historial Clínico</span>
+                <p>{{ patient.caseHistory }}</p>
+            </div>
+        </div>
+
+        <div class="row mt-4 text-end">
+            <p><a href="{{ path('patient_update', {id: patient.id}) }}">Editar</a></p>
+            <p><a href="{{ path('patient_remove', {id: patient.id}) }}">Eliminar</a></p>
+            <p><a href="{{ path('patients_list') }}">Volver al listado de Pacientes</a></p>
+        </div>
     </main>
 {% endblock %}

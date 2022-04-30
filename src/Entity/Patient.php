@@ -24,6 +24,11 @@ class Patient extends User
      */
     private $caseHistory;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Psychologist")
+     */
+    private $psychologist;
+
     public function __construct(
         string $name, 
         string $surnames, 
@@ -66,6 +71,18 @@ class Patient extends User
     public function setCaseHistory(string $caseHistory): self
     {
         $this->caseHistory = $caseHistory;
+
+        return $this;
+    }
+
+    public function getPsychologist(): Psychologist
+    {
+        return $this->psychologist;
+    }
+    
+    public function setPsychologist(Psychologist $psychologist): self
+    {
+        $this->psychologist = $psychologist;
 
         return $this;
     }

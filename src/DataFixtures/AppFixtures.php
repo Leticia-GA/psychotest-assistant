@@ -7,6 +7,7 @@ use App\Entity\Patient;
 use App\Entity\Psychologist;
 use App\Entity\Test;
 use App\Entity\User;
+use App\Form\Type\PsychologistType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -23,9 +24,10 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $this->adminFixtures($manager);
-        $patient = $this->patientFixtures($manager);
+        $this->psychoFixtures($manager, "2");
+        $psychologist = $this->psychoFixtures($manager, "1");
+        $patient = $this->patientFixtures($manager, $psychologist);
         $this->testFixtures($manager, $patient);
-        $this->psychoFixtures($manager);
     }
 
     public function adminFixtures(ObjectManager $manager): void {
@@ -43,20 +45,20 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
-    public function psychoFixtures(ObjectManager $manager): void {
+    public function psychoFixtures(ObjectManager $manager, string $index): Psychologist {
         $psycho = new Psychologist(
-            'Psicólogo 1',
-            'Apellidos 1',
-            'psico1@gmail.com',
-            '699124578',
+            'Psicólogo '.$index,
+            'Apellidos '.$index,
+            'psico'.$index.'@gmail.com',
+            '69900000'.$index,
             'Licenciatura en Psicología',
             'Terapia Sistémica',
-            'O-1111'
+            'O-000'.$index
         );
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $psycho,
-            'psico1'
+            'psico'.$index
         );
 
         $psycho->setPassword($hashedPassword);
@@ -64,15 +66,19 @@ class AppFixtures extends Fixture
         $manager->persist($psycho);
 
         $manager->flush();
+
+        return $psycho;
     }
 
-    public function patientFixtures(ObjectManager $manager): Patient {
+    public function patientFixtures(ObjectManager $manager, Psychologist $psychologist): Patient {
         $patient = new Patient(
             'Paciente 1',
             'Apellidos 1',
             'paciente1@gmail.com',
             '699124578'
         );
+
+        $patient->setPsychologist($psychologist);
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $patient,
