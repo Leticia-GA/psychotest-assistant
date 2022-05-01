@@ -2,7 +2,7 @@
 
 {% block content %}
    <main class="container">
-        <h1 class="mt-4 mb-4">Test</h1>
+        <h1 class="mt-4 mb-4">Notificaciones</h1>
         <hr>
         <table class="table">
             <thead class="table-light">
@@ -17,7 +17,7 @@
                     <tr>
                         <td>{{ associatedTest.test.name }}</td>
                         <td>
-                            <a href="#">Realizar Test</a>
+                            <a class="btn btn-primary" href="{{ path('test_done_create', {id: associatedTest.id}) }}">Realizar Test</a>
                         </td>
                     </tr>
                 {% endfor %}

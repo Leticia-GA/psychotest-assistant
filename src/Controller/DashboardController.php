@@ -29,7 +29,10 @@ class DashboardController extends AbstractController
         }
 
         $repository = $entityManager->getRepository(AssociatedTest::class);
-        $test = $repository->findBy(["patient" => $user->getId()]);
+        $test = $repository->findBy(
+            ["patient" => $user->getId()],
+            ["date" => 'DESC']
+        );
 
         return $this->render('dashboard/patient/index.html.twig', ['test' => $test]);
     }

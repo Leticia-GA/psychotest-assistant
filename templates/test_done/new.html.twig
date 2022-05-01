@@ -2,17 +2,16 @@
 
 {% block content %}
     <main class="container">
-        <p class="display-6 mt-5 mb-5">{{ patient.name~' '~patient.surnames}}</p>
+        <p class="display-6 mt-5 mb-5">{{ test.name }}</p>
 
         <hr>
         
         <div class="row m-2 pt-4">
-            <h1>Asignar Test</h1>
             {{ form(form) }}
         </div>
 
         <div class="row mt-4 text-end">
-            <p><a href="{{ path('patients_list') }}">Volver al listado de Pacientes</a></p>
+            <p><a class="btn btn-primary" href="{{ path('dashboard') }}">Volver</a></p>
         </div>
     </main>
 {% endblock %}
