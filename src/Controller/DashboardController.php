@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\AssociatedTest;
+use App\Entity\TestDone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -25,7 +26,10 @@ class DashboardController extends AbstractController
         }
 
         if(in_array("ROLE_PSYC", $userRoles)) {
-            return $this->render('dashboard/index.html.twig');
+            $repository = $entityManager->getRepository(TestDone::class);
+            $test = $repository->findAllTestDone($user->getId());
+
+            return $this->render('dashboard/psychologist/index.html.twig', ['test' => $test]);
         }
 
         $repository = $entityManager->getRepository(AssociatedTest::class);
