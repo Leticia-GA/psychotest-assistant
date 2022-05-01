@@ -24,10 +24,11 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $this->adminFixtures($manager);
-        $this->psychoFixtures($manager, "2");
-        $psychologist = $this->psychoFixtures($manager, "1");
-        $patient = $this->patientFixtures($manager, $psychologist);
-        $this->testFixtures($manager, $patient);
+        $psychologist1 = $this->psychoFixtures($manager, "1");
+        $psychologist2 = $this->psychoFixtures($manager, "2");
+        $patient1 = $this->patientFixtures($manager, $psychologist1, "1");
+        $this->patientFixtures($manager, $psychologist2, "2");
+        $this->testFixtures($manager, $patient1);
     }
 
     public function adminFixtures(ObjectManager $manager): void {
@@ -47,8 +48,8 @@ class AppFixtures extends Fixture
 
     public function psychoFixtures(ObjectManager $manager, string $index): Psychologist {
         $psycho = new Psychologist(
-            'Psicólogo '.$index,
-            'Apellidos '.$index,
+            'Psicólogo'.$index,
+            'Apellidos'.$index,
             'psico'.$index.'@gmail.com',
             '69900000'.$index,
             'Licenciatura en Psicología',
@@ -70,19 +71,19 @@ class AppFixtures extends Fixture
         return $psycho;
     }
 
-    public function patientFixtures(ObjectManager $manager, Psychologist $psychologist): Patient {
+    public function patientFixtures(ObjectManager $manager, Psychologist $psychologist, string $index): Patient {
         $patient = new Patient(
-            'Paciente 1',
-            'Apellidos 1',
-            'paciente1@gmail.com',
-            '699124578'
+            'Paciente'.$index,
+            'Apellidos'.$index,
+            'paciente'.$index.'@gmail.com',
+            '69912457'.$index
         );
 
         $patient->setPsychologist($psychologist);
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $patient,
-            'pac1'
+            'pac'.$index
         );
 
         $patient->setPassword($hashedPassword);
