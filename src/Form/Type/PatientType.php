@@ -21,7 +21,7 @@ class PatientType extends AbstractType
             ->add('diagnostic', TextType::class, ['label' => 'Diagnóstico'])
             ->add('caseHistory', TextType::class, ['label' => 'Historial Clínico'])
             ->add('password', TextType::class, ['label' => 'Contraseña'])
-            ->add('save', SubmitType::class, ['label' => 'Añadir'])
+            ->add('save', SubmitType::class, ['label' => 'Aceptar'])
             
         ;
     }

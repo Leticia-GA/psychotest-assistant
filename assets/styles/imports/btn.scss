@@ -32,6 +32,11 @@
     border: solid 0.1em $danger;   
 }
 
+.btn-check:focus + .btn-light, .btn-light:focus {
+    color: $danger;
+    border: solid 0.1em $danger;   
+}
+
 /*----------------- PROFILE BUTTON ----------------- */
 .btn-profile {
     border: none;
@@ -40,8 +45,4 @@
 .btn-profile:hover {
     background-color: transparent;
     color: $primary;
-}
-
-.nav-item:hover {
-    background-color: $secondary;
 }

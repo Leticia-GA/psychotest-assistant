@@ -22,7 +22,7 @@ class PsychologistType extends AbstractType
             ->add('education', TextType::class, ['label' => 'Estudios Universitarios'])
             ->add('specialization', TextType::class, ['label' => 'Especialización'])
             ->add('collegiateNumber', TextType::class, ['label' => 'Número de Colegiado/a']) 
-            ->add('save', SubmitType::class, ['label' => 'Añadir'])
+            ->add('save', SubmitType::class, ['label' => 'Aceptar'])
         ;
     }
 

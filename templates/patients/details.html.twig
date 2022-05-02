@@ -4,13 +4,21 @@
     <main class="container">
         <div class="row">
             <div class="display-6 col-10 mt-5 mb-5">{{ patient.name~' '~patient.surnames}}</div>
-
-            <div class="col-2 mt-5 mb-4">
-                <a class="btn btn-light warning" href="{{ path('patient_update', {id: patient.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a class="btn btn-light danger" href="{{ path('patient_remove', {id: patient.id}) }}"><i class="fa-solid fa-trash"></i></a>
-            </div>
+            
+            {% if is_granted('ROLE_PSYC') %}
+                <div class="col-2 mt-5 mb-4">
+                    <a class="btn btn-light warning" href="{{ path('patient_update', {id: patient.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    <a class="btn btn-light danger" href="{{ path('patient_remove', {id: patient.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                </div>
+            {% endif %}
         </div>
 
+        {% if is_granted('ROLE_ADMIN') %}
+            <div>Psicólogo: 
+                <a href="{{ path('psychologist_details', {id: psychologist.id}) }}">{{ psychologist.name~' '~psychologist.surnames }}</a>
+            </div>
+        {% endif %}
+        
         <hr>
         
         <div class="row m-2 pt-4">

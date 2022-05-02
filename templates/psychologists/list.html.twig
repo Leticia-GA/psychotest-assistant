@@ -8,9 +8,9 @@
 {% block content %}
     <main class="container">
         <div class="row">
-            <div class="h1 col-10 mt-4 mb-4">Psicólogos</div>
+            <div class="h1 col-9 mt-4 mb-4">Psicólogos</div>
 
-            <div class="col-2 mt-5 mb-4">
+            <div class="col-3 mt-5 mb-4">
                 <a class="btn btn-light primary" href="{{ path('psychologist_create') }}"><i class="fas fa-user-plus"></i> Añadir nuevo psicólogo</a>
             </div>
         </div>
@@ -20,11 +20,11 @@
         <table class="table">
             <thead class="table-light">
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">Teléfono</th>
-                    <th scope="col">Especialización</th>
-                    <th scope="col">Acciones</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Teléfono</th>
+                    <th>Especialización</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
 
@@ -35,7 +35,7 @@
                         <td>{{ psychologist.surnames }}</td>
                         <td>{{ psychologist.phoneNumber }}</td>
                         <td>{{ psychologist.specialization }}</td>
-                        <td>
+                        <td class="text-center">
                             <a class="btn btn-light success" href="{{ path('psychologist_details', {id: psychologist.id}) }}">
                                 <i class="fa-solid fa-circle-info"></i> Detalles
                             </a>

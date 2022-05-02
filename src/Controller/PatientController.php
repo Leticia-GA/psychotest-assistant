@@ -74,19 +74,49 @@ class PatientController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        return $this->render('patients/details.html.twig', ['patient' => $patient]);
+        return $this->render('patients/details.html.twig', [
+            'patient' => $patient,
+            'psychologist' => $patient->getPsychologist()
+        ]);
     }
 
     /**
-     * @Route("/patient/{id}", name="patient_update", requirements={"id"="\d+"})
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
+     * @Route("/patient/{id}/update", name="patient_update", requirements={"id"="\d+"})
+     * @IsGranted(User::ROLE_PSYC)
      */
-    public function update(int $id): Response
+    public function update(int $id, UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {
-        $repository = $this->entityManager->getRepository(patient::class);
-        $patients = $repository->findAll();
+        $repository = $this->entityManager->getRepository(Patient::class);
+        $patient = $repository->find($id);
 
-        return $this->render('patients/list.html.twig', ['patients' => $patients]);
+        if (!$patient) {
+            throw new NotFoundHttpException();
+        }
+
+        $form = $this->createForm(PatientType::class, $patient);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $patient = $form->getData();
+
+            $hashedPassword = $passwordHasher->hashPassword(
+                $patient,
+                $patient->getPassword()
+            );
+
+            $patient->setPassword($hashedPassword);
+            $patient->setRoles([User::ROLE_USER]);
+            
+
+            $this->entityManager->persist($patient);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('patients_list');
+        }
+
+        return $this->renderForm('patients/edit.html.twig', [
+            'form' => $form
+        ]);
     }
 
     /**

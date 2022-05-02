@@ -53,33 +53,42 @@ class PsychologistController extends AbstractController
     }
 
     /**
-     * @Route("/psychologist/{id}", name="psychologist_update", requirements={"id"="\d+"})
+     * @Route("/psychologist/{id}/update", name="psychologist_update", requirements={"id"="\d+"})
      * @IsGranted(User::ROLE_ADMIN)
      */
-    public function update(int $id): Response
+    public function update(int $id, UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {
         $repository = $this->entityManager->getRepository(Psychologist::class);
-        $psychologists = $repository->findAll();
-
-        return $this->render('psychologists/list.html.twig', ['psychologists' => $psychologists]);
-
-        /* 
-        $entityManager = $doctrine->getManager();
-        $psychologist = $entityManager->getRepository(Product::class)->find($id);
+        $psychologist = $repository->find($id);
 
         if (!$psychologist) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
+            throw new NotFoundHttpException();
         }
 
-        $psychologist->setName('New product name!');
-        $entityManager->flush();
+        $form = $this->createForm(PsychologistType::class, $psychologist);
+        $form->handleRequest($request);
 
-        return $this->redirectToRoute('product_show', [
-            'id' => $psychologist->getId()
+        if ($form->isSubmitted() && $form->isValid()) {
+            $psychologist = $form->getData();
+
+            $hashedPassword = $passwordHasher->hashPassword(
+                $psychologist,
+                $psychologist->getPassword()
+            );
+
+            $psychologist->setPassword($hashedPassword);
+            $psychologist->setRoles([User::ROLE_USER, User::ROLE_PSYC]);
+            
+
+            $this->entityManager->persist($psychologist);
+            $this->entityManager->flush();
+
+            return $this->redirectToRoute('psychologists_list');
+        }
+
+        return $this->renderForm('psychologists/edit.html.twig', [
+            'form' => $form
         ]);
-        */
     }
 
     /**

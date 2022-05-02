@@ -1,0 +1,7 @@
+{% extends 'layout/header.html.twig' %}
+
+{% block content %}
+    <h1>Editar Paciente</h1>
+    {{ form(form) }}
+    <a href="{{ path('patients_list') }}">Volver</a>
+{% endblock %}
