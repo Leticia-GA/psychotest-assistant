@@ -1,0 +1,47 @@
+.btn {
+    border: solid 0.1em;
+}
+
+.btn.primary:hover {
+    background-color: $primary;
+    color: white; 
+    border: solid 0.1em $primary;
+}
+
+.btn.success:hover {
+    background-color: $success;
+    color: white;    
+    border: solid 0.1em $success;
+}
+
+.btn.test:hover {
+    background-color: $test;
+    color: white;
+    border: solid 0.1em $test;     
+}
+
+.btn.warning:hover {
+    background-color: $warning;
+    color: white;
+    border: solid 0.1em $warning;   
+}
+
+.btn.danger:hover {
+    background-color: $danger;
+    color: white; 
+    border: solid 0.1em $danger;   
+}
+
+/*----------------- PROFILE BUTTON ----------------- */
+.btn-profile {
+    border: none;
+}
+
+.btn-profile:hover {
+    background-color: transparent;
+    color: $primary;
+}
+
+.nav-item:hover {
+    background-color: $secondary;
+}

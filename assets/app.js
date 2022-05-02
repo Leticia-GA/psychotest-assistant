@@ -5,7 +5,5 @@
  * (and its CSS file) in your base layout/header.html.twig (base.html.twig).
  */
 
-// any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
-
 import 'bootstrap/dist/js/bootstrap.bundle';
+import '@fortawesome/fontawesome-free/js/all.js';

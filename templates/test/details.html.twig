@@ -29,12 +29,9 @@
 
         {% if is_granted('ROLE_PSYC') %}
             <div class="row mt-4">
-                <p><a class="btn btn-success" href="#">Asignar a paciente</a></p>
+                <p><a class="btn btn-light test" href="#"><i class="fas fa-user"></i> Asignar a paciente</a></p>
+                <p><a class="btn btn-light primary" href="{{ path('test_list') }}"><i class="fas fa-angle-left"></i> Volver</a></p>
             </div>
         {% endif %}
-        
-        <div class="row mt-4 text-end">
-            <p><a href="{{ path('test_list') }}">Volver al listado de Test</a></p>
-        </div>
     </main>
 {% endblock %}

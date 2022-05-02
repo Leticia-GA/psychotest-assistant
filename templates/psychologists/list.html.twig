@@ -7,8 +7,16 @@
 
 {% block content %}
     <main class="container">
-        <h1 class="mt-4 mb-4">Psicólogos</h1>
+        <div class="row">
+            <div class="h1 col-10 mt-4 mb-4">Psicólogos</div>
+
+            <div class="col-2 mt-5 mb-4">
+                <a class="btn btn-light primary" href="{{ path('psychologist_create') }}"><i class="fas fa-user-plus"></i> Añadir nuevo psicólogo</a>
+            </div>
+        </div>
+
         <hr>
+
         <table class="table">
             <thead class="table-light">
                 <tr>
@@ -28,10 +36,14 @@
                         <td>{{ psychologist.phoneNumber }}</td>
                         <td>{{ psychologist.specialization }}</td>
                         <td>
-                            <a class="btn btn-secondary" href="{{ path('psychologist_details', {id: psychologist.id}) }}">Detalles</a>
-                            <a class="btn btn-warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}">Editar</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal">
-                                Eliminar
+                            <a class="btn btn-light success" href="{{ path('psychologist_details', {id: psychologist.id}) }}">
+                                <i class="fa-solid fa-circle-info"></i> Detalles
+                            </a>
+                            <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <button type="button" class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal">
+                                <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>
@@ -47,8 +59,8 @@
                                     ¿Eliminar definitivamente el Psicólogo/a {{ psychologist.name~' '~psychologist.surnames }}?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="delete_confirmation_btn btn btn-danger" data-href="{{ path('psychologist_remove', {id: psychologist.id}) }}">Eliminar</button>
+                                    <button type="button" class="btn btn-light primary" data-bs-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-light danger" data-href="{{ path('psychologist_remove', {id: psychologist.id}) }}">Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +68,5 @@
                 {% endfor %}
             </tbody>
         </table>
-
-        <a href="{{ path('psychologist_create') }}">Añadir nuevo psicólogo</a>
     </main>
 {% endblock %}

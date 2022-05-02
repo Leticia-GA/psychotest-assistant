@@ -7,8 +7,8 @@
         <table class="table">
             <thead class="table-light">
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Acciones</th>
+                    <th>Nombre</th>
+                    <th class="text-center">Acciones</th>
                 </tr>
             </thead>
 
@@ -16,10 +16,14 @@
                 {% for singleTest in test %}
                     <tr>
                         <td>{{ singleTest.name }}</td>
-                        <td>
-                            <a class="btn btn-secondary" href="{{ path('test_details', {id: singleTest.id}) }}">Detalles</a>
+                        <td class="text-center">
+                            <a class="btn btn-light success" href="{{ path('test_details', {id: singleTest.id}) }}">
+                                <i class="fa-solid fa-circle-info"></i> Detalles
+                            </a>
                             {% if is_granted('ROLE_PSYC') %}
-                                <a class="btn btn-success" href="#">Asignar a paciente</a>
+                                <a class="btn btn-light test" href="#">
+                                    <i class="fas fa-user"></i> Asignar a paciente
+                                </a>
                             {% endif %}
                         </td>
                     </tr>

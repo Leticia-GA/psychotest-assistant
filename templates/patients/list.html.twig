@@ -8,15 +8,25 @@
 {% block content %}
 
     <main class="container">
-        <h1 class="mt-4 mb-4">Pacientes</h1>
+        <div class="row">
+            <div class="h1 col-9 mt-4 mb-4">Pacientes</div>
+
+            <div class="col-3 mt-5 mb-4">
+                {% if is_granted('ROLE_PSYC') %}
+                    <a class="btn btn-light primary" href="{{ path('patient_create') }}"><i class="fas fa-user-plus"></i> Añadir nuevo paciente</a>
+                {% endif %}
+            </div>
+        </div>
+
         <hr>
+
         <table class="table">
             <thead class="table-light">
-                <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Teléfono</th>
-                    <th>Acciones</th>
+                <tr class="text-center">
+                    <th class="col-3">Nombre</th>
+                    <th class="col-3">Apellidos</th>
+                    <th class="col-2">Teléfono</th>
+                    <th class="col-4">Acciones</th>
                 </tr>
             </thead>
 
@@ -25,15 +35,21 @@
                     <tr>
                         <td>{{ patient.name }}</td>
                         <td>{{ patient.surnames }}</td>
-                        <td>{{ patient.phoneNumber }}</td>
-                        <td>
-                            <a class="btn btn-secondary" href="{{ path('patient_details', {id: patient.id}) }}">Detalles</a>
+                        <td class="text-center">{{ patient.phoneNumber }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-light success" href="{{ path('patient_details', {id: patient.id}) }}">
+                                <i class="fa-solid fa-circle-info"></i> Detalles
+                            </a>
                             {% if is_granted('ROLE_PSYC') %}
-                                <a class="btn btn-success" href="{{ path('associated_test_create', {id: patient.id}) }}">Asignar Test</a>
+                                <a class="btn btn-light test" href="{{ path('associated_test_create', {id: patient.id}) }}">
+                                    <i class="fa-solid fa-file-signature"></i> Asignar Test
+                                </a>
                             {% endif %}
-                            <a class="btn btn-warning" href="{{ path('patient_update', {id: patient.id}) }}">Editar</a>
-                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal">
-                                Eliminar
+                            <a class="btn btn-light warning" href="{{ path('patient_update', {id: patient.id}) }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <button type="button" class="btn btn-light danger"  data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal">
+                                <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>
@@ -49,8 +65,10 @@
                                     ¿Eliminar definitivamente el Paciente {{ patient.name~' '~patient.surnames }}?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="delete_confirmation_btn btn btn-danger" data-href="{{ path('patient_remove', {id: patient.id}) }}">Eliminar</button>
+                                    <button type="button" class="btn btn-light primary" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i> Cancelar</button>
+                                    <button type="button" class="btn btn-light danger" data-href="{{ path('patient_remove', {id: patient.id}) }}">
+                                        <i class="fa-solid fa-trash"></i> Eliminar
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -58,10 +76,5 @@
                 {% endfor %}
             </tbody>
         </table>
-
-        {# {% if is_granted('ROLE_PSYC') %} #}
-        {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
-            <a href="{{ path('patient_create') }}">Añadir nuevo paciente</a>
-        {% endif %}
     </main>
 {% endblock %}

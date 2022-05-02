@@ -2,7 +2,14 @@
 
 {% block content %}
     <main class="container">
-        <p class="display-6 mt-5 mb-5">{{ psychologist.name~' '~psychologist.surnames}}</p>
+        <div class="row">
+            <div class="display-6 col-10 mt-5 mb-5">{{ psychologist.name~' '~psychologist.surnames}}</div>
+
+            <div class="col-2 mt-5 mb-4">
+                <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a class="btn btn-light danger" href="{{ path('psychologist_remove', {id: psychologist.id}) }}"><i class="fa-solid fa-trash"></i></a>
+            </div>
+        </div>
 
         <hr>
              
@@ -30,10 +37,8 @@
             </div>
         </div>
 
-        <div class="row mt-4 text-end">
-            <p><a href="{{ path('psychologist_update', {id: psychologist.id}) }}">Editar</a></p>
-            <p><a href="{{ path('psychologist_remove', {id: psychologist.id}) }}">Eliminar</a></p>
-            <p><a href="{{ path('psychologists_list') }}">Volver al listado de Psicólogos</a></p>
+        <div class="row mt-4 justify-content-end">
+            <a class="btn btn-light primary col-1" href="{{ path('psychologists_list') }}"><i class="fas fa-angle-left"></i> Volver</a>
         </div>
     </main>
 {% endblock %}

@@ -2,7 +2,14 @@
 
 {% block content %}
     <main class="container">
-        <p class="display-6 mt-5 mb-5">{{ patient.name~' '~patient.surnames}}</p>
+        <div class="row">
+            <div class="display-6 col-10 mt-5 mb-5">{{ patient.name~' '~patient.surnames}}</div>
+
+            <div class="col-2 mt-5 mb-4">
+                <a class="btn btn-light warning" href="{{ path('patient_update', {id: patient.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                <a class="btn btn-light danger" href="{{ path('patient_remove', {id: patient.id}) }}"><i class="fa-solid fa-trash"></i></a>
+            </div>
+        </div>
 
         <hr>
         
@@ -27,10 +34,8 @@
             </div>
         </div>
 
-        <div class="row mt-4 text-end">
-            <p><a href="{{ path('patient_update', {id: patient.id}) }}">Editar</a></p>
-            <p><a href="{{ path('patient_remove', {id: patient.id}) }}">Eliminar</a></p>
-            <p><a href="{{ path('patients_list') }}">Volver al listado de Pacientes</a></p>
+        <div class="row mt-4 justify-content-end">
+            <a class="btn btn-light primary col-1" href="{{ path('patients_list') }}"><i class="fas fa-angle-left"></i> Volver</a>
         </div>
     </main>
 {% endblock %}

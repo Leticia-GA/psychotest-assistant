@@ -100,9 +100,7 @@ class PsychologistController extends AbstractController
         $entityManager->remove($psychologist);
         $entityManager->flush();
 
-        $psychologists = $this->entityManager->getRepository(Psychologist::class)->findAll();
-
-        return $this->render('psychologists/list.html.twig', ['psychologists' => $psychologists]);
+        return $this->redirectToRoute('psychologists_list');
     }
 
     /**
