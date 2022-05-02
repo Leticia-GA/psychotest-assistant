@@ -1,7 +1,18 @@
 {% extends 'layout/header.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block content %}
-    <h1>Editar Psicólogo</h1>
-    {{ form(form) }}
-    <a href="{{ path('psychologists_list') }}">Volver</a>
+    <main class="container">
+        <div class="row">
+            <div class="h1 col-9 mt-4 mb-4">Editar Psicólogo</div>
+        </div>
+
+        <hr>
+
+        {{ form(form) }}
+
+        <div class="row mt-4 justify-content-end">
+            <a class="btn btn-light primary col-1" href="{{ path('psychologists_list') }}"><i class="fas fa-angle-left"></i> Volver</a>
+        </div>
+    </main>
 {% endblock %}

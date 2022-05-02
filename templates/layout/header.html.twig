@@ -4,34 +4,69 @@
    
    <nav class="navbar navbar-expand navbar-light bg-light static-top mb-4 shadow">
       <div class="container-fluid">
-      
-         <a class="navbar-brand" href="{{ path('dashboard') }}">
-            {# assets/images/logoLight.png was copied to public/build/images/logoLight.png #}
-            <img src="{{ asset('build/images/logoLight.png') }}" width="200" alt="PSY-A logo">
-         </a>
 
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto">
-               <li class="nav-item">
-                  <a class="nav-link small" href="#">Notificaciones</a>
-               </li>
+            <a class="navbar-brand" href="{{ path('dashboard') }}">
+               {# assets/images/logoLight.png was copied to public/build/images/logoLight.png #}
+               <img src="{{ asset('build/images/logoLight.png') }}" width="200" alt="PSY-A logo">
+            </a>
+
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+               {% if is_granted('ROLE_ADMIN') %}
+                  <li class="nav-item">
+                     <a {% if (app.request.get('_route')  == 'psychologists_list' or app.request.get('_route') == 'psychologist_details') %} 
+                           class="nav-link active" aria-current="page" 
+                        {% else %} 
+                           class="nav-link" href="{{ path('psychologists_list') }}" 
+                        {% endif %}>Psicólogos
+                     </a>
+                  </li>
+               {% endif %}
+
+               {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
+                  <li class="nav-item">
+                     <a {% if (app.request.get('_route')  == 'patients_list' or app.request.get('_route') == 'patient_details' or app.request.get('_route') == 'associated_test_create') %} 
+                           class="nav-link active" aria-current="page" 
+                        {% else %} 
+                           class="nav-link" href="{{ path('patients_list') }}" 
+                        {% endif %}>Pacientes
+                     </a>               
+                  </li>
+               {% endif %}
+
+
+               {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
+                  <li class="nav-item">
+                     <a c{% if (app.request.get('_route')  == 'test_list' or app.request.get('_route') == 'test_details') %} 
+                           class="nav-link active" aria-current="page" 
+                        {% else %} 
+                           class="nav-link" href="{{ path('test_list') }}" 
+                        {% endif %}>Test</a>
+                  </li>
+               {% endif %}
             </ul>
-            
+         </div>
+
+         <div class="d-flex align-items-center">
+            <a class="text-reset me-3" href="#">
+               <i class="fas fa-bell"></i>
+            </a>
+
             <div class="dropdown">
-               <button class="btn btn-profile dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{ app.user.name }}
-                  <img class="img-profile rounded-circle" src="{{ asset('build/images/undraw_profile.svg') }}" width="30">
-               </button>
-               
-               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                  <li><a class="dropdown-item" href="{{ path('app_logout') }}">Cerrar Sesión</a></li>
-               </ul>
+                  <button class="btn btn-profile dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                     {{ app.user.name }}
+                     <img class="img-profile rounded-circle" src="{{ asset('build/images/undraw_profile.svg') }}" width="30">
+                  </button>
+                  
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                     <li><a class="dropdown-item" href="{{ path('app_logout') }}">Cerrar Sesión</a></li>
+                  </ul>
             </div>
          </div>
+         
       </div>
    </nav>   
-
-   {% include 'layout/menu.html.twig' %}
    
    {% block content %}{% endblock %}
 
