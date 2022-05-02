@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Security\Core\Security as SecurityService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -83,6 +84,11 @@ class PsychologistController extends AbstractController
             $this->entityManager->persist($psychologist);
             $this->entityManager->flush();
 
+            $this->addFlash(
+                'notice',
+                'Cambios guardados correctamente!'
+            );
+
             return $this->redirectToRoute('psychologists_list');
         }
 
@@ -95,19 +101,27 @@ class PsychologistController extends AbstractController
      * @Route("/psychologist_remove/{id}", name="psychologist_remove", requirements={"id"="\d+"})
      * @IsGranted(User::ROLE_ADMIN)
      */
-    public function remove(int $id, ManagerRegistry $doctrine): Response
+    public function remove(int $id, SecurityService $security): Response
     {
-        $entityManager = $doctrine->getManager();
-        $psychologist = $entityManager->getRepository(Psychologist::class)->find($id);
+        $user = $security->getUser();
+        $userRoles = $user->getRoles();
+        $repository = $this->entityManager->getRepository(Psychologist::class);
 
-        if (!$psychologist) {
-            throw $this->createNotFoundException(
-                'No se ha encontrado ningún Psicólogo para el ID: '.$id
-            );
+        if(in_array("ROLE_ADMIN", $userRoles)) {
+            $psychologist = $repository->find($id);
         }
 
-        $entityManager->remove($psychologist);
-        $entityManager->flush();
+        if (!$psychologist) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->entityManager->remove($psychologist);
+        $this->entityManager->flush();
+
+        $this->addFlash(
+            'notice',
+            'Psicólogo eliminado correctamente!'
+        );
 
         return $this->redirectToRoute('psychologists_list');
     }
@@ -137,6 +151,11 @@ class PsychologistController extends AbstractController
 
             $this->entityManager->persist($psychologist);
             $this->entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Psicólogo creado correctamente!'
+            );
 
             return $this->redirectToRoute('psychologists_list');
         }

@@ -111,6 +111,11 @@ class PatientController extends AbstractController
             $this->entityManager->persist($patient);
             $this->entityManager->flush();
 
+            $this->addFlash(
+                'notice',
+                'Cambios guardados correctamente!'
+            );
+
             return $this->redirectToRoute('patients_list');
         }
 
@@ -121,17 +126,13 @@ class PatientController extends AbstractController
 
     /**
      * @Route("/patient_remove/{id}", name="patient_remove", requirements={"id"="\d+"})
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
+     * @IsGranted(User::ROLE_PSYC)
      */
-    public function remove(int $id, ManagerRegistry $doctrine, SecurityService $security): Response
+    public function remove(int $id, SecurityService $security): Response
     {
         $user = $security->getUser();
         $userRoles = $user->getRoles();
         $repository = $this->entityManager->getRepository(Patient::class);
-
-        if(in_array("ROLE_ADMIN", $userRoles)) {
-            $patient = $repository->find($id);
-        }
 
         if(in_array("ROLE_PSYC", $userRoles)) {
             $patient = $repository->findOneBy([
@@ -147,7 +148,12 @@ class PatientController extends AbstractController
         $this->entityManager->remove($patient);
         $this->entityManager->flush();
 
-        return $this->forward('App\Controller\PatientController::patients');
+        $this->addFlash(
+            'notice',
+            'Paciente eliminado correctamente!'
+        );
+
+        return $this->redirectToRoute('patients_list');
     }
 
     /**
@@ -178,6 +184,11 @@ class PatientController extends AbstractController
 
             $this->entityManager->persist($patient);
             $this->entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Paciente creado correctamente!'
+            );
 
             return $this->redirectToRoute('patients_list');
         }

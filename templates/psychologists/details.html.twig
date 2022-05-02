@@ -7,7 +7,7 @@
 
             <div class="col-2 mt-5 mb-4">
                 <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a class="btn btn-light danger" href="{{ path('psychologist_remove', {id: psychologist.id}) }}"><i class="fa-solid fa-trash"></i></a>
+                <a class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal"><i class="fa-solid fa-trash"></i></a>
             </div>
         </div>
 
@@ -39,6 +39,24 @@
 
         <div class="row mt-4 justify-content-end">
             <a class="btn btn-light primary col-1" href="{{ path('psychologists_list') }}"><i class="fas fa-angle-left"></i> Volver</a>
+        </div>
+
+        <div class="modal fade" id="delete_confirmation_modal" tabindex="-1" aria-labelledby="delete_confirmation_modal_label" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="delete_confirmation_modal_label">Eliminar Psicólogo</h5>
+                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Eliminar definitivamente el Psicólogo/a {{ psychologist.name~' '~psychologist.surnames }}?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light primary" data-bs-dismiss="modal">Cancelar</button>
+                        <a class="btn btn-light danger" href="{{ path('psychologist_remove', {id: psychologist.id}) }}">Eliminar</a>
+                    </div>
+                </div>
+             </div>
         </div>
     </main>
 {% endblock %}
