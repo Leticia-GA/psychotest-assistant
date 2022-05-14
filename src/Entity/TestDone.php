@@ -27,10 +27,21 @@ class TestDone
      */
     private $associatedTest;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $testScore;
+
+    /**
+     * @ORM\Column(type="simple_array", nullable=true)
+     */
+    private $answers;
+
     public function __construct(AssociatedTest $associatedTest)
     {
         $this->date = new \DateTime();
         $this->associatedTest = $associatedTest;
+        $this->answers = [];
     }
 
     public function getId(): ?int
@@ -54,6 +65,30 @@ class TestDone
 
     public function setAssociatedTest(AssociatedTest $associatedTest): self {
         $this->associatedTest = $associatedTest;
+
+        return $this;
+    }
+
+    public function getTestScore(): int
+    {
+        return $this->testScore;
+    }
+
+    public function setTestScore($testScore): self
+    {
+        $this->testScore = $testScore;
+
+        return $this;
+    }
+
+    public function getAnswers(): array
+    {
+        return $this->answers;
+    }
+
+    public function setAnswers($answers): self
+    {
+        $this->answers = $answers;
 
         return $this;
     }
