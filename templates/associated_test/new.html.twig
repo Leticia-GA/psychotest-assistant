@@ -1,18 +1,21 @@
 {% extends 'layout/header.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block content %}
     <main class="container">
-        <p class="display-6 mt-5 mb-5">{{ patient.name~' '~patient.surnames}}</p>
+        <div class="row">
+            <div class="h1 col-9 mt-4 mb-4">Asignar Test</div>
+        </div>
 
         <hr>
         
         <div class="row m-2 pt-4">
-            <h1>Asignar Test</h1>
+            <p>Paciente: <a href="{{ path('patient_details', {id: patient.id}) }}">{{ patient.name~' '~patient.surnames}}</a></p>
             {{ form(form) }}
         </div>
 
-        <div class="row mt-4 text-end">
-            <p><a href="{{ path('patients_list') }}">Volver al listado de Pacientes</a></p>
+        <div class="row mt-4 justify-content-end">
+            <a class="btn btn-light primary col-1" href="{{ path('patients_list') }}"><i class="fas fa-angle-left"></i> Volver</a>
         </div>
     </main>
 {% endblock %}

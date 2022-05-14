@@ -10,10 +10,21 @@
                 <a class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal"><i class="fa-solid fa-trash"></i></a>
             </div>
         </div>
-
-        <hr>
-             
+        
         <div class="row m-2 pt-4">
+            <h4>Información Personal</h4>
+            <hr>
+            <div class="col-5">
+                <span class="text-primary fw-bold">DNI</span>
+                <p>** actualizar BBDD</p>
+            </div>
+            <div class="col-5">
+                <span class="text-primary fw-bold">Fecha de nacimiento</span>
+                <p>** actualizar BBDD</p>
+            </div>
+        </div>
+
+        <div class="row m-2">
             <div class="col-5">
                 <span class="text-primary fw-bold">Teléfono</span>
                 <p>{{ psychologist.phoneNumber }}</p>
@@ -25,6 +36,8 @@
         </div>
 
         <div class="row m-2 pt-4">
+            <h4>Información Académica</h4>
+            <hr>
             <div class="col">
                 <span class="text-primary fw-bold">Estudios</span>
                 <p>{{ psychologist.education }}</p>

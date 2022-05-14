@@ -20,9 +20,15 @@ class Test
      */
     private $name;
 
-    public function __construct(string $name)
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $explanation;
+
+    public function __construct(string $name, string $explanation)
     {
         $this->name = $name;
+        $this->explanation = $explanation;
     }
 
     public function getId(): ?int
@@ -40,6 +46,11 @@ class Test
         $this->name = $name;
 
         return $this;
+    }
+
+    public function getExplanation(): string
+    {
+        return $this->explanation;
     }
 
     public function __toString()

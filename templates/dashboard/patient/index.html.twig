@@ -2,26 +2,21 @@
 
 {% block content %}
    <main class="container">
-        <h1 class="mt-4 mb-4">Notificaciones</h1>
-        <hr>
-        <table class="table">
-            <thead class="table-light">
-                <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
+        <div class="row">
+            <div class="h1 col-9 mt-4 mb-4">Notificaciones</div>
+            <hr>
+        </div>
 
-            <tbody>
-                {% for associatedTest in test %}
-                    <tr>
-                        <td>{{ associatedTest.test.name }}</td>
-                        <td>
-                            <a class="btn btn-light primary" href="{{ path('test_done_create', {id: associatedTest.id}) }}">Realizar Test</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            {% for associatedTest in test %}
+                <div class="col-10 mt-2 mb-2">
+                    <p>Tiene pendiente el test <span class="fw-bold">{{ associatedTest.test.name }}</span> por hacer</p>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-light primary" href="{{ path('test_done_create', {id: associatedTest.id}) }}">Realizar Test</a>
+                </div>
+                <hr>                
+            {% endfor %}
+        </div>
     </main>
 {% endblock %}

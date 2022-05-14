@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Security\Core\Security as SecurityService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -39,7 +40,7 @@ class PsychologistController extends AbstractController
 
     /**
      * @Route("/psychologist/{id}", name="psychologist_details", requirements={"id"="\d+"})
-     * @IsGranted(User::ROLE_ADMIN)
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
      */
     public function pshychologist(int $id): Response
     {

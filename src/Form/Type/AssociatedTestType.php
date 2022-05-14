@@ -22,7 +22,7 @@ class AssociatedTestType extends AbstractType
                     return $er->createQueryBuilder('c');
                 }
             ))
-            ->add('save', SubmitType::class, ['label' => 'Asociar'])
+            ->add('save', SubmitType::class, ['label' => 'Aceptar'])
         ;
     }
 

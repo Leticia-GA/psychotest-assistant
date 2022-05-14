@@ -2,28 +2,20 @@
 
 {% block content %}
    <main class="container">
-        <h1 class="mt-4 mb-4">Notificaciones</h1>
-        <hr>
-        <table class="table">
-            <thead class="table-light">
-                <tr>
-                    <th scope="col">Paciente</th>
-                    <th scope="col">Test</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-            </thead>
+        <div class="row">
+            <div class="h1 col-9 mt-4 mb-4">Notificaciones</div>
+            <hr>
+        </div>
 
-            <tbody>
-                {% for testDone in test %}
-                    <tr>
-                        <td>{{ testDone.associatedTest.patient.name }}</td>
-                        <td>{{ testDone.associatedTest.test.name }}</td>
-                        <td>
-                            <a class="btn btn-light primary" href="#">Ver resultados</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="row">
+            {% for testDone in test %}
+                <div class="col-10 mt-2 mb-2">
+                    <p>El paciente <a href="#">{{ testDone.associatedTest.patient.name }}</a> ha completado el test <span class="fw-bold">{{ testDone.associatedTest.test.name }}</span></p>
+                </div>
+                <div class="col-2">
+                    <a class="btn btn-light primary" href="#">Ver resultados</a>
+                </div>                
+            {% endfor %}
+        </div>
     </main>
 {% endblock %}

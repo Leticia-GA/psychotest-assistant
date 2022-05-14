@@ -1,3 +1,14 @@
+.nav-item {
+    font-size: large;
+    padding: 0% 5% 0% 5%; //top right bottom left
+}
+
 .nav-item:hover {
     background-color: $secondary;
+    border-radius: 5%;
+}
+
+.nav-item .active {
+    color: $primary !important;
+    font-weight: bold;
 }

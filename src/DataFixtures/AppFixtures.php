@@ -2,9 +2,11 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Answer;
 use App\Entity\AssociatedTest;
 use App\Entity\Patient;
 use App\Entity\Psychologist;
+use App\Entity\Question;
 use App\Entity\Test;
 use App\Entity\User;
 use App\Form\Type\PsychologistType;
@@ -96,14 +98,23 @@ class AppFixtures extends Fixture
     }
 
     public function testFixtures(ObjectManager $manager, Patient $patient): void {
-        for ($i = 1; $i < 6; $i++) {
-            $test = new Test('Test de Prueba '.$i);
-            $associatedTest = new AssociatedTest($patient, $test);
+        $test = new Test(
+            'Escala para el Trastorno de Ansiedad Generalizada (GAD-7)',
+            'Señale con qué frecuencia ha sufrido los siguientes problemas en los últimos 15 días:'
+        );
 
-            $manager->persist($test);
-            $manager->persist($associatedTest);
-        }
+        $manager->persist(new Answer('Nunca', 0, 1, $test));
+        $manager->persist(new Answer('Menos de la mitad de los días', 1, 2, $test));
+        $manager->persist(new Answer('Más de la mitad de los días', 2, 3, $test));
+        $manager->persist(new Answer('Casi todos los días', 3, 4, $test));
 
+        $manager->persist(new Question('Se ha sentido nervioso, ansioso o muy alterado', 1, $test));
+        $manager->persist(new Question('No ha podido dejar de preocuparse', 2, $test));
+        
+        $manager->persist(new AssociatedTest($patient, $test));
+
+        $manager->persist($test);
+        
         $manager->flush();
     }
 }

@@ -12,16 +12,21 @@
                 </div>
             {% endif %}
         </div>
-
-        {% if is_granted('ROLE_ADMIN') %}
-            <div>Psicólogo: 
-                <a href="{{ path('psychologist_details', {id: psychologist.id}) }}">{{ psychologist.name~' '~psychologist.surnames }}</a>
-            </div>
-        {% endif %}
-        
-        <hr>
         
         <div class="row m-2 pt-4">
+            <h4>Información Personal</h4>
+            <hr>
+            <div class="col-5">
+                <span class="text-primary fw-bold">DNI</span>
+                <p>** actualizar BBDD</p>
+            </div>
+            <div class="col-5">
+                <span class="text-primary fw-bold">Fecha de nacimiento</span>
+                <p>** actualizar BBDD</p>
+            </div>
+        </div>
+
+        <div class="row m-2">
             <div class="col-5">
                 <span class="text-primary fw-bold">Teléfono</span>
                 <p>{{ patient.phoneNumber }}</p>
@@ -30,6 +35,15 @@
                 <span class="text-primary fw-bold">Email</span>
                 <p>{{ patient.email }}</p>
             </div>
+        </div>
+
+        <div class="row m-2 pt-4">
+            <h4>Información Clínica</h4>
+            <hr>
+            {% if is_granted('ROLE_ADMIN') %}
+                <span class="text-primary fw-bold">Psicólogo</span>
+                <a href="{{ path('psychologist_details', {id: psychologist.id}) }}">{{ psychologist.name~' '~psychologist.surnames }}</a>
+            {% endif %}
         </div>
 
         <div class="row m-2 pt-4">
