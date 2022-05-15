@@ -10,10 +10,10 @@
         <div class="row">
             {% for testDone in test %}
                 <div class="col-10 mt-2 mb-2">
-                    <p>El paciente <a href="#">{{ testDone.associatedTest.patient.name }}</a> ha completado el test <span class="fw-bold">{{ testDone.associatedTest.test.name }}</span></p>
+                    <p>El paciente <a href="{{ path('patient_details', {id: testDone.associatedTest.patient.id}) }}">{{ testDone.associatedTest.patient.name }}</a> ha completado el test <span class="fw-bold">{{ testDone.associatedTest.test.name }}</span></p>
                 </div>
                 <div class="col-2">
-                    <a class="btn btn-light primary" href="#">Ver resultados</a>
+                    <a class="btn btn-light primary" href="{{ path('test_done_review', {id: testDone.id}) }}">Ver resultados</a>
                 </div>                
             {% endfor %}
         </div>

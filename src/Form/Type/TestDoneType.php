@@ -68,7 +68,7 @@ class TestDoneType extends AbstractType
         $choices = [];
 
         foreach($answers as $answer) {
-            $choices[$answer->getText()] = $answer->getScore();
+            $choices[$answer->getText()] = $answer->getPosition();
         }
 
         return $choices;

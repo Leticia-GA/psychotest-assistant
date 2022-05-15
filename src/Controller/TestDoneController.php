@@ -14,6 +14,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Security;
 
+use function PHPUnit\Framework\isEmpty;
+
 class TestDoneController extends AbstractController
 {
     private $entityManager;
@@ -48,7 +50,7 @@ class TestDoneController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $testDone = $form->getData();
 
-            $testDone->setTestScore($this->getTestScore($form));
+            $testDone->setAnswers($this->getAnswers($form));
             
             $this->entityManager->persist($testDone);
             $this->entityManager->flush();
@@ -62,17 +64,33 @@ class TestDoneController extends AbstractController
         ]);
     }  
 
-    private function getTestScore(FormInterface $form): int {
-        $testScore = 0;
+    private function getAnswers(FormInterface $form): array {
+        $answers = [];
 
         $i = 0;
 
         while($form->has("answer".$i)) {
-            $answerScore = $form->get("answer".$i)->getData();
-            $testScore += $answerScore;
+            $answerPosition = $form->get("answer".$i)->getData();
+            $answers[] = $answerPosition;
             $i++;
         }
 
-        return $testScore;
+        return $answers;
+    }
+
+    /**
+     * @Route("/test_done/{id}/review", name="test_done_review", requirements={"id"="\d+"})
+     */ 
+    public function review(int $id, Security $security): Response {
+        $user = $security->getUser();
+        $testDoneRepository = $this->entityManager->getRepository(TestDone::class);
+
+        $testDone = $testDoneRepository->findTestDoneByPsychologist($id, $user->getId());
+
+        if(!$testDone) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->render('test_done/review.html.twig', ['testDone' => $testDone]);
     }
 }

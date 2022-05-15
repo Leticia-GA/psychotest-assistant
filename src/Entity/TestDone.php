@@ -28,11 +28,6 @@ class TestDone
     private $associatedTest;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $testScore;
-
-    /**
      * @ORM\Column(type="simple_array", nullable=true)
      */
     private $answers;
@@ -65,18 +60,6 @@ class TestDone
 
     public function setAssociatedTest(AssociatedTest $associatedTest): self {
         $this->associatedTest = $associatedTest;
-
-        return $this;
-    }
-
-    public function getTestScore(): int
-    {
-        return $this->testScore;
-    }
-
-    public function setTestScore($testScore): self
-    {
-        $this->testScore = $testScore;
 
         return $this;
     }

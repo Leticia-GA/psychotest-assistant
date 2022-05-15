@@ -8,6 +8,7 @@ use App\Entity\Patient;
 use App\Entity\Psychologist;
 use App\Entity\Question;
 use App\Entity\Test;
+use App\Entity\TestInterpretation;
 use App\Entity\User;
 use App\Form\Type\PsychologistType;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -98,6 +99,13 @@ class AppFixtures extends Fixture
     }
 
     public function testFixtures(ObjectManager $manager, Patient $patient): void {
+        $testGAD7 = $this->createGAD7($manager);
+        
+        $manager->persist(new AssociatedTest($patient, $testGAD7));
+        $manager->flush();
+    }
+
+    private function createGAD7(ObjectManager $manager) {
         $test = new Test(
             'Escala para el Trastorno de Ansiedad Generalizada (GAD-7)',
             'Señale con qué frecuencia ha sufrido los siguientes problemas en los últimos 15 días:'
@@ -110,11 +118,27 @@ class AppFixtures extends Fixture
 
         $manager->persist(new Question('Se ha sentido nervioso, ansioso o muy alterado', 1, $test));
         $manager->persist(new Question('No ha podido dejar de preocuparse', 2, $test));
+
+        $manager->persist(new TestInterpretation(
+            0, 5, $test,
+            'Una puntuación de 5 o menor en el GAD-7 puede interpretarse como un nivel leve de ansiedad.'
+        ));
+
+        $manager->persist(new TestInterpretation(
+            5, 10, $test,
+            'Una puntuación de entre 5 y 10 en el GAD-7 puede interpretarse como un nivel de ansiedad moderado.'
+        ));
         
-        $manager->persist(new AssociatedTest($patient, $test));
+        $manager->persist(new TestInterpretation(
+            10, TestInterpretation::MAX_SCORE, $test,
+            'Una puntuación superior a 10 en el GAD-7 puede interpretarse como un nivel de ansiedad alto.'
+        ));
 
         $manager->persist($test);
         
         $manager->flush();
+
+        return $test;
     }
+
 }

@@ -28,4 +28,23 @@ class TestDoneRepository extends ServiceEntityRepository
 
         return $query->getResult();
     }
+
+    public function findTestDoneByPsychologist(int $id, int $psychoId): ?TestDone
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT td 
+             FROM App\Entity\TestDone td
+             JOIN td.associatedTest associatedTest
+             JOIN associatedTest.patient p
+             WHERE td.id = :id AND p.psychologist = :psychoId
+             ORDER BY td.date DESC' 
+        )->setParameters([
+            'id' => $id,
+            'psychoId' => $psychoId
+        ]);
+
+        return $query->getOneOrNullResult();
+    }
 }

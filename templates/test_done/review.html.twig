@@ -1,0 +1,15 @@
+{% extends 'layout/header.html.twig' %}
+
+{% block content %}
+    <main class="container">
+        <p class="display-6 mt-5 mb-5">{{ testDone.associatedTest.test.name }}</p>
+        <p>Paciente: {{ testDone.associatedTest.patient.name }} {{ testDone.associatedTest.patient.surnames }}</p>
+        <p>Fecha de realización: {{ testDone.date|date('d-m-Y / H:i:s') }}</p>
+
+        <hr>
+
+        <p>Puntuación total: {{ testDone|score }}</p>
+        <p></p>
+
+    </main>
+{% endblock %}
