@@ -20,11 +20,17 @@ class TestReviewExtension extends AbstractExtension
     {
         return [
             new TwigFilter('score', [$this, 'getScore']),
+            new TwigFilter('interpretation', [$this, 'getInterpretation'])
         ]; 
     }
 
     public function getScore(TestDone $testDone): int
     {
         return $this->testReviewer->getScore($testDone);
+    }
+
+    public function getInterpretation(TestDone $testDone): string
+    {
+        return $this->testReviewer->getInterpretation($testDone);
     }
 }

@@ -9,7 +9,17 @@
         <hr>
 
         <p>Puntuación total: {{ testDone|score }}</p>
-        <p></p>
+        <p>{{ testDone|interpretation }}</p>
+
+        <hr>
+
+        {% for question in questions %}
+            {% set currentAnswerPosition = testDone.answerPositions[loop.index0] %}
+            <p><b>{{ loop.index }}. {{ question.text }}</b></p>
+            {% for answer in answers %}
+                <p {% if answer.position == currentAnswerPosition %}class="selected"{% endif %}>{{ answer.text }}</p>
+            {% endfor %}
+        {% endfor %}
 
     </main>
 {% endblock %}

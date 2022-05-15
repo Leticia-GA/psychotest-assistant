@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
 use App\Entity\AssociatedTest;
+use App\Entity\Question;
+use App\Entity\Test;
 use App\Entity\TestDone;
 use App\Form\Type\TestDoneType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,8 +16,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Security;
-
-use function PHPUnit\Framework\isEmpty;
 
 class TestDoneController extends AbstractController
 {
@@ -50,7 +51,7 @@ class TestDoneController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $testDone = $form->getData();
 
-            $testDone->setAnswers($this->getAnswers($form));
+            $testDone->setAnswerPositions($this->getAnswerPositions($form));
             
             $this->entityManager->persist($testDone);
             $this->entityManager->flush();
@@ -64,7 +65,7 @@ class TestDoneController extends AbstractController
         ]);
     }  
 
-    private function getAnswers(FormInterface $form): array {
+    private function getAnswerPositions(FormInterface $form): array {
         $answers = [];
 
         $i = 0;
@@ -91,6 +92,32 @@ class TestDoneController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        return $this->render('test_done/review.html.twig', ['testDone' => $testDone]);
+        $test = $testDone->getAssociatedTest()->getTest();
+
+        return $this->render('test_done/review.html.twig', [
+            'testDone' => $testDone,
+            'questions' => $this->getQuestions($test),
+            'answers' =>  $this->getAnswers($test)
+        ]);
+    }
+
+    private function getQuestions(Test $test): array 
+    {
+        $questionRepository = $this->entityManager->getRepository(Question::class);
+
+        return $questionRepository->findBy(
+            ["test" => $test->getId()],
+            ["position" => "ASC"]
+        );
+    }
+
+    private function getAnswers(Test $test): array 
+    {
+        $answerRepository = $this->entityManager->getRepository(Answer::class);
+
+        return $answerRepository->findBy(
+            ["test" => $test->getId()],
+            ["position" => "ASC"]
+        );
     }
 }

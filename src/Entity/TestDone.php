@@ -30,13 +30,13 @@ class TestDone
     /**
      * @ORM\Column(type="simple_array", nullable=true)
      */
-    private $answers;
+    private $answerPositions;
 
     public function __construct(AssociatedTest $associatedTest)
     {
         $this->date = new \DateTime();
         $this->associatedTest = $associatedTest;
-        $this->answers = [];
+        $this->answerPositions = [];
     }
 
     public function getId(): ?int
@@ -64,14 +64,14 @@ class TestDone
         return $this;
     }
 
-    public function getAnswers(): array
+    public function getAnswerPositions(): array
     {
-        return $this->answers;
+        return $this->answerPositions;
     }
 
-    public function setAnswers($answers): self
+    public function setAnswerPositions($answerPositions): self
     {
-        $this->answers = $answers;
+        $this->answerPositions = $answerPositions;
 
         return $this;
     }

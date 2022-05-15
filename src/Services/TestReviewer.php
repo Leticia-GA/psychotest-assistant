@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Entity\Answer;
 use App\Entity\Test;
 use App\Entity\TestDone;
+use App\Entity\TestInterpretation;
 use Doctrine\ORM\EntityManagerInterface;
 
 class TestReviewer 
@@ -20,7 +21,7 @@ class TestReviewer
     {
         $score = 0;
 
-        $testDoneAnswers = $testDone->getAnswers();
+        $testDoneAnswers = $testDone->getAnswerPositions();
         $test = $testDone->getAssociatedTest()->getTest();
         $answers = $this->getAnswers($test);
 
@@ -50,5 +51,15 @@ class TestReviewer
             ["test" => $test->getId()],
             ["position" => "ASC"]
         );
+    }
+
+    public function getInterpretation(TestDone $testDone): string
+    {
+        $score = $this->getScore($testDone);
+
+        $repository = $this->entityManager->getRepository(TestInterpretation::class);
+        $testInterpretation = $repository->findInterpretationByScore($score);
+
+        return $testInterpretation->getText();
     }
 }

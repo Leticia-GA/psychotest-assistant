@@ -118,15 +118,20 @@ class AppFixtures extends Fixture
 
         $manager->persist(new Question('Se ha sentido nervioso, ansioso o muy alterado', 1, $test));
         $manager->persist(new Question('No ha podido dejar de preocuparse', 2, $test));
+        $manager->persist(new Question('Se ha preocupado excesivamente por diferentes cosas', 3, $test));
+        $manager->persist(new Question('Ha tenido dificultad para relajarse', 4, $test));
+        $manager->persist(new Question('Se ha sentido tan intranquilo que no podía estarse quieto', 5, $test));
+        $manager->persist(new Question('Se ha irritado o enfadado con facilidad', 6, $test));
+        $manager->persist(new Question('Ha sentido miedo, como si fuera a suceder algo terrible', 7, $test));
 
         $manager->persist(new TestInterpretation(
-            0, 5, $test,
+            0, 6, $test,
             'Una puntuación de 5 o menor en el GAD-7 puede interpretarse como un nivel leve de ansiedad.'
         ));
 
         $manager->persist(new TestInterpretation(
-            5, 10, $test,
-            'Una puntuación de entre 5 y 10 en el GAD-7 puede interpretarse como un nivel de ansiedad moderado.'
+            6, 10, $test,
+            'Una puntuación de entre 6 y 10 en el GAD-7 puede interpretarse como un nivel de ansiedad moderado.'
         ));
         
         $manager->persist(new TestInterpretation(
