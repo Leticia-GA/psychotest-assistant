@@ -3,19 +3,19 @@
 namespace App\Controller;
 
 use App\Entity\Answer;
-use App\Entity\AssociatedTest;
 use App\Entity\Question;
 use App\Entity\Test;
 use App\Entity\TestDone;
+use App\Entity\AssociatedTest;
 use App\Form\Type\TestDoneType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Security\Core\Security;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Security;
 
 class TestDoneController extends AbstractController
 {
@@ -55,6 +55,11 @@ class TestDoneController extends AbstractController
             
             $this->entityManager->persist($testDone);
             $this->entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Test enviado correctamente!'
+            );
 
             return $this->redirectToRoute('dashboard');
         }

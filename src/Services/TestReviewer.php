@@ -58,7 +58,7 @@ class TestReviewer
         $score = $this->getScore($testDone);
 
         $repository = $this->entityManager->getRepository(TestInterpretation::class);
-        $testInterpretation = $repository->findInterpretationByScore($score);
+        $testInterpretation = $repository->findInterpretationByScore($score, $testDone->getAssociatedTest()->getTest());
 
         return $testInterpretation->getText();
     }

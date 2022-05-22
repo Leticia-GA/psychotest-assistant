@@ -54,6 +54,11 @@ class AssociatedTestController extends AbstractController
             $this->entityManager->persist($associatedTest);
             $this->entityManager->flush();
 
+            $this->addFlash(
+                'notice',
+                'Se ha enviado correctamente el test '.$associatedTest->getTest()->getName().' al paciente '.$patient->getName()
+            );
+
             return $this->redirectToRoute('patients_list');
         }
 

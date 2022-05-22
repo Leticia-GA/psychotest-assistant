@@ -100,6 +100,7 @@ class AppFixtures extends Fixture
 
     public function testFixtures(ObjectManager $manager, Patient $patient): void {
         $testGAD7 = $this->createGAD7($manager);
+        $this->createZarit($manager);
         
         $manager->persist(new AssociatedTest($patient, $testGAD7));
         $manager->flush();
@@ -137,6 +138,64 @@ class AppFixtures extends Fixture
         $manager->persist(new TestInterpretation(
             10, TestInterpretation::MAX_SCORE, $test,
             'Una puntuación superior a 10 en el GAD-7 puede interpretarse como un nivel de ansiedad alto.'
+        ));
+
+        $manager->persist($test);
+        
+        $manager->flush();
+
+        return $test;
+    }
+
+    private function createZarit(ObjectManager $manager) {
+        $test = new Test(
+            'Escala de Sobrecarga del Cuidador de Zarit',
+            'A continuación se presentan una lista de frases que reflejan cómo se sienten algunas personas cuando cuidan a otra persona. Después de leer cada frase, indique con qué frecuencia se siente Ud. de esa manera, escogiendo entre: NUNCA, CASI NUNCA, A VECES, FRECUENTEMENTE O CASI SIEMPRE. No existen respuestas correctas o incorrectas.
+            Señale sólo una respuesta para cada pregunta'
+        );
+
+        $manager->persist(new Answer('Nunca', 1, 1, $test));
+        $manager->persist(new Answer('Rara vez', 2, 2, $test));
+        $manager->persist(new Answer('Algunas veces', 3, 3, $test));
+        $manager->persist(new Answer('Bastantes veces', 4, 4, $test));
+        $manager->persist(new Answer('Casi siempre', 5, 5, $test));
+
+        $manager->persist(new Question('¿Piensa que su familiar le pide más ayuda de la que realmente necesita?', 1, $test));
+        $manager->persist(new Question('¿Piensa que debido al tiempo que dedica a su familiar no tiene suficiente tiempo para usted?', 2, $test));
+        $manager->persist(new Question('¿Se siente agobiado por intentar compatibilizar el cuidado de su familiar con otras responsabilidades (trabajo, familia)?', 3, $test));
+        $manager->persist(new Question('¿Siente vergüenza por la conducta de su familiar?', 4, $test));
+        $manager->persist(new Question('¿Se siente enfadado cuando está cerca de su familiar?', 5, $test));
+        $manager->persist(new Question('¿Piensa que el cuidar de su familiar afecta negativamente la relación que usted tiene con otros miembros de su familia?', 6, $test));
+        $manager->persist(new Question('¿Tiene miedo por el futuro de su familiar?', 7, $test));
+        $manager->persist(new Question('¿Piensa que su familiar depende de usted?', 8, $test));
+        $manager->persist(new Question('¿Se siente tenso cuando está cerca de su familiar?', 9, $test));
+        $manager->persist(new Question('¿Piensa que su salud ha empeorado debido a tener que cuidar de su familiar?', 10, $test));
+        $manager->persist(new Question('¿Piensa que no tiene tanta intimidad como le gustaría debido a tener que cuidar de su familiar?', 11, $test));
+        $manager->persist(new Question('¿Piensa que su vida social se ha visto afectada negativamente por tener que cuidar a su familiar?', 12, $test));
+        $manager->persist(new Question('¿Se siente incómodo por distanciarse de sus amistades debido a tener que cuidar de su familiar?', 13, $test));
+        $manager->persist(new Question('¿Piensa que su familiar le considera a usted la única persona que le puede cuidar?', 14, $test));
+        $manager->persist(new Question('¿Piensa que no tiene suficientes ingresos económicos para los gastos de cuidar a su familiar, además de sus otros gastos?', 15, $test));
+        $manager->persist(new Question('¿Piensa que no será capaz de cuidar a su familiar por mucho más tiempo?', 16, $test));
+        $manager->persist(new Question('¿Siente que ha perdido el control de su vida desde que comenzó la enfermedad de su familiar?', 17, $test));
+        $manager->persist(new Question('¿Desearía poder dejar el cuidado de su familiar a otra persona?', 18, $test));
+        $manager->persist(new Question('¿Se siente indeciso sobre qué hacer con su familiar?', 19, $test));
+        $manager->persist(new Question('¿Piensa que debería hacer más por su familiar?', 20, $test));
+        $manager->persist(new Question('¿Piensa que podría cuidar mejor a su familiar?', 21, $test));
+        $manager->persist(new Question('Globalmente, ¿qué grado de "carga" experimenta por el hecho de cuidar a tu familiar?', 22, $test));
+
+        $manager->persist(new TestInterpretation(
+            0, 46, $test,
+            'No hay sobrecarga.'
+        ));
+
+        $manager->persist(new TestInterpretation(
+            46, 56, $test,
+            'Sobrecarga leve.'
+        ));
+        
+        $manager->persist(new TestInterpretation(
+            56, TestInterpretation::MAX_SCORE, $test,
+            'Sobrecarga intensa.'
         ));
 
         $manager->persist($test);
