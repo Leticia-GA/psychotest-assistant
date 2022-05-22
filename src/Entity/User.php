@@ -6,12 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity()
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"user" = "User", "patient" = "Patient", "psychologist" = "Psychologist"})
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Ya existe un usuario con el mismo email"
+ * )
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {

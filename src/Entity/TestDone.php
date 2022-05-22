@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TestDoneRepository")
  */
-class TestDone
+class TestDone implements SortableByDate
 {
     /**
      * @ORM\Id

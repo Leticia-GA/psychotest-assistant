@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\TestDone;
 use App\Entity\AssociatedTest;
+use App\Entity\SortableByDate;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +23,17 @@ class DashboardController extends AbstractController
         $userRoles = $user->getRoles();
 
         if(in_array("ROLE_ADMIN", $userRoles)) {
-            return $this->render('dashboard/index.html.twig');
+            $associatedTestRepository = $entityManager->getRepository(AssociatedTest::class);
+            $associatedTest = $associatedTestRepository->findAll();
+
+            $testDoneRepository = $entityManager->getRepository(TestDone::class);
+            $testDone = $testDoneRepository->findAll();
+
+            $notifications = array_merge($associatedTest, $testDone);
+
+            usort($notifications, [DashboardController::class, "sortByDate"]);
+
+            return $this->render('dashboard/admin/index.html.twig', ['notifications' => $notifications]);
         }
 
         if(in_array("ROLE_PSYC", $userRoles)) {
@@ -36,5 +47,17 @@ class DashboardController extends AbstractController
         $test = $repository->findAllPendingTest($user->getId());
 
         return $this->render('dashboard/patient/index.html.twig', ['test' => $test]);
+    }
+
+    private function sortByDate(SortableByDate $notification1, SortableByDate $notification2): int {
+        if($notification1->getDate() > $notification2->getDate()) {
+            return -1;
+        } 
+
+        if($notification1->getDate() < $notification2->getDate()) {
+            return 1;
+        } 
+
+        return 0;
     }
 }

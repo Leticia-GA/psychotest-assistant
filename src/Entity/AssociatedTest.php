@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AssociatedTestRepository")
  */
-class AssociatedTest
+class AssociatedTest implements SortableByDate
 {
     /**
      * @ORM\Id

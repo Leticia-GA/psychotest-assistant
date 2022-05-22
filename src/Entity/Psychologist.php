@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity()
+ * @UniqueEntity(
+ *     fields={"collegiateNumber"},
+ *     message="Ya existe un usuario con este Número de Colegiado/a"
+ * )
  */
 class Psychologist extends User
 {
@@ -25,7 +30,7 @@ class Psychologist extends User
     private $specialization;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="string", length=20, unique=true)
      */
     private $collegiateNumber;
 

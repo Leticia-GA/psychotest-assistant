@@ -19,7 +19,7 @@ class AssociatedTestType extends AbstractType
             ->add('test', EntityType::class, array(
                 'class' => Test::class,
                 'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('c');
+                    return $er->createQueryBuilder('t');
                 }
             ))
             ->add('save', SubmitType::class, ['label' => 'Aceptar'])

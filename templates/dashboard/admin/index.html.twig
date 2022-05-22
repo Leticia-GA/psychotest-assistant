@@ -1,0 +1,31 @@
+{% extends 'layout/header.html.twig' %}
+
+{% block content %}
+   <main class="container">
+        <div class="row">
+            <div class="h1 col-9 mt-4 mb-4">Notificaciones</div>
+            <hr>
+        </div>
+
+        <div class="row">
+            {% for notification in notifications %}
+                <div class="col-2 mt-2 mb-2"> 
+                    {{ notification.date|date('d-m-Y / H:i:s') }}
+                </div>
+                <div class="col-10 mt-2 mb-2">
+                    <p> 
+                    {% if notification is associated_test %}
+                        El psicólogo {{ notification.patient.psychologist.name }} 
+                        ha asociado el test {{ notification.test.name }} 
+                        al paciente {{ notification.patient.name }}
+
+                    {% else %}
+                        El paciente {{ notification.associatedTest.patient.name }} 
+                        ha realizado el test {{ notification.associatedTest.test.name }} 
+                    {% endif %}
+                    </p>
+                </div>             
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}
