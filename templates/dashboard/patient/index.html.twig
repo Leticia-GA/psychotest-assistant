@@ -16,6 +16,10 @@
         </div>
 
         <div class="row">
+            {% if test is empty %}
+                <h5 class="mt-5 pt-5 text-center text-muted">No hay ninguna notificación</h5>
+            {% endif %}
+
             {% for associatedTest in test %}
                 <div class="col-10 mt-2 mb-2">
                     <p>Tiene pendiente el test <span class="fw-bold">{{ associatedTest.test.name }}</span> por hacer</p>

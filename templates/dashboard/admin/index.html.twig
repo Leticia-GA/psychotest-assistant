@@ -8,6 +8,10 @@
         </div>
 
         <div class="row">
+            {% if notifications is empty %}
+                <h5 class="mt-5 pt-5 text-center text-muted">No hay ninguna notificación</h5>
+            {% endif %}
+
             {% for notification in notifications %}
                 <div class="col-2 mt-2 mb-2"> 
                     {{ notification.date|date('d-m-Y / H:i:s') }}

@@ -8,6 +8,10 @@
         </div>
 
         <div class="row">
+            {% if test is empty %}
+                <h5 class="mt-5 pt-5 text-center text-muted">No hay ninguna notificación</h5>
+            {% endif %}
+
             {% for testDone in test %}
                 <div class="col-10 mt-2 mb-2">
                     <p>El paciente <a href="{{ path('patient_details', {id: testDone.associatedTest.patient.id}) }}">{{ testDone.associatedTest.patient.name }}</a> ha completado el test <span class="fw-bold">{{ testDone.associatedTest.test.name }}</span></p>
