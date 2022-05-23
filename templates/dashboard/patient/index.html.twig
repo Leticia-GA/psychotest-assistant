@@ -2,6 +2,14 @@
 
 {% block content %}
    <main class="container">
+        {% for message in app.flashes('notice') %}
+            <div class="row justify-content-md-center">
+                <div class="flash-notice alert alert-success col col-lg-4 m-3 text-center">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+
         <div class="row">
             <div class="h1 col-9 mt-4 mb-4">Notificaciones</div>
             <hr>

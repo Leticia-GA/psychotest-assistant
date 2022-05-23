@@ -58,7 +58,7 @@ class TestDoneController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'Test enviado correctamente!'
+                'Test realizado correctamente. ¡Muchas gracias!'
             );
 
             return $this->redirectToRoute('dashboard');
