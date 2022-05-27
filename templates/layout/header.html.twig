@@ -1,7 +1,4 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
-   
+<header>
    <nav class="navbar navbar-expand navbar-light bg-light static-top mb-4 shadow">
       <div class="container-fluid">
 
@@ -14,7 +11,7 @@
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                {% if is_granted('ROLE_ADMIN') %}
-                  <li class="nav-item">
+                  <li class="nav-item p-3">
                      <a {% if (app.request.get('_route')  == 'psychologists_list' or app.request.get('_route') == 'psychologist_details') %} 
                            class="nav-link active" aria-current="page" 
                         {% else %} 
@@ -25,7 +22,7 @@
                {% endif %}
 
                {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
-                  <li class="nav-item">
+                  <li class="nav-item p-3">
                      <a {% if (app.request.get('_route')  == 'patients_list' or app.request.get('_route') == 'patient_details' or app.request.get('_route') == 'associated_test_create') %} 
                            class="nav-link active" aria-current="page" 
                         {% else %} 
@@ -37,7 +34,7 @@
 
 
                {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
-                  <li class="nav-item">
+                  <li class="nav-item p-3">
                      <a c{% if (app.request.get('_route')  == 'test_list' or app.request.get('_route') == 'test_details') %} 
                            class="nav-link active" aria-current="page" 
                         {% else %} 
@@ -69,7 +66,4 @@
          
       </div>
    </nav>   
-   
-   {% block content %}{% endblock %}
-
-{% endblock %}
+</header>

@@ -1,4 +1,4 @@
-{% extends 'layout/header.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block content %}
    <main class="container">
@@ -9,7 +9,8 @@
 
         <div class="row">
             {% if test is empty %}
-                <h5 class="mt-5 pt-5 text-center text-muted">No hay ninguna notificación</h5>
+                <h4 class="mt-5 pt-5 text-center text-muted fw-bold">No hay ninguna notificación</h4>
+                <i class="fa-solid fa-inbox fa-4x text-muted mt-3"></i>
             {% endif %}
 
             {% for testDone in test %}

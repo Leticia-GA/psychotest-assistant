@@ -1,4 +1,4 @@
-{% extends 'layout/header.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block content %}
     <main class="container">
@@ -48,10 +48,6 @@
                 <span class="text-primary fw-bold">Especialización</span>
                 <p>{{ psychologist.specialization }}</p>
             </div>
-        </div>
-
-        <div class="row mt-4 justify-content-end">
-            <a class="btn btn-light primary col-1" href="{{ path('psychologists_list') }}"><i class="fas fa-angle-left"></i> Volver</a>
         </div>
 
         <div class="modal fade" id="delete_confirmation_modal" tabindex="-1" aria-labelledby="delete_confirmation_modal_label" aria-hidden="true">

@@ -1,14 +1,17 @@
 // customize some Bootstrap variables
 $primary: darken(#800080, 1%);
-$secondary: lighten(#d9b3d9, 10%);
+// $secondary: darken(#E3E8F8,  1%);
+$secondary: lighten(#BDBDD7, 10%);
 $success: lighten(#00695c, 1%);
-$test: darken(#0d47a1, 1%);
-$warning: darken(#FF8800, 1%);
-$danger: darken(#DC5656, 1%);
+$test: lighten(#0d47a1, 5%);
+$warning: lighten(#FF8800, 5%);
+$danger: lighten(#DC5656, 5%);
+$dark: darken(#7e7e7e, 1%);
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 @import '@fortawesome/fontawesome-free/css/all.min.css';
+@import "~datatables.net-dt/css/jquery.dataTables.min.css";
 @import "imports/app.scss";
 @import "imports/btn.scss";
 @import "imports/nav.scss";

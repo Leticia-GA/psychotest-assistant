@@ -1,14 +1,45 @@
-.nav-item {
-    font-size: large;
-    padding: 0% 5% 0% 5%; //top right bottom left
+
+/* ---------- MAIN NAVIGATION BAR ---------- */
+.navbar {
+    .nav-item {
+        font-size: large;
+    }
+    
+    .nav-item:hover {
+        background-color: $secondary;
+        border-radius: 5%;
+    }
+    
+    .nav-item .active {
+        color: $primary !important;
+        font-weight: bold;
+    }
 }
 
-.nav-item:hover {
-    background-color: $secondary;
-    border-radius: 5%;
+
+/* ---------- DETAILS NAV TABS ---------- */
+
+.details {
+    border-color: $primary;
+
+    .details-btn {
+        color: grey;
+        border-top: 1px solid $secondary;
+        border-left: 1px solid $secondary;
+        border-right: 1px solid $secondary;
+    }
+    
+    .details-btn.active {
+        color: grey;
+        font-weight: bolder;
+        border-color: $primary $primary #fff;
+    }
+
+    .details-btn:hover {
+        color: #595959;
+        background-color: $secondary;
+        border-bottom: 1px solid $primary;
+    }
 }
 
-.nav-item .active {
-    color: $primary !important;
-    font-weight: bold;
-}
+

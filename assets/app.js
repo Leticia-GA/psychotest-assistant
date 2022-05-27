@@ -7,3 +7,4 @@
 
 import 'bootstrap/dist/js/bootstrap.bundle';
 import '@fortawesome/fontawesome-free/js/all.js';
+import 'datatables.net/js/jquery.dataTables';

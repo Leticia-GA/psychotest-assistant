@@ -1,9 +1,4 @@
-{% extends 'layout/header.html.twig' %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('delete_confirmation') }}
-{% endblock %}
+{% extends 'base.html.twig' %}
 
 {% block content %}
 
@@ -28,7 +23,7 @@
 
         <hr>
 
-        <table class="table">
+        <table class="table data_table">
             <thead class="table-light">
                 <tr>
                     <th class="col-3">Nombre</th>
