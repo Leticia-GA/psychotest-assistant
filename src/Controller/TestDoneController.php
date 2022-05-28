@@ -8,6 +8,7 @@ use App\Entity\Test;
 use App\Entity\TestDone;
 use App\Entity\AssociatedTest;
 use App\Form\Type\TestDoneType;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Security\Core\Security;
@@ -97,6 +98,10 @@ class TestDoneController extends AbstractController
             throw new NotFoundHttpException();
         }
 
+        $testDone->setReadAt(new DateTime());
+        $this->entityManager->persist($testDone);
+        $this->entityManager->flush();
+
         $test = $testDone->getAssociatedTest()->getTest();
 
         return $this->render('test_done/review.html.twig', [
@@ -125,4 +130,5 @@ class TestDoneController extends AbstractController
             ["position" => "ASC"]
         );
     }
+
 }

@@ -12,15 +12,18 @@
                 <h4 class="mt-5 pt-5 text-center text-muted fw-bold">No hay ninguna notificación</h4>
                 <i class="fa-solid fa-inbox fa-4x text-muted mt-3"></i>
             {% endif %}
-
-            {% for testDone in test %}
-                <div class="col-10 mt-2 mb-2">
-                    <p>El paciente <a href="{{ path('patient_details', {id: testDone.associatedTest.patient.id}) }}">{{ testDone.associatedTest.patient.name }}</a> ha completado el test <span class="fw-bold">{{ testDone.associatedTest.test.name }}</span></p>
-                </div>
-                <div class="col-2">
-                    <a class="btn btn-light primary" href="{{ path('test_done_review', {id: testDone.id}) }}">Ver resultados</a>
-                </div>                
-            {% endfor %}
         </div>
+
+        {% for testDone in test %}
+            <div {% if testDone.readAt == null %} class="no_read row p-2 m-3" {% else %} class="read row p-2 m-3" {% endif %}>
+                <div class="col-10">
+                    <p class="pt-1"><b><a href="{{ path('patient_details', {id: testDone.associatedTest.patient.id}) }}">{{ testDone.associatedTest.patient.name }} {{ testDone.associatedTest.patient.surnames }}</a></b> ha completado el test <span class="fw-bold">{{ testDone.associatedTest.test.name }}</span></p>
+                </div>
+                <div class="col-2 text-center">
+                    <a class="btn btn-light primary" href="{{ path('test_done_review', {id: testDone.id}) }}">Ver resultados</a>
+                </div> 
+            </div>               
+            {% endfor %}
+        
     </main>
 {% endblock %}

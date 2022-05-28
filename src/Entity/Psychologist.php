@@ -11,6 +11,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     fields={"collegiateNumber"},
  *     message="Ya existe un usuario con este Número de Colegiado/a"
  * )
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Ya existe un usuario con el mismo email", 
+ *     entityClass="App\Entity\User" 
+ * )
  */
 class Psychologist extends User
 {

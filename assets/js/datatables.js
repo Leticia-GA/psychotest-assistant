@@ -1,4 +1,3 @@
-
 import dt from 'datatables.net-bs';
 dt(window, $); 
 

@@ -3,9 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity()
+ * @UniqueEntity(
+ *     fields={"email"},
+ *     message="Ya existe un usuario con el mismo email", 
+ *     entityClass="App\Entity\User" 
+ * )
  */
 class Patient extends User
 {

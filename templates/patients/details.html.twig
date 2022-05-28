@@ -33,46 +33,15 @@
 
         <div class="tab-content" id="patientDetailsTabContent">
             <div class="tab-pane fade show active" id="personal-info-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                <div class="row m-2 pt-4">
-                    <div class="col-5">
-                        <span class="text-primary">DNI</span>
-                        <p>** actualizar BBDD</p>
-                    </div>
-                    <div class="col-5">
-                        <span class="text-primary">Fecha de nacimiento</span>
-                        <p>** actualizar BBDD</p>
-                    </div>
-                </div>
-
-                <div class="row m-2 pt-4">
-                    <div class="col-5">
-                        <span class="text-primary">Teléfono</span>
-                        <p>{{ patient.phoneNumber }}</p>
-                    </div>
-                    <div class="col-5">
-                        <span class="text-primary">Email</span>
-                        <p>{{ patient.email }}</p>
-                    </div>
-                </div>
+                {% include 'patients/details/personalInfo.html.twig' %}
             </div>
 
             <div class="tab-pane fade" id="clinical-info-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                {% if is_granted('ROLE_ADMIN') %}
-                    <span class="text-primary fw-bold">Psicólogo</span>
-                    <a href="{{ path('psychologist_details', {id: psychologist.id}) }}">{{ psychologist.name~' '~psychologist.surnames }}</a>
-                {% endif %}
-
-                <div class="col">
-                    <span class="text-primary fw-bold">Diagnóstico</span>
-                    <p>{{ patient.diagnostic }}</p>
-
-                    <span class="text-primary fw-bold">Historial Clínico</span>
-                    <p>{{ patient.caseHistory }}</p>
-                </div>
+                {% include 'patients/details/clinicalInfo.html.twig' %}
             </div>
 
             <div class="tab-pane fade" id="test-done-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-                
+                {% include 'patients/details/testDone.html.twig' %}
             </div>
         </div>
 

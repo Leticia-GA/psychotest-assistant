@@ -1,0 +1,25 @@
+<table class="table data_table">
+    <thead class="table-light">
+        <tr>
+            <th class="col-2 text-center">Fecha</th>
+            <th class="col-6 text-center">Test Realizado</th>
+            <th class="col-2 text-center">Puntuación</th>
+            <th class="col-2 text-center">Ver</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for test in test_done %}
+            <tr>
+                <td class="text-center">{{ test.date|date('d-m-Y') }}</td>
+                <td class="text-center">{{ test.associatedTest.test.name }}</td>
+                <td class="text-center">{{ test|score }}</td>
+                <td class="text-center">
+                    <a class="btn btn-light success" href="{{ path('test_done_review', {id: test.id}) }}">
+                        <i class="fa-solid fa-eye"></i>
+                    </a>
+                </td>
+        {% endfor %}
+    </tbody>
+</table>
+

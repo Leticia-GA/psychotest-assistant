@@ -2,24 +2,57 @@
 
 {% block content %}
     <main class="container">
-        <p class="display-6 mt-5 mb-5">{{ testDone.associatedTest.test.name }}</p>
-        <p>Paciente: {{ testDone.associatedTest.patient.name }} {{ testDone.associatedTest.patient.surnames }}</p>
-        <p>Fecha de realización: {{ testDone.date|date('d-m-Y / H:i:s') }}</p>
+        <p class="display-6 mt-5 mb-4">{{ testDone.associatedTest.test.name }}</p>
+        <p class="fs-3 mb-4">Paciente: <b>{{ testDone.associatedTest.patient.name }} {{ testDone.associatedTest.patient.surnames }}</b></p>
 
-        <hr>
+        <ul class="nav nav-tabs details" id="testReviewTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active details-btn" id="home-tab" data-bs-toggle="tab" data-bs-target="#general-info-tab-pane" type="button" role="tab" aria-controls="general-info-tab-pane" aria-selected="true">
+                    Información General
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link details-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#test-done-tab-pane" type="button" role="tab" aria-controls="test-done-tab-pane" aria-selected="false">
+                    Test Realizado
+                </button>
+            </li>
+        </ul>
 
-        <p>Puntuación total: {{ testDone|score }}</p>
-        <p>{{ testDone|interpretation }}</p>
+        <div class="tab-content" id="testReviewTabContent">
+            <div class="tab-pane fade show active" id="general-info-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                <div class="row m-2 pt-4">
+                    <div class="col-2">
+                        <span class="text-primary">Fecha:</span>
+                        <p>{{ testDone.date|date('d-m-Y') }}</p>
+                    </div>
+                    <div class="col-10">
+                        <span class="text-primary">Hora:</span>
+                        <p>{{ testDone.date|date('H:i:s') }}</p>
+                    </div>
+                </div>
 
-        <hr>
+                <div class="row m-2 pt-4">
+                    <div class="col-2">
+                        <span class="text-primary">Puntuación total:</span>
+                        <p>{{ testDone|score }}</p>
+                    </div>
+                    <div class="col-10">
+                        <span class="text-primary">Resultado:</span>
+                        <p>{{ testDone|interpretation }}</p>
+                    </div>
+                </div>
+            </div>
 
-        {% for question in questions %}
-            {% set currentAnswerPosition = testDone.answerPositions[loop.index0] %}
-            <p><b>{{ loop.index }}. {{ question.text }}</b></p>
-            {% for answer in answers %}
-                <p {% if answer.position == currentAnswerPosition %}class="selected"{% endif %}>{{ answer.text }}</p>
-            {% endfor %}
-        {% endfor %}
-
+            <div class="tab-pane fade m-2 mt-5 mb-5" id="test-done-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                {% for question in questions %}
+                    {% set currentAnswerPosition = testDone.answerPositions[loop.index0] %}
+                    <p><b>{{ loop.index }}. {{ question.text }}</b></p>
+                
+                    {% for answer in answers %}
+                        <p><span {% if answer.position == currentAnswerPosition %} class="selected-answer" {% endif %} class="dark">{{ answer.text }}</span></p>
+                    {% endfor %}
+                {% endfor %}
+            </div>
+        </div>
     </main>
 {% endblock %}

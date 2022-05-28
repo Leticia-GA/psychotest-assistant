@@ -29,6 +29,22 @@ class TestDoneRepository extends ServiceEntityRepository
         return $query->getResult();
     }
 
+    public function findAllNoReadTestDone(int $psychoId): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT td 
+             FROM App\Entity\TestDone td
+             JOIN td.associatedTest associatedTest
+             JOIN associatedTest.patient p
+             WHERE p.psychologist = :psychoId AND td.readAt IS NULL
+             ORDER BY td.date DESC' 
+        )->setParameter('psychoId', $psychoId);
+
+        return $query->getResult();
+    }
+
     public function findTestDoneByPsychologist(int $id, int $psychoId): ?TestDone
     {
         $entityManager = $this->getEntityManager();
@@ -46,5 +62,23 @@ class TestDoneRepository extends ServiceEntityRepository
         ]);
 
         return $query->getOneOrNullResult();
+    }
+
+    public function findTestDoneByPatient(int $patientId): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT td 
+             FROM App\Entity\TestDone td
+             JOIN td.associatedTest associatedTest
+             JOIN associatedTest.patient p
+             WHERE p.id = :patientId
+             ORDER BY td.date DESC' 
+        )->setParameters([
+            'patientId' => $patientId
+        ]);
+
+        return $query->getResult();
     }
 }

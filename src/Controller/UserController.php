@@ -25,33 +25,27 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/profile/{id}", name="profile", requirements={"id"="\d+"})
+     * @Route("/profile", name="profile")
      */
-    public function user(int $id, SecurityService $security): Response
+    public function user(SecurityService $security): Response
     {
         $user = $security->getUser();
+
+        if(!$user) {
+            throw new NotFoundHttpException();
+        }
+        
         $userRoles = $user->getRoles();
-        $repository = $this->entityManager->getRepository(Patient::class);
 
         if(in_array("ROLE_ADMIN", $userRoles)) {
-            $patient = $repository->find($id);
+            return $this->render('admin/profile.html.twig');
         }
 
         if(in_array("ROLE_PSYC", $userRoles)) {
-            $patient = $repository->findOneBy([
-                "id" => $id, 
-                "psychologist" => $user->getId()
-            ]);
+            return $this->render('psychologists/profile.html.twig');
         }
 
-        if(!$patient) {
-            throw new NotFoundHttpException();
-        }
-
-        return $this->render('patients/details.html.twig', [
-            'patient' => $patient,
-            'psychologist' => $patient->getPsychologist()
-        ]);
+        return $this->render('patients/profile.html.twig');
     }
     
 }

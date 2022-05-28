@@ -22,6 +22,18 @@ h1 {
     color: $test;
 }
 
-.selected {
-    color: green;
+.dark {
+    color: $dark;
 }
+
+.selected-answer {
+    color: black;
+    background-color: $selectedAnswer;
+    border-radius: 0.3em;
+}
+
+.no_read {
+    background-color: $noreadnotif;
+    border-radius: 0.5em;
+}
+

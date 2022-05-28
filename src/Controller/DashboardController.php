@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class DashboardController extends AbstractController 
 {
@@ -59,5 +60,24 @@ class DashboardController extends AbstractController
         } 
 
         return 0;
+    }
+
+    /**
+     * @Route("/notifications", name="notifications")
+     * @IsGranted("ROLE_USER")
+     */
+    public function notifications(Security $security, EntityManagerInterface $entityManager) 
+    {
+        $user = $security->getUser();
+        $userRoles = $user->getRoles();
+        $notifications = 0;
+
+        if(in_array("ROLE_PSYC", $userRoles)) {
+            $repository = $entityManager->getRepository(TestDone::class);
+            
+            $notifications = count($repository->findAllNoReadTestDone($user->getId()));
+        }
+
+        return new JsonResponse($notifications);
     }
 }

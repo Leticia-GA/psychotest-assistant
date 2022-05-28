@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Psychologist;
 use App\Form\Type\PsychologistType;
+use App\Form\Type\PsychologistEditType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,7 +68,7 @@ class PsychologistController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $form = $this->createForm(PsychologistType::class, $psychologist);
+        $form = $this->createForm(PsychologistEditType::class, $psychologist);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

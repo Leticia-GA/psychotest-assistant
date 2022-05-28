@@ -22,6 +22,11 @@ class TestDone implements SortableByDate
     private $date;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $readAt;
+
+    /**
      * @ORM\ManyToOne(targetEntity="AssociatedTest")
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
@@ -50,6 +55,16 @@ class TestDone implements SortableByDate
 
     public function setDate(\DateTime $date): self {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getReadAt(): ?\DateTime {
+        return $this->readAt;
+    }
+
+    public function setReadAt(\DateTime $readAt): self {
+        $this->readAt = $readAt;
 
         return $this;
     }

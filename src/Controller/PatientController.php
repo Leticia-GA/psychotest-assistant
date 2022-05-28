@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Patient;
+use App\Entity\TestDone;
 use App\Form\Type\PatientType;
+use App\Form\Type\PatientEditType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -74,9 +76,18 @@ class PatientController extends AbstractController
             throw new NotFoundHttpException();
         }
 
+        $patientTestDone = [];
+        
+        if(in_array("ROLE_PSYC", $userRoles)) {
+            $testDoneRepository = $this->entityManager->getRepository(TestDone::class);
+
+            $patientTestDone = $testDoneRepository->findTestDoneByPatient($patient->getId());
+        }
+
         return $this->render('patients/details.html.twig', [
             'patient' => $patient,
-            'psychologist' => $patient->getPsychologist()
+            'psychologist' => $patient->getPsychologist(),
+            'test_done' => $patientTestDone
         ]);
     }
 
@@ -93,7 +104,7 @@ class PatientController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        $form = $this->createForm(PatientType::class, $patient);
+        $form = $this->createForm(PatientEditType::class, $patient);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
