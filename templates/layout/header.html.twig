@@ -62,15 +62,15 @@
             </ul>
          </div>
 
-         <div class="d-flex align-items-center">
+         <div class="d-flex align-items-center mr-5">
             <div class="position-relative" id="notifications">
                <a class="text-reset me-3" href="{{ path('dashboard') }}">
                   <i class="fas fa-bell"></i>
                </a>
             </div>
 
-            <div class="dropdown">
-                  <button class="btn btn-profile dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="dropdown ml-5">
+                  <button class="btn btn-profile dropdown-toggle ml-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                      {{ app.user.name }}
                      <img class="img-profile rounded-circle" src="{{ asset('build/images/undraw_profile.svg') }}" width="30">
                   </button>
