@@ -2,36 +2,30 @@
 
 {% block content %}
     <main class="container">
-        <p class="display-6 mt-5 mb-5">{{ test.name }}</p>
-
-        <hr>
-
-        <div class="row m-2 pt-4">
-            <div class="col-5">
-                <span class="text-primary fw-bold">Categoría</span>
-                <p>---</p>
-            </div>
-            <div class="col-5">
-                <span class="text-primary fw-bold">Edad de aplicación</span>
-                <p>--</p>
-            </div>
-        </div>
-
-        <div class="row m-2 pt-4">
-            <div class="col">
-                <span class="text-primary fw-bold">Autor/es</span>
-                <p>--</p>
-
-                <span class="text-primary fw-bold">Descripción</span>
-                <p>--</p>
-            </div>
-        </div>
-
+        <p class="display-6 mt-3 mb-3">{{ test.name }}</p>
+            
         {% if is_granted('ROLE_PSYC') %}
-            <div class="row mt-4">
-                <p><a class="btn btn-light test" href="#"><i class="fas fa-user"></i> Asignar a paciente</a></p>
-                <p><a class="btn btn-light primary" href="{{ path('test_list') }}"><i class="fas fa-angle-left"></i> Volver</a></p>
-            </div>
+            <p class="text-end"><a class="btn btn-light test" href="#"><i class="fas fa-user"></i> Asignar a paciente</a></p>
         {% endif %}
+            
+        </div>
+
+        <ul class="nav nav-tabs details" id="patientDetailsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active details-btn" id="home-tab" data-bs-toggle="tab" data-bs-target="#general-info-tab-pane" type="button" role="tab" aria-controls="general-info-tab-pane" aria-selected="true">
+                    Información General
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link details-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#test-tab-pane" type="button" role="tab" aria-controls="test-tab-pane" aria-selected="false">
+                    Test Completo
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="patientDetailsTabContent">
+            {% include 'test/details/generalInfo.html.twig' %}
+            {% include 'test/details/test.html.twig' %}
+        </div>
     </main>
 {% endblock %}

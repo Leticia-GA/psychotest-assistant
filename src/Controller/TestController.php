@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Answer;
+use App\Entity\Question;
 use App\Entity\Test;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -44,6 +46,30 @@ class TestController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        return $this->render('test/details.html.twig', ['test' => $test]);
+        return $this->render('test/details.html.twig', [
+            'test' => $test,
+            'questions' => $this->getQuestions($test),
+            'answers' =>  $this->getAnswers($test)
+        ]);
     }    
+
+    private function getQuestions(Test $test): array 
+    {
+        $questionRepository = $this->entityManager->getRepository(Question::class);
+
+        return $questionRepository->findBy(
+            ["test" => $test->getId()],
+            ["position" => "ASC"]
+        );
+    }
+
+    private function getAnswers(Test $test): array 
+    {
+        $answerRepository = $this->entityManager->getRepository(Answer::class);
+
+        return $answerRepository->findBy(
+            ["test" => $test->getId()],
+            ["position" => "ASC"]
+        );
+    }
 }

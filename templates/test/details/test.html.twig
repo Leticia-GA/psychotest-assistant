@@ -1,0 +1,11 @@
+<div class="tab-pane fade m-2 mt-5 mb-5" id="test-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+    {% for question in questions %}
+        <p><b>{{ loop.index }}. {{ question.text }}</b></p>
+                
+        {% for answer in answers %}
+            <p><span class="dark">{{ answer.text }}</span></p>
+        {% endfor %}
+
+        <hr>
+    {% endfor %}
+</div>
