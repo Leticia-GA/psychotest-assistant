@@ -26,12 +26,14 @@ h1 {
     color: $dark;
 }
 
+/* Test Review */
 .selected-answer {
     color: black;
     background-color: $selectedAnswer;
     border-radius: 0.3em;
 }
 
+/* Notifications */
 .no_read {
     background-color: $noreadnotif;
     border-radius: 0.5em;

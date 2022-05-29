@@ -11,10 +11,12 @@ use App\Form\Type\TestDoneType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Core\Security as SecurityService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -30,7 +32,7 @@ class TestDoneController extends AbstractController
     /**
      * @Route("/associated_test/{id}/answer", name="test_done_create", requirements={"id"="\d+"})
      */
-    public function create(int $id, Security $security, Request $request): Response
+    public function create(int $id, SecurityService $security, Request $request): Response
     {
         $user = $security->getUser();
         $repository = $this->entityManager->getRepository(AssociatedTest::class);
@@ -87,8 +89,9 @@ class TestDoneController extends AbstractController
 
     /**
      * @Route("/test_done/{id}/review", name="test_done_review", requirements={"id"="\d+"})
+     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
      */ 
-    public function review(int $id, Security $security): Response {
+    public function review(int $id, SecurityService $security): Response {
         $user = $security->getUser();
         $testDoneRepository = $this->entityManager->getRepository(TestDone::class);
 

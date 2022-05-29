@@ -1,12 +1,9 @@
-{% if is_granted('ROLE_ADMIN') %}
-    <span class="text-primary fw-bold">Psicólogo</span>
-    <a href="{{ path('psychologist_details', {id: psychologist.id}) }}">{{ psychologist.name~' '~psychologist.surnames }}</a>
-{% endif %}
+<div class="row m-2 pt-4">
+    <div class="col">
+        <span class="text-primary">Diagnóstico</span>
+        <p>{{ patient.diagnostic }}</p>
 
-<div class="col">
-    <span class="text-primary fw-bold">Diagnóstico</span>
-    <p>{{ patient.diagnostic }}</p>
-
-    <span class="text-primary fw-bold">Historial Clínico</span>
-    <p>{{ patient.caseHistory }}</p>
+        <span class="text-primary">Historial Clínico</span>
+        <p>{{ patient.caseHistory }}</p>
+    </div>
 </div>

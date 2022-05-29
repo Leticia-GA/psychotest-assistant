@@ -78,7 +78,7 @@ class PatientController extends AbstractController
 
         $patientTestDone = [];
         
-        if(in_array("ROLE_PSYC", $userRoles)) {
+        if(in_array("ROLE_PSYC", $userRoles) || in_array("ROLE_ADMIN", $userRoles) ) {
             $testDoneRepository = $this->entityManager->getRepository(TestDone::class);
 
             $patientTestDone = $testDoneRepository->findTestDoneByPatient($patient->getId());

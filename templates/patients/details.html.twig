@@ -3,7 +3,11 @@
 {% block content %}
     <main class="container">
         <div class="row">
-            <div class="display-6 col-10 mt-5 mb-5">{{ patient.name~' '~patient.surnames}}</div>
+            <div class="display-6 col-10 mt-5 mb-4">{{ patient.name~' '~patient.surnames}}</div>
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <p class="mb-5">Psicólogo: <a href="{{ path('psychologist_details', {id: psychologist.id}) }}">{{ psychologist.name~' '~psychologist.surnames }}</a></p>
+            {% endif %}
             
             {% if is_granted('ROLE_PSYC') %}
                 <div class="col-2 mt-5 mb-4">

@@ -10,43 +10,27 @@
                 <a class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal"><i class="fa-solid fa-trash"></i></a>
             </div>
         </div>
-        
-        <div class="row m-2 pt-4">
-            <h4>Información Personal</h4>
-            <hr>
-            <div class="col-5">
-                <span class="text-primary fw-bold">DNI</span>
-                <p>** actualizar BBDD</p>
-            </div>
-            <div class="col-5">
-                <span class="text-primary fw-bold">Fecha de nacimiento</span>
-                <p>** actualizar BBDD</p>
-            </div>
-        </div>
 
-        <div class="row m-2">
-            <div class="col-5">
-                <span class="text-primary fw-bold">Teléfono</span>
-                <p>{{ psychologist.phoneNumber }}</p>
+        <ul class="nav nav-tabs details" id="psychoDetailsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active details-btn" id="home-tab" data-bs-toggle="tab" data-bs-target="#personal-info-tab-pane" type="button" role="tab" aria-controls="personal-info-tab-pane" aria-selected="true">
+                    Información Personal
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link details-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#academic-info-tab-pane" type="button" role="tab" aria-controls="academic-info-tab-pane" aria-selected="false">
+                    Información Clínica
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="psychoDetailsTabContent">
+            <div class="tab-pane fade show active" id="personal-info-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                {% include 'psychologists/details/personalInfo.html.twig' %}
             </div>
-            <div class="col-5">
-                <span class="text-primary fw-bold">Email</span>
-                <p>{{ psychologist.email }}</p>
-            </div>
-        </div>
 
-        <div class="row m-2 pt-4">
-            <h4>Información Académica</h4>
-            <hr>
-            <div class="col">
-                <span class="text-primary fw-bold">Estudios</span>
-                <p>{{ psychologist.education }}</p>
-
-                <span class="text-primary fw-bold">Número de Colegiación</span>
-                <p>{{ psychologist.collegiateNumber }}</p>
-
-                <span class="text-primary fw-bold">Especialización</span>
-                <p>{{ psychologist.specialization }}</p>
+            <div class="tab-pane fade" id="academic-info-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                {% include 'psychologists/details/academicInfo.html.twig' %}
             </div>
         </div>
 

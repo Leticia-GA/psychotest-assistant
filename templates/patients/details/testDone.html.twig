@@ -1,25 +1,31 @@
-<table class="table data_table">
-    <thead class="table-light">
-        <tr>
-            <th class="col-2 text-center">Fecha</th>
-            <th class="col-6 text-center">Test Realizado</th>
-            <th class="col-2 text-center">Puntuación</th>
-            <th class="col-2 text-center">Ver</th>
-        </tr>
-    </thead>
-
-    <tbody>
-        {% for test in test_done %}
+{% if test_done is empty %}
+    <div class="row">
+        <h5 class="mt-5 pt-5 text-center text-muted fw-bold">El paciente aún no ha completado ningún test</h5>
+        <i class="fa-solid fa-file-circle-minus fa-3x text-muted mt-3"></i>
+    </div>
+{% else %}
+    <table class="table data_table mt-4 mb-4">
+        <thead class="table-light">
             <tr>
-                <td class="text-center">{{ test.date|date('d-m-Y') }}</td>
-                <td class="text-center">{{ test.associatedTest.test.name }}</td>
-                <td class="text-center">{{ test|score }}</td>
-                <td class="text-center">
-                    <a class="btn btn-light success" href="{{ path('test_done_review', {id: test.id}) }}">
-                        <i class="fa-solid fa-eye"></i>
-                    </a>
-                </td>
-        {% endfor %}
-    </tbody>
-</table>
+                <th class="col-2 text-center">Fecha</th>
+                <th class="col-6 text-center">Test Realizado</th>
+                <th class="col-2 text-center">Puntuación</th>
+                <th class="col-2 text-center">Ver</th>
+            </tr>
+        </thead>
 
+        <tbody>
+            {% for test in test_done %}
+                <tr>
+                    <td class="text-center">{{ test.date|date('d-m-Y') }}</td>
+                    <td class="text-center">{{ test.associatedTest.test.name }}</td>
+                    <td class="text-center">{{ test|score }}</td>
+                    <td class="text-center">
+                        <a class="btn btn-light success" href="{{ path('test_done_review', {id: test.id}) }}">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                    </td>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
