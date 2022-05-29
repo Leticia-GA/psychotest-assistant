@@ -21,7 +21,7 @@
                                 <i class="fa-solid fa-circle-info"></i> Detalles
                             </a>
                             {% if is_granted('ROLE_PSYC') %}
-                                <a class="btn btn-light test" href="#">
+                                <a class="btn btn-light test" href="{{ path('associated_test_associate', {id: singleTest.id}) }}">
                                     <i class="fas fa-user"></i> Asignar a paciente
                                 </a>
                             {% endif %}

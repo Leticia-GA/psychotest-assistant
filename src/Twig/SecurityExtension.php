@@ -19,6 +19,7 @@ class SecurityExtension extends AbstractExtension
     {
         return [
             new TwigFunction('has_role', [$this, 'hasRole']),
+            new TwigFunction('is_patient', [$this, 'isPatient'])
         ]; 
     }
 
@@ -39,5 +40,24 @@ class SecurityExtension extends AbstractExtension
         }
 
         return false;
+    }
+
+    public function isPatient(): bool
+    {
+        $user = $this->security->getUser();
+
+        if(!$user) {
+            return false; 
+        }
+
+        $userRoles = $user->getRoles();
+        
+        foreach($userRoles as $role) {
+            if($role == "ROLE_ADMIN" || $role == "ROLE_PSYC"){
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -39,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="string", length=250)
      */
-    private $surnames;
+    protected $surnames;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)

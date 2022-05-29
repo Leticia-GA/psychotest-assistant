@@ -55,7 +55,7 @@ class TestDoneRepository extends ServiceEntityRepository
              JOIN td.associatedTest associatedTest
              JOIN associatedTest.patient p
              WHERE td.id = :id AND p.psychologist = :psychoId
-             ORDER BY td.date DESC' 
+             ORDER BY td.date DESC'
         )->setParameters([
             'id' => $id,
             'psychoId' => $psychoId

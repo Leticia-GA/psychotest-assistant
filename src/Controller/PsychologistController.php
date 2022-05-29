@@ -41,12 +41,25 @@ class PsychologistController extends AbstractController
 
     /**
      * @Route("/psychologist/{id}", name="psychologist_details", requirements={"id"="\d+"})
-     * @Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_PSYC')")
+     * @IsGranted(User::ROLE_USER)
      */
-    public function pshychologist(int $id): Response
+    public function pshychologist(int $id, SecurityService $security): Response
     {
+        $user = $security->getUser();
+        $userRoles = $user->getRoles();
         $repository = $this->entityManager->getRepository(Psychologist::class);
         $psychologist = $repository->find($id);
+
+        if(in_array("ROLE_PSYC", $userRoles)) {
+            if($user->getId() != $id) {
+                throw new NotFoundHttpException();
+            }
+        }
+        elseif(!in_array("ROLE_ADMIN", $userRoles)) {
+            if($user->getPsychologist()->getId() != $id) {
+                throw new NotFoundHttpException();
+            }
+        }
 
         if(!$psychologist) {
             throw new NotFoundHttpException();

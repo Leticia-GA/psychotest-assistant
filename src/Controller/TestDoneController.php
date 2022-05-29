@@ -93,9 +93,16 @@ class TestDoneController extends AbstractController
      */ 
     public function review(int $id, SecurityService $security): Response {
         $user = $security->getUser();
+        $userRoles = $user->getRoles();
         $testDoneRepository = $this->entityManager->getRepository(TestDone::class);
 
-        $testDone = $testDoneRepository->findTestDoneByPsychologist($id, $user->getId());
+        if(in_array("ROLE_PSYC", $userRoles)) {
+            $testDone = $testDoneRepository->findTestDoneByPsychologist($id, $user->getId());
+        }
+
+        if(in_array("ROLE_ADMIN", $userRoles)) {
+            $testDone = $testDoneRepository->find($id);
+        }
 
         if(!$testDone) {
             throw new NotFoundHttpException();

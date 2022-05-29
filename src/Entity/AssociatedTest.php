@@ -34,7 +34,7 @@ class AssociatedTest implements SortableByDate
      */
     private $test;
 
-    public function __construct(Patient $patient, ?Test $test = null)
+    public function __construct(?Patient $patient = null, ?Test $test = null)
     {
         $this->patient = $patient;
         $this->test = $test;
@@ -56,7 +56,7 @@ class AssociatedTest implements SortableByDate
         return $this;
     }
 
-    public function getPatient(): Patient {
+    public function getPatient(): ?Patient {
         return $this->patient;
     }
 

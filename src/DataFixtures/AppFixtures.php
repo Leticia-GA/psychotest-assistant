@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use App\Entity\Answer;
 use App\Entity\AssociatedTest;
+use App\Entity\Clinic;
 use App\Entity\Patient;
 use App\Entity\Psychologist;
 use App\Entity\Question;
@@ -27,6 +28,7 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $this->adminFixtures($manager);
+        $this->clinicFixtures($manager);
         $psychologist1 = $this->psychoFixtures($manager, "1");
         $psychologist2 = $this->psychoFixtures($manager, "2");
         $patient1 = $this->patientFixtures($manager, $psychologist1, "1");
@@ -96,6 +98,20 @@ class AppFixtures extends Fixture
         $manager->flush();
 
         return $patient;
+    }
+
+    public function clinicFixtures(ObjectManager $manager): void {
+        $clinic = new Clinic(
+            '+++++++++++++ Añadir información sobre la clínica ++++++++++++++',
+            '626 408 950',
+            'clinica@gmail.com',
+            'C/ Esperanza, Nº6 (33600 Mieres - Asturias)',
+            'L-V de 09:00h a 14:30h y de 16:30h a 19:30h'
+        );
+
+        $manager->persist($clinic);
+
+        $manager->flush();
     }
 
     public function testFixtures(ObjectManager $manager, Patient $patient): void {

@@ -6,6 +6,7 @@ use App\Entity\AssociatedTest;
 use App\Entity\Patient;
 use App\Entity\User;
 use App\Entity\Test;
+use App\Form\Type\AssociatedTestToPatientType;
 use App\Form\Type\AssociatedTestType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,5 +67,45 @@ class AssociatedTestController extends AbstractController
             'form' => $form->createView(), 
             'patient' => $patient
         ]);
-    }  
+    }
+    
+    /**
+     * @Route("/test/{id}/associated_test/create", name="associated_test_associate", requirements={"id"="\d+"})
+     * @IsGranted(User::ROLE_PSYC)
+     */
+    public function associate(int $id, Security $security, Request $request): Response
+    {
+        $user = $security->getUser();
+        $repository = $this->entityManager->getRepository(Test::class);
+
+        $test = $repository->find($id);
+
+        if(!$test) {
+            throw new NotFoundHttpException();
+        }
+
+        $associatedTest = new AssociatedTest(null, $test);
+        $form = $this->createForm(AssociatedTestToPatientType::class, $associatedTest, ['psychologist' => $user]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $associatedTest = $form->getData();
+            
+            $this->entityManager->persist($associatedTest);
+            $this->entityManager->flush();
+
+            $this->addFlash(
+                'notice',
+                'Se ha enviado correctamente el test '.$associatedTest->getTest()->getName().' al paciente '.$associatedTest->getPatient()->getName()
+            );
+
+            return $this->redirectToRoute('patients_list');
+        }
+
+        return $this->render('associated_test/newToPatient.html.twig', [
+            'form' => $form->createView(), 
+            'test' => $test
+        ]);
+    }
 }

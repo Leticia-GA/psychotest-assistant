@@ -41,6 +41,24 @@
                         {% endif %}>Test</a>
                   </li>
                {% endif %}
+
+               {% if is_patient() %}
+                  <li class="nav-item p-3">
+                     <a {% if (app.request.get('_route') == 'psychologist_details') %} 
+                           class="nav-link active" aria-current="page" 
+                        {% else %} 
+                           class="nav-link" href="{{ path('psychologist_details', {id: app.user.psychologist.id}) }}" 
+                        {% endif %}>Su Psicólogo</a>
+                  </li>
+               {% endif %}
+
+               <li class="nav-item p-3">
+                  <a {% if (app.request.get('_route')  == 'clinic' or app.request.get('_route') == 'clinic') %} 
+                        class="nav-link active" aria-current="page" 
+                     {% else %} 
+                        class="nav-link" href="{{ path('clinic') }}" 
+                     {% endif %}>La Clínica</a>
+               </li>
             </ul>
          </div>
 

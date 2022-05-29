@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <main class="container">
+        <div class="row">
+            <div class="h1 col-9 mt-4 mb-4">La Clínica</div>
+        </div>
+
+        <hr>
+
+        <div class="row text-center">
+            <div class="col-md-6">
+                <p>{{ clinic.info }}</p>
+            </div>
+            <div class="col-md-6">
+                <img src="{{ asset('build/images/clinic.png') }}" class="rounded" alt="Imagen salud mental" width="300">
+            </div>
+        </div>
+    </main>
+{% endblock %}

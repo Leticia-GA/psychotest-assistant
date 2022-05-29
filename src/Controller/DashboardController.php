@@ -74,8 +74,11 @@ class DashboardController extends AbstractController
 
         if(in_array("ROLE_PSYC", $userRoles)) {
             $repository = $entityManager->getRepository(TestDone::class);
-            
             $notifications = count($repository->findAllNoReadTestDone($user->getId()));
+        }
+        elseif(!in_array("ROLE_ADMIN", $userRoles)) {
+            $repository = $entityManager->getRepository(AssociatedTest::class);
+            $notifications = count($repository->findAllPendingTest($user->getId()));
         }
 
         return new JsonResponse($notifications);

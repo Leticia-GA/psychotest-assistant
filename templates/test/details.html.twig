@@ -5,7 +5,7 @@
         <p class="display-6 mt-3 mb-3">{{ test.name }}</p>
             
         {% if is_granted('ROLE_PSYC') %}
-            <p class="text-end"><a class="btn btn-light test" href="#"><i class="fas fa-user"></i> Asignar a paciente</a></p>
+            <p class="text-end"><a class="btn btn-light test" href="{{ path('associated_test_associate', {id: test.id}) }}"><i class="fas fa-user"></i> Asignar a paciente</a></p>
         {% endif %}
             
         </div>

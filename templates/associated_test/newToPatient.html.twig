@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block content %}
+    <main class="container">
+        <div class="row">
+            <div class="h1 col-9 mt-4 mb-4">Asignar a Paciente</div>
+        </div>
+
+        <hr>
+        
+        <div class="row m-2 pt-4">
+            <p>Test: <a href="{{ path('patient_details', {id: test.id}) }}">{{ test.name }}</a></p>
+            {{ form(form) }}
+        </div>
+    </main>
+{% endblock %}
