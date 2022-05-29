@@ -1,5 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
+    <main class="container">
+        <div class="row">
+            <p class="display-6 mt-5 mb-4">{{ app.user.name~' '~app.user.surnames }}</p>
+            <p class="dark">Administrador</p>
+        </div>
 
+        <hr>
+
+        <div class="row m-2 pt-4">
+            <div class="col-5">
+                <span class="text-primary">DNI</span>
+                <p>** actualizar BBDD</p>
+            </div>
+            <div class="col-5">
+                <span class="text-primary">Fecha de nacimiento</span>
+                <p>** actualizar BBDD</p>
+            </div>
+        </div>
+
+        <div class="row m-2 pt-4">
+            <div class="col-5">
+                <span class="text-primary">Teléfono</span>
+                <p>** actualizar BBDD</p>
+            </div>
+            <div class="col-5">
+                <span class="text-primary">Email</span>
+                <p>{{ app.user.email }}</p>
+            </div>
+        </div>
+    </main>
 {% endblock %}
