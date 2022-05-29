@@ -3,7 +3,7 @@
 {% block content %}
    <main class="container">
         <div class="row">
-            <div class="h1 col-9 mt-4 mb-4">Notificaciones</div>
+            <div class="h1 col-9 mt-4 mb-4">Listado de Notificaciones</div>
             <hr>
         </div>
 
@@ -14,19 +14,19 @@
             {% endif %}
 
             {% for notification in notifications %}
-                <div class="col-2 mt-2 mb-2"> 
-                    {{ notification.date|date('d-m-Y / H:i:s') }}
+                <div class="col-2 mt-2 mb-2 dark"> 
+                    <p>{{ notification.date|date('d-m-Y') }} a las {{ notification.date|date('H:i') }}</p>
                 </div>
-                <div class="col-10 mt-2 mb-2">
+                <div class="col-10 mt-2 mb-4">
                     <p> 
                     {% if notification is associated_test %}
-                        El psicólogo {{ notification.patient.psychologist.name }} 
-                        ha asociado el test {{ notification.test.name }} 
-                        al paciente {{ notification.patient.name }}
+                        El psicólogo <a href="{{ path('psychologist_details', {id: notification.patient.psychologist.id}) }}">{{ notification.patient.psychologist.name }}</a> 
+                        ha asociado el test <a href="{{ path('test_details', {id: notification.test.id}) }}">{{ notification.test.name }}</a>  
+                        al paciente <a href="{{ path('patient_details', {id: notification.patient.id}) }}">{{ notification.patient.name }}</a> 
 
                     {% else %}
-                        El paciente {{ notification.associatedTest.patient.name }} 
-                        ha realizado el test {{ notification.associatedTest.test.name }} 
+                        El paciente <a href="{{ path('patient_details', {id: notification.associatedTest.patient.id}) }}">{{ notification.associatedTest.patient.name }}</a>  
+                        ha realizado el test <a href="{{ path('test_details', {id: notification.associatedTest.test.id}) }}">{{ notification.associatedTest.test.name }}</a>  
                     {% endif %}
                     </p>
                 </div>             

@@ -1,0 +1,17 @@
+<div class="modal fade" id="delete_confirmation_modal" tabindex="-1" aria-labelledby="delete_confirmation_modal_label" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete_confirmation_modal_label">Eliminar Psicólogo</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Eliminar definitivamente el Psicólogo/a {{ psychologist.name~' '~psychologist.surnames }}?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light primary" data-bs-dismiss="modal">Cancelar</button>
+                <a class="btn btn-light danger" href="{{ path('psychologist_remove', {id: psychologist.id}) }}">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>

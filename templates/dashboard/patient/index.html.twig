@@ -22,7 +22,10 @@
             {% endif %}
 
             {% for associatedTest in test %}
-                <div class="col-10 mt-2 mb-2">
+                <div class="col-2 text-center">
+                    <p class="mt-2 mb-2 dark">{{ associatedTest.date|date('d-m-Y') }}</p>
+                </div> 
+                <div class="col-8 mt-2 mb-2">
                     <p>Tiene pendiente el test <span class="fw-bold">{{ associatedTest.test.name }}</span> por hacer</p>
                 </div>
                 <div class="col-2">
