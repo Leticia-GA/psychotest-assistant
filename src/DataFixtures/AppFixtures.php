@@ -2,18 +2,17 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Test;
+use App\Entity\User;
 use App\Entity\Answer;
-use App\Entity\AssociatedTest;
 use App\Entity\Clinic;
 use App\Entity\Patient;
-use App\Entity\Psychologist;
 use App\Entity\Question;
-use App\Entity\Test;
+use App\Entity\Psychologist;
+use App\Entity\AssociatedTest;
 use App\Entity\TestInterpretation;
-use App\Entity\User;
-use App\Form\Type\PsychologistType;
-use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
@@ -37,7 +36,7 @@ class AppFixtures extends Fixture
     }
 
     public function adminFixtures(ObjectManager $manager): void {
-        $admin = new User('Leticia', 'González Álvarez', 'admin@gmail.com', [User::ROLE_USER, User::ROLE_ADMIN]);
+        $admin = new User('Leticia', 'González Álvarez', '71776104-G', '28/10/1991', '626 40 89 50', 'admin@gmail.com', 'https://i.pravatar.cc/?img=22', [User::ROLE_USER, User::ROLE_ADMIN]);
 
         $hashedPassword = $this->passwordHasher->hashPassword(
             $admin,
@@ -55,8 +54,11 @@ class AppFixtures extends Fixture
         $psycho = new Psychologist(
             'Psicólogo'.$index,
             'Apellidos'.$index,
+            '71717171-A',
+            '21/11/1990',
+            '62600000'.$index,
             'psico'.$index.'@gmail.com',
-            '69900000'.$index,
+            'https://i.pravatar.cc/?img=16',
             'Licenciatura en Psicología',
             'Terapia Sistémica',
             'O-000'.$index
@@ -80,8 +82,11 @@ class AppFixtures extends Fixture
         $patient = new Patient(
             'Paciente'.$index,
             'Apellidos'.$index,
+            '71717171-P',
+            '21/11/1983',
+            '62600250'.$index,
             'paciente'.$index.'@gmail.com',
-            '69912457'.$index
+            'https://i.pravatar.cc/?img=17',
         );
 
         $patient->setPsychologist($psychologist);
@@ -102,10 +107,10 @@ class AppFixtures extends Fixture
 
     public function clinicFixtures(ObjectManager $manager): void {
         $clinic = new Clinic(
-            '+++++++++++++ Añadir información sobre la clínica ++++++++++++++',
+            'La mayoría de la gente gasta más energía en hablar de los problemas que en tratar de resolverlos. Nosotras te acompañamos en lo segundo.',
             '626 408 950',
             'clinica@gmail.com',
-            'C/ Esperanza, Nº6 (33600 Mieres - Asturias)',
+            'Calle Esperanza, Nº6 (33600 Mieres - Asturias)',
             'L-V de 09:00h a 14:30h y de 16:30h a 19:30h'
         );
 

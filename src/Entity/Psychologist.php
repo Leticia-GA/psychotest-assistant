@@ -20,11 +20,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Psychologist extends User
 {
     /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $phoneNumber;
-
-    /**
      * @ORM\Column(type="string", length=200)
      */
     private $education;
@@ -42,29 +37,19 @@ class Psychologist extends User
     public function __construct(
         string $name, 
         string $surnames, 
+        string $dni, 
+        string $birthdate,
+        string $phoneNumber,
         string $email,
-        string $phoneNumber, 
+        string $photo,
         string $education, 
         string $specialization, 
         string $collegiateNumber
     ) {
-        parent::__construct($name, $surnames, $email, [User::ROLE_USER, User::ROLE_PSYC]);
-        $this->phoneNumber = $phoneNumber;
+        parent::__construct($name, $surnames, $dni, $birthdate, $phoneNumber, $email, $photo, [User::ROLE_USER, User::ROLE_PSYC]);
         $this->education = $education;
         $this->specialization = $specialization;
         $this->collegiateNumber = $collegiateNumber;  
-    }
-
-    public function getPhoneNumber(): string 
-    {
-        return $this->phoneNumber;
-    }
-    
-    public function setPhoneNumber(string $phoneNumber): self
-    {
-        $this->phoneNumber = $phoneNumber;
-
-        return $this;
     }
 
     public function getEducation()

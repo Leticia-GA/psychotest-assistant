@@ -42,10 +42,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     protected $surnames;
 
     /**
+     * @ORM\Column(type="string", length=30)
+     */
+    protected $dni;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    protected $birthDate;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    protected $phoneNumber;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email()
      */
     protected $email;
+
+     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $photo;
 
     /**
      * @ORM\Column(type="json")
@@ -58,11 +78,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     protected $password;
 
-    public function __construct(string $name, string $surnames, string $email, array $roles)
+    public function __construct(string $name, string $surnames, string $dni, string $birthDate, string $phoneNumber, string $email, string $photo, array $roles)
     {
         $this->name = $name;
         $this->surnames = $surnames;
+        $this->dni = $dni;
+        $this->birthDate = $birthDate;
+        $this->phoneNumber = $phoneNumber;
         $this->email = $email;
+        $this->photo = $photo;
         $this->roles = $roles;
     }
 
@@ -95,6 +119,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getDni(): string
+    {
+        return $this->dni;
+    }
+
+    public function setDni(string $dni): self
+    {
+        $this->dni = $dni;
+
+        return $this;
+    }
+
+    public function getBirthDate(): string
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate(string $birthDate): self
+    {
+        $this->birthDate = $birthDate;
+
+        return $this;
+    }
+
+    public function getPhoneNumber(): string 
+    {
+        return $this->phoneNumber;
+    }
+    
+    public function setPhoneNumber(string $phoneNumber): self
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;
@@ -103,6 +163,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
+
+        return $this;
+    }
+
+    public function getPhoto(): string
+    {
+        return $this->photo;
+    }
+
+    public function setPhoto(string $photo): self
+    {
+        $this->photo = $photo;
 
         return $this;
     }

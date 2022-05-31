@@ -8,13 +8,24 @@
 
         <hr>
 
-        <div class="row text-center">
-            <div class="col-md-6">
+        <div class="row text-center align-items-center mt-4 mb-4">
+            <div class="col-md-7">
                 <p>{{ clinic.info }}</p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <img src="{{ asset('build/images/clinic.png') }}" class="rounded" alt="Imagen salud mental" width="300">
             </div>
         </div>
+
+        <div class="row text-center align-items-center p-3 contact">
+        <div class="col-md-12">
+            <p class="display-6 pb-2">Contacto</p>
+            <p class="fs-5"><i class="fa-solid fa-phone fa-1x text-muted me-2"></i> {{ clinic.phoneNumber }}</p>
+            <p class="fs-5"><i class="fa-solid fa-envelope  text-muted me-2"></i> {{ clinic.email }}</p>
+            <p class="fs-5"><i class="fa-solid fa-location-dot text-muted me-2"></i> {{ clinic.location }}</p>
+        </div>
+    </div>
     </main>
+
+    
 {% endblock %}

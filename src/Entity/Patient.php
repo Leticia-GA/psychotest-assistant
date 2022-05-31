@@ -16,11 +16,6 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 class Patient extends User
 {
     /**
-     * @ORM\Column(type="string", length=20)
-     */
-    private $phoneNumber;
-
-    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $diagnostic;
@@ -38,23 +33,13 @@ class Patient extends User
     public function __construct(
         string $name, 
         string $surnames, 
+        string $dni, 
+        string $birthdate,
+        string $phoneNumber,
         string $email,
-        string $phoneNumber
+        string $photo,
     ) {
-        parent::__construct($name, $surnames, $email, [User::ROLE_USER]);
-        $this->phoneNumber = $phoneNumber;
-    }
-
-    public function getPhoneNumber(): string
-    {
-        return $this->phoneNumber;
-    }
-    
-    public function setPhoneNumber(string $phoneNumber): self
-    {
-        $this->phoneNumber = $phoneNumber;
-
-        return $this;
+        parent::__construct($name, $surnames, $dni, $birthdate, $phoneNumber, $email, $photo, [User::ROLE_USER]);
     }
 
     public function getDiagnostic(): string
