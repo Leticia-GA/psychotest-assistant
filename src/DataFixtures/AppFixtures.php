@@ -107,10 +107,10 @@ class AppFixtures extends Fixture
 
     public function clinicFixtures(ObjectManager $manager): void {
         $clinic = new Clinic(
-            'La mayoría de la gente gasta más energía en hablar de los problemas que en tratar de resolverlos. Nosotras te acompañamos en lo segundo.',
+            'La mayoría de la gente gasta más energía en hablar de los problemas que en tratar de resolverlos. Nosotr@s te acompañamos en lo segundo.',
             '626 408 950',
             'clinica@gmail.com',
-            'Calle Esperanza, Nº6 (33600 Mieres - Asturias)',
+            'Calle Frai Paulino Álvarez (33600 Mieres, Asturias)',
             'L-V de 09:00h a 14:30h y de 16:30h a 19:30h'
         );
 

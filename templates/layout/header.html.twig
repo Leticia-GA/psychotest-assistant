@@ -57,7 +57,7 @@
                         class="nav-link active" aria-current="page" 
                      {% else %} 
                         class="nav-link" href="{{ path('clinic') }}" 
-                     {% endif %}>La Clínica</a>
+                     {% endif %}>Contacto</a>
                </li>
             </ul>
          </div>
@@ -65,14 +65,14 @@
          <div class="d-flex align-items-center mr-5">
             <div class="position-relative" id="notifications">
                <a class="text-reset me-3" href="{{ path('dashboard') }}">
-                  <i class="fas fa-bell"></i>
+                  <i class="fas fa-bell fs-5 dark"></i>
                </a>
             </div>
 
             <div class="dropdown ml-5">
                   <button class="btn btn-profile dropdown-toggle ml-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                      {{ app.user.name }}
-                     <img class="img-profile rounded-circle" src="{{ asset('build/images/undraw_profile.svg') }}" width="30">
+                     <img class="img-profile rounded-circle" src="{{ app.user.photo }}" width="40">
                   </button>
                   
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">

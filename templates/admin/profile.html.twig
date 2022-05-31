@@ -3,12 +3,12 @@
 {% block content %}
     <main class="container">
         <div class="row">
-            <div class="col-2 mt-3 mb-4 text-center align-items-center">
+            <div class="col-md-2 mt-3 mb-4 text-center align-items-center">
                  <img class="rounded-circle" src="{{ app.user.photo }}" alt="Profile photo" width="170">  
             </div>
-            <div class="col-10">
+            <div class="col-md-10">
                 <p class="display-6 mt-5 mb-4">{{ app.user.name~' '~app.user.surnames }}</p>
-                <p class="dark">Administrador</p>
+                <p class="dark font-italic"><i>Administrador</i></p>
             </div>
         </div>
 

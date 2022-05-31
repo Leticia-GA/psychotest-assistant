@@ -3,29 +3,20 @@
 {% block content %}
     <main class="container">
         <div class="row">
-            <div class="h1 col-9 mt-4 mb-4">La Clínica</div>
+            <div class="h1 col-9 mt-4 mb-4">Contacto</div>
         </div>
 
         <hr>
 
-        <div class="row text-center align-items-center mt-4 mb-4">
-            <div class="col-md-7">
-                <p>{{ clinic.info }}</p>
+        <div class="row text-center align-items-center">
+            <div class="col-md-6 lead">
+                <p class="fs-4"><i class="fa-solid fa-phone fa-1x text-muted me-2"></i> {{ clinic.phoneNumber }}</p>
+                <p class="fs-4"><i class="fa-solid fa-envelope  text-muted me-2"></i> {{ clinic.email }}</p>
+                <p class="fs-4"><i class="fa-solid fa-location-dot text-muted me-2"></i> {{ clinic.location }}</p>
             </div>
-            <div class="col-md-5">
-                <img src="{{ asset('build/images/clinic.png') }}" class="rounded" alt="Imagen salud mental" width="300">
+            <div class="col-md-6">
+                <div class="mapouter"><div class="gmap_canvas"><iframe width="650" height="400" id="gmap_canvas" src="https://maps.google.com/maps?q=bernaldo%20de%20quiros%20mieres&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://fmovies-online.net"></a><br><style>.mapouter{position:relative;text-align:right;height:400px;width:650px;}</style><a href="https://www.embedgooglemap.net">using google maps on your website</a><style>.gmap_canvas {overflow:hidden;background:none!important;height:400px;width:650px;}</style></div></div>
             </div>
         </div>
-
-        <div class="row text-center align-items-center p-3 contact">
-        <div class="col-md-12">
-            <p class="display-6 pb-2">Contacto</p>
-            <p class="fs-5"><i class="fa-solid fa-phone fa-1x text-muted me-2"></i> {{ clinic.phoneNumber }}</p>
-            <p class="fs-5"><i class="fa-solid fa-envelope  text-muted me-2"></i> {{ clinic.email }}</p>
-            <p class="fs-5"><i class="fa-solid fa-location-dot text-muted me-2"></i> {{ clinic.location }}</p>
-        </div>
-    </div>
     </main>
-
-    
 {% endblock %}
