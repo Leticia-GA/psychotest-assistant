@@ -2,46 +2,33 @@
 
 {% block content %}
     <main class="container">
-        <div class="row">
-            <div class="display-6 col-10 mt-5 mb-5">{{ app.user.name~' '~app.user.surnames}}</div>
+        <div class="row align-items-center mt-3 mb-4">
+            <div class="col-md-2">
+                 <img class="rounded-circle" src="{{ app.user.photo }}" alt="Profile photo" width="170">  
+            </div>
+            <div class="display-6 col-10">{{ app.user.name~' '~app.user.surnames}}</div>
         </div>
         
-        <div class="row m-2 pt-4">
-            <h4>Información Personal</h4>
-            <hr>
-            <div class="col-5">
-                <span class="text-primary fw-bold">DNI</span>
-                <p>** actualizar BBDD</p>
-            </div>
-            <div class="col-5">
-                <span class="text-primary fw-bold">Fecha de nacimiento</span>
-                <p>** actualizar BBDD</p>
-            </div>
-        </div>
+        <ul class="nav nav-tabs details" id="psychoDetailsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active details-btn" id="home-tab" data-bs-toggle="tab" data-bs-target="#personal-info-tab-pane" type="button" role="tab" aria-controls="personal-info-tab-pane" aria-selected="true">
+                    Información Personal
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link details-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#academic-info-tab-pane" type="button" role="tab" aria-controls="academic-info-tab-pane" aria-selected="false">
+                    Información Académica
+                </button>
+            </li>
+        </ul>
 
-        <div class="row m-2">
-            <div class="col-5">
-                <span class="text-primary fw-bold">Teléfono</span>
-                <p>{{ app.user.phoneNumber }}</p>
+        <div class="tab-content" id="psychoDetailsTabContent">
+            <div class="tab-pane fade show active" id="personal-info-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                {% include 'psychologists/profileDetails/personalInfo.html.twig' %}
             </div>
-            <div class="col-5">
-                <span class="text-primary fw-bold">Email</span>
-                <p>{{ app.user.email }}</p>
-            </div>
-        </div>
 
-        <div class="row m-2 pt-4">
-            <h4>Información Académica</h4>
-            <hr>
-            <div class="col">
-                <span class="text-primary fw-bold">Estudios</span>
-                <p>{{ app.user.education }}</p>
-
-                <span class="text-primary fw-bold">Número de Colegiación</span>
-                <p>{{ app.user.collegiateNumber }}</p>
-
-                <span class="text-primary fw-bold">Especialización</span>
-                <p>{{ app.user.specialization }}</p>
+            <div class="tab-pane fade" id="academic-info-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                {% include 'psychologists/profileDetails/academicInfo.html.twig' %}
             </div>
         </div>
 

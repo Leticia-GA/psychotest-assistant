@@ -2,12 +2,14 @@
 
 {% block content %}
     <main class="container">
-        <div class="row">
-            <div class="display-6 col-10 mt-5 mb-5">{{ psychologist.name~' '~psychologist.surnames}}</div>
-
-            <div class="col-2 mt-5 mb-4">
-                <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal"><i class="fa-solid fa-trash"></i></a>
+        <div class="row align-items-center mt-3 mb-4">
+            <div class="col-md-2">
+                 <img class="rounded-circle" src="{{ psychologist.photo }}" alt="Profile photo" width="170">  
+            </div>
+            <div class="col-md-8 display-6">{{ psychologist.name~' '~psychologist.surnames}}</div>
+            <div class="col-md-2">
+                <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                <a class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal"><i class="fa-solid fa-trash"></i> Eliminar</a>
             </div>
         </div>
 

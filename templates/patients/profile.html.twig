@@ -2,7 +2,10 @@
 
 {% block content %}
     <main class="container">
-        <div class="row">
+        <div class="row align-items-center mt-3 mb-4">
+            <div class="col-md-2">
+                 <img class="rounded-circle" src="{{ app.user.photo }}" alt="Profile photo" width="170">  
+            </div>
             <div class="display-6 col-10 mt-5 mb-4">{{ app.user.name~' '~app.user.surnames }}</div>
         </div>
 
@@ -11,11 +14,11 @@
         <div class="row m-2 pt-4">
             <div class="col-5">
                 <span class="text-primary">DNI</span>
-                <p>** actualizar BBDD</p>
+                <p>{{ app.user.dni }}</p>
             </div>
             <div class="col-5">
                 <span class="text-primary">Fecha de nacimiento</span>
-                <p>** actualizar BBDD</p>
+                <p>{{ app.user.birthDate }}</p>
             </div>
         </div>
 
