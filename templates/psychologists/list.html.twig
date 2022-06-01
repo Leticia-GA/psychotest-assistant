@@ -12,7 +12,7 @@
         <div class="row">
             <div class="h1 col-9 mt-4 mb-4">Psicólogos</div>
 
-            <div class="col-3 mt-5 mb-4">
+            <div class="col-3 mt-5 mb-4 text-center">
                 <a class="btn btn-light primary" href="{{ path('psychologist_create') }}"><i class="fas fa-user-plus"></i> Añadir nuevo psicólogo</a>
             </div>
         </div>
@@ -33,19 +33,19 @@
             <tbody>
                 {% for psychologist in psychologists %}
                     <tr>
-                        <td>{{ psychologist.name }}</td>
-                        <td>{{ psychologist.surnames }}</td>
-                        <td>{{ psychologist.phoneNumber }}</td>
-                        <td>{{ psychologist.specialization }}</td>
-                        <td class="text-center">
+                        <td class="col-3">{{ psychologist.name }}</td>
+                        <td class="col-3">{{ psychologist.surnames }}</td>
+                        <td class="col-1">{{ psychologist.phoneNumber }}</td>
+                        <td class="col-2">{{ psychologist.specialization }}</td>
+                        <td class="col-3 text-center">
                             <a class="btn btn-light success" href="{{ path('psychologist_details', {id: psychologist.id}) }}">
                                 <i class="fa-solid fa-circle-info"></i> Detalles
                             </a>
                             <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}">
-                                <i class="fa-solid fa-pen-to-square"></i>
+                                <i class="fa-solid fa-pen-to-square"></i> Editar
                             </a>
                             <button type="button" class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{psychologist.id}}">
-                                <i class="fa-solid fa-trash"></i>
+                                <i class="fa-solid fa-trash"></i> Eliminar
                             </button>
                         </td>
                     </tr>

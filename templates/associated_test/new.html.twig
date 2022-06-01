@@ -13,9 +13,5 @@
             <p>Paciente: <a href="{{ path('patient_details', {id: patient.id}) }}">{{ patient.name~' '~patient.surnames}}</a></p>
             {{ form(form) }}
         </div>
-
-        <div class="row mt-4 justify-content-end">
-            <a class="btn btn-light primary col-1" href="{{ path('patients_list') }}"><i class="fas fa-angle-left"></i> Volver</a>
-        </div>
     </main>
 {% endblock %}

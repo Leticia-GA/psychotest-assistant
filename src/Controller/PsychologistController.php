@@ -147,7 +147,7 @@ class PsychologistController extends AbstractController
      */
     public function create(UserPasswordHasherInterface $passwordHasher, Request $request): Response
     {
-        $psychologist = new Psychologist('', '', '', '', '', '', '');
+        $psychologist = new Psychologist('', '', '', new \DateTime(''), '', '', '', '', '', '');
         $form = $this->createForm(PsychologistType::class, $psychologist);
 
         $form->handleRequest($request);

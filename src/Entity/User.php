@@ -2,11 +2,13 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity()
@@ -47,7 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     protected $dni;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="datetime")
      */
     protected $birthDate;
 
@@ -78,7 +80,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     protected $password;
 
-    public function __construct(string $name, string $surnames, string $dni, string $birthDate, string $phoneNumber, string $email, string $photo, array $roles)
+    public function __construct(string $name, string $surnames, string $dni, DateTime $birthDate, string $phoneNumber, string $email, string $photo, array $roles)
     {
         $this->name = $name;
         $this->surnames = $surnames;
@@ -131,12 +133,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBirthDate(): string
+    public function getBirthDate(): DateTime
     {
         return $this->birthDate;
     }
 
-    public function setBirthDate(string $birthDate): self
+    public function setBirthDate(DateTime $birthDate): self
     {
         $this->birthDate = $birthDate;
 

@@ -4,6 +4,7 @@ namespace App\Form\Type;
 
 use App\Entity\Psychologist;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -17,6 +18,8 @@ class PsychologistType extends AbstractType
         $builder
             ->add('name', TextType::class, ['label' => 'Nombre'])
             ->add('surnames', TextType::class, ['label' => 'Apellidos'])
+            ->add('dni', TextType::class, ['label' => 'DNI'])
+            ->add('birthDate', BirthdayType::class, ['placeholder' => 'Seleccione una opción'])
             ->add('phoneNumber', TextType::class, ['label' => 'Teléfono'])
             ->add('email', TextType::class, ['label' => 'Email'])
             ->add('education', TextType::class, ['label' => 'Titulación Universitaria'])

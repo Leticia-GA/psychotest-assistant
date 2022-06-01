@@ -18,6 +18,7 @@ class AssociatedTestToPatientType extends AbstractType
     {
         $builder
             ->add('patient', EntityType::class, array(
+                'label' => 'Paciente:',
                 'class' => Patient::class,
                 'query_builder' => function (EntityRepository $er) use($options){
                     return $er->createQueryBuilder('p')

@@ -173,7 +173,7 @@ class PatientController extends AbstractController
      */
     public function create(UserPasswordHasherInterface $passwordHasher, Request $request, SecurityService $security): Response
     {
-        $patient = new Patient('', '', '', '');
+        $patient = new Patient('', '', '', new \DateTime(''), '', '', '');
         $form = $this->createForm(PatientType::class, $patient);
 
         $form->handleRequest($request);

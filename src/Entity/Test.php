@@ -25,10 +25,34 @@ class Test
      */
     private $explanation;
 
-    public function __construct(string $name, string $explanation)
+     /**
+     * @ORM\Column(type="string", length=200)
+     */
+    private $author;
+
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $time;
+
+     /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $applicationAge;
+
+     /**
+     * @ORM\Column(type="text")
+     */
+    private $description;
+
+    public function __construct(string $name, string $explanation, string $author, string $time, string $applicationAge, string $description)
     {
         $this->name = $name;
         $this->explanation = $explanation;
+        $this->author = $author;
+        $this->time = $time;
+        $this->applicationAge = $applicationAge;
+        $this->description = $description;
     }
 
     public function getId(): ?int
@@ -51,6 +75,26 @@ class Test
     public function getExplanation(): string
     {
         return $this->explanation;
+    }
+ 
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    public function getTime()
+    {
+        return $this->time;
+    }
+
+    public function getApplicationAge()
+    {
+        return $this->applicationAge;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     public function __toString()

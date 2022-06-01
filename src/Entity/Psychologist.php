@@ -2,8 +2,10 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity()
@@ -38,7 +40,7 @@ class Psychologist extends User
         string $name, 
         string $surnames, 
         string $dni, 
-        string $birthdate,
+        DateTime $birthDate,
         string $phoneNumber,
         string $email,
         string $photo,
@@ -46,7 +48,7 @@ class Psychologist extends User
         string $specialization, 
         string $collegiateNumber
     ) {
-        parent::__construct($name, $surnames, $dni, $birthdate, $phoneNumber, $email, $photo, [User::ROLE_USER, User::ROLE_PSYC]);
+        parent::__construct($name, $surnames, $dni, $birthDate, $phoneNumber, $email, $photo, [User::ROLE_USER, User::ROLE_PSYC]);
         $this->education = $education;
         $this->specialization = $specialization;
         $this->collegiateNumber = $collegiateNumber;  

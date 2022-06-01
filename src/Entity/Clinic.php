@@ -11,7 +11,6 @@ class Clinic
 {
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     protected $id;
@@ -41,8 +40,9 @@ class Clinic
      */
     private $openingHours;
 
-    public function __construct(string $info, string $phoneNumber, string $email, string $location, string $openingHours)
+    public function __construct(int $id, string $info, string $phoneNumber, string $email, string $location, string $openingHours)
     {
+        $this->id = 1;
         $this->info = $info;
         $this->phoneNumber = $phoneNumber;
         $this->email = $email;
