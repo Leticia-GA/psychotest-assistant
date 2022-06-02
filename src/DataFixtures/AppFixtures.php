@@ -144,22 +144,24 @@ class AppFixtures extends Fixture
             $patient1,
             'paciente'
         );
+        $patient1->setPassword($hashedPassword);
+
         $hashedPassword = $this->passwordHasher->hashPassword(
             $patient2,
             'paciente'
         );
+        $patient2->setPassword($hashedPassword);
+
         $hashedPassword = $this->passwordHasher->hashPassword(
             $patient3,
             'paciente'
         );
+        $patient3->setPassword($hashedPassword);
+
         $hashedPassword = $this->passwordHasher->hashPassword(
             $patient4,
             'paciente'
         );
-
-        $patient1->setPassword($hashedPassword);
-        $patient2->setPassword($hashedPassword);
-        $patient3->setPassword($hashedPassword);
         $patient4->setPassword($hashedPassword);
 
         $manager->persist($patient1);

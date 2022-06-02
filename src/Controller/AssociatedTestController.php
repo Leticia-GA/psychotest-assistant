@@ -57,7 +57,7 @@ class AssociatedTestController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'Se ha enviado correctamente el test '.$associatedTest->getTest()->getName().' al paciente '.$patient->getName()
+                'Se ha enviado correctamente el test '.$associatedTest->getTest()->getName().' a '.$patient->getName().' '.$patient->getSurnames()
             );
 
             return $this->redirectToRoute('patients_list');
@@ -97,7 +97,7 @@ class AssociatedTestController extends AbstractController
 
             $this->addFlash(
                 'notice',
-                'Se ha enviado correctamente el test '.$associatedTest->getTest()->getName().' al paciente '.$associatedTest->getPatient()->getName()
+                'Se ha enviado correctamente el test '.$associatedTest->getTest()->getName().' a '.$associatedTest->getPatient()->getName().' '.$associatedTest->getPatient()->getSurnames()
             );
 
             return $this->redirectToRoute('patients_list');

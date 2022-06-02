@@ -7,10 +7,13 @@
                  <img class="rounded-circle" src="{{ psychologist.photo }}" alt="Profile photo" width="170">  
             </div>
             <div class="col-md-8 display-6">{{ psychologist.name~' '~psychologist.surnames}}</div>
-            <div class="col-md-2">
-                <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
-                <a class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal"><i class="fa-solid fa-trash"></i> Eliminar</a>
-            </div>
+            
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="col-md-2">
+                    <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}"><i class="fa-solid fa-pen-to-square"></i> Editar</a>
+                    <a class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal"><i class="fa-solid fa-trash"></i> Eliminar</a>
+                </div>
+            {% endif %}
         </div>
 
         <ul class="nav nav-tabs details" id="psychoDetailsTab" role="tablist">

@@ -1,19 +1,23 @@
-<div class="row m-2 pt-4">
-    <div class="col-5">
-        <span class="text-primary">DNI</span>
-        <p>{{ psychologist.dni}}</p>
+{% if is_granted('ROLE_ADMIN') %}
+    <div class="row m-2 pt-4">
+        <div class="col-5">
+            <span class="text-primary">DNI</span>
+            <p>{{ psychologist.dni}}</p>
+        </div>
+        <div class="col-5">
+            <span class="text-primary">Fecha de nacimiento</span>
+            <p>{{ psychologist.birthDate|date('d-m-Y') }}</p>
+        </div>
     </div>
-    <div class="col-5">
-        <span class="text-primary">Fecha de nacimiento</span>
-        <p>{{ psychologist.birthDate|date('d-m-Y') }}</p>
-    </div>
-</div>
+{% endif %}
 
 <div class="row m-2 pt-4">
-    <div class="col-5">
-        <span class="text-primary">Teléfono</span>
-        <p>{{ psychologist.phoneNumber }}</p>
-    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="col-5">
+            <span class="text-primary">Teléfono</span>
+            <p>{{ psychologist.phoneNumber }}</p>
+        </div>
+    {% endif %}
     <div class="col-5">
         <span class="text-primary">Email</span>
         <p>{{ psychologist.email }}</p>
