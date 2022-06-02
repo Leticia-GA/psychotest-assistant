@@ -9,6 +9,43 @@
 
         <hr>
 
-        {{ form(form) }}
+        {{ form_start(form) }}
+            <div class="row fw-bold">
+                <div class="col">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="col fw-bold">
+                    {{ form_row(form.surnames) }}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                <div class="col mt-2">
+                    {{ form_row(form.dni) }}
+                </div>
+                <div class="col fw-bold">
+                    {{ form_row(form.birthDate) }}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                <div class="col-3">
+                    {{ form_row(form.phoneNumber) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.email) }}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                <div class="col">
+                    {{ form_row(form.education) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.collegiateNumber) }}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                {{ form_row(form.specialization) }}
+            </div>
+        {{ form_end(form) }}
+
     </main>
 {% endblock %}

@@ -9,6 +9,7 @@ $danger: lighten(#DC5656, 5%);
 $dark: darken(#7e7e7e, 7%);
 $noreadnotif: lighten(#d3f8ef, 1%);
 $selectedAnswer: lighten(#28cebc, 30%);
+$thead: lighten(#28cebc, 40%);
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
