@@ -31,7 +31,8 @@ class AppFixtures extends Fixture
         $this->clinicFixtures($manager);
         $psycho1 = $this->psycho1Fixtures($manager);
         $this->patientsPsycho1Fixtures($manager, $psycho1);
-        $this->psycho2Fixtures($manager);
+        $psycho2 = $this->psycho2Fixtures($manager);
+        $this->patientsPsycho2Fixtures($manager, $psycho2);
         $this->testFixtures($manager);
         /*
         $psychologist1 = $this->psychoFixtures($manager, "1");
@@ -103,6 +104,10 @@ class AppFixtures extends Fixture
             '612 110 804',
             'hortensio@gmail.com',
             'https://i.pravatar.cc/?img=18',
+            'Trastorno de Ansiedad Generalizada',
+            'El paciente refiere presentar episodios de ansiedad desde hace 2 años. 
+            Manifiesta que los síntomas comenzaron con dificultad para conciliar el sueño y sensación de ira y agresividad ante ciertas situaciones desencadenantes en el trabajo. 
+            Además, desde hace unos meses, el problema se ha agravado con respuestas fisiológicas como taquicardia, temblor y malestar gastrointestinal.'
         );
 
         $patient2 = new Patient(
@@ -113,6 +118,10 @@ class AppFixtures extends Fixture
             '652 267 878',
             'margarita@gmail.com',
             'https://i.pravatar.cc/?img=10',
+            'Trastorno Obsesivo Compulsivo',
+            'Remitida por su médico por realizar rituales compulsivos que se van agravando hastqa imposibilitar su vida cotidiana.
+            Desde hace un año no puede tocar ninguna puerta, barandilla o mostrador en áreas públicas, por miedo a contagiarse de algún germen que pueda afectar seriamente a su salud. 
+            Cuando cree haber tocado algo que no debería se lava las manos repetidas veces, incluso con lejía, llegando a producirse graves heridas.'
         );
 
         $patient3 = new Patient(
@@ -123,6 +132,13 @@ class AppFixtures extends Fixture
             '642 457 601',
             'gabino@gmail.com',
             'https://i.pravatar.cc/?img=11',
+            'Depresión',
+            'Acude a consulta aquejado de tristeza, soledad, irritabilidad y alta sensibilidad; también sentimientos de fracaso como persona, padre y como ser humano, además de desánimo y cansancio por vivir, pelear por ello y hacerlo mal. 
+            Afirma sentirse así desde hace tres meses cuando se dio cuenta de que perdía a la mujer que quería. 
+            Desde entonces este estado es más o menos permanente a lo largo del día con picos de mayor intensidad que pueden durar hasta una hora. 
+            Reconoce que todo esto ha afectado a su vida laboral y personal; su rendimiento ha disminuido y ya no practica hobbies que antes sí que solía hacer. 
+            Le gustaba leer y estudiar, salir a pasear y, los fines de semana, salir con los amigos y hacer algo de deporte. También dice que su relación con los demás ha empeorado. 
+            Hoy por hoy sólo sale a pasear y no tanto como antes. Afirma que "ahora lo único que hago es ver televisión", cosa que antes le horrorizaba.'
         );
 
         $patient4 = new Patient(
@@ -133,6 +149,11 @@ class AppFixtures extends Fixture
             '652 267 878',
             'teodora@gmail.com',
             'https://i.pravatar.cc/?img=21',
+            'Fobia Social',
+            'Paciente que refiere haber sido desde pequeña "muy tímida e introvertida" aunque desde hace un año aproximadamente se ha intensificado su miedo en situaciones en las que tiene que realizar cualquier actividad ante otras personas y en interacciones sociales.
+            Manifiesta tener una alta sintomatología de ansiedad e incluso ha llegado a experimentar un episodio de ataque de pánico hace un par de semanas, lo que le ha llevado a acudir a tomar la decisión de acudir a consulta (teme volver a pasar por una situación similar).
+            También refiere sentirse evaluada de forma negativa por los demás, lo que hace que se ponga aún más nerviosa y que no sepa comportarse de un modo adecuado o competente.
+            Todo ello le está causando sentimientos de tristeza, vacío y soledad.'
         );
 
         $patient1->setPsychologist($psycho1);
@@ -172,7 +193,7 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 
-    public function psycho2Fixtures(ObjectManager $manager) {
+    public function psycho2Fixtures(ObjectManager $manager): Psychologist {
         $psycho2 = new Psychologist(
             'Fortunata',
             'Arriaga Brito',
@@ -182,7 +203,7 @@ class AppFixtures extends Fixture
             'fortunata@gmail.com',
             'https://i.pravatar.cc/?img=44',
             'Licenciatura en Psicología',
-            'Terapia Sistémica',
+            'Psicogerontología',
             'O-4508'
         );
 
@@ -208,7 +229,7 @@ class AppFixtures extends Fixture
             'ursula@gmail.com',
             'https://i.pravatar.cc/?img=5',
             'Licenciatura en Psicología',
-            'Terapia Cognitivo Conductual',
+            'Terapia Sistémica',
             'O-7431'
         );
 
@@ -232,6 +253,61 @@ class AppFixtures extends Fixture
         $manager->persist($psycho2);
         $manager->persist($psycho3);
         $manager->persist($psycho4);
+
+        $manager->flush();
+
+        return $psycho2;
+    }
+
+    public function patientsPsycho2Fixtures(ObjectManager $manager, Psychologist $psycho2) {
+        $patient1 = new Patient(
+            'Santos',
+            'Campo Fernández',
+            '12121212-S',
+            new \DateTime('2/20/1944'),
+            '681 325 756',
+            'familiardesantos@gmail.com',
+            'https://i.pravatar.cc/?img=66',
+            'Enfermedad de Alzheimer',
+            'Paciente que reside en un centro geriátrico. Diagnóstico de Alzheimer, en fase moderada desde hace 5 años. Manifiesta agitación y estrés ante una situación incómoda. 
+            Debido a la aparición de estos cambios conductuales, tanto la enfermera a su cuidado como la familia desconocen cómo actuar.'
+        );
+
+        $patient2 = new Patient(
+            'José María',
+            'Alonso Álvarwez',
+            '13131313-J',
+            new \DateTime('9/2/1952'),
+            '698 647 521',
+            'chema@gmail.com',
+            'https://i.pravatar.cc/?img=69',
+            'Deterioro Cognitivo Leve',
+            'Paciente que refiere tener pérdida de memoria de 3 años de evolución. 
+            Presenta antecedentes clínicos de hipertensión arterial, en tratamiento con enalapril, con buen control.
+            Habita en medio urbano. Ha trabajado como empleado de banca. 
+            En los últimos 3 años refiere olvidos frecuentes, que afectan a la capacidad de recordar dónde ha dejado útiles de uso común, y dificultad para evocar noticias que ha leído o comentar películas que ha visto. 
+            En algunas ocasiones tarda en encontrar la palabra correcta para denominar objetos. 
+            No presenta sintomatología de tipo depresivo, aunque sí cierta ansiedad ante la posibilidad de padecer una enfermedad de Alzheimer. 
+            Realiza todas sus actividades habituales sin ningún tipo de limitación.'
+        );
+
+        $patient1->setPsychologist($psycho2);
+        $patient2->setPsychologist($psycho2);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $patient1,
+            'paciente'
+        );
+        $patient1->setPassword($hashedPassword);
+
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $patient2,
+            'paciente'
+        );
+        $patient2->setPassword($hashedPassword);
+
+        $manager->persist($patient1);
+        $manager->persist($patient2);
 
         $manager->flush();
     }

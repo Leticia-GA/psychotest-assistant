@@ -35,11 +35,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="El nombre no puede contener números."
+     * )
      */
     protected $name;
 
     /**
      * @ORM\Column(type="string", length=250)
+     * @Assert\Regex(
+     *     pattern="/\d/",
+     *     match=false,
+     *     message="Los apellidos no pueden contener números."
+     * )
      */
     protected $surnames;
 
@@ -60,7 +70,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
-     * @Assert\Email()
+     * @Assert\Email(
+     *      message = "El email '{{ value }}' no es válido." 
+     * )
      */
     protected $email;
 

@@ -5,7 +5,6 @@ namespace App\Entity;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity()
@@ -39,9 +38,14 @@ class Patient extends User
         DateTime $birthDate,
         string $phoneNumber,
         string $email,
-        string $photo,
+        string $photo, 
+        string $diagnostic,
+        string $caseHistory
     ) {
         parent::__construct($name, $surnames, $dni, $birthDate, $phoneNumber, $email, $photo, [User::ROLE_USER]);
+
+        $this->diagnostic = $diagnostic;
+        $this->caseHistory =$caseHistory;
     }
 
     public function getDiagnostic(): string

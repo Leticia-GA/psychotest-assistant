@@ -4,7 +4,7 @@ global.$ = global.jQuery = $;
 $(function() {
     checkNotifications();
 
-    setInterval(checkNotifications, 30000); 
+    setInterval(checkNotifications, 10000); 
 });
 
 function checkNotifications() {

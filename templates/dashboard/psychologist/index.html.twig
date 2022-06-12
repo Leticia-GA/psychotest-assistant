@@ -16,7 +16,7 @@
 
         {% for testDone in test %}
             <div {% if testDone.readAt == null %} class="no_read row p-2 m-3" {% else %} class="read row p-2 m-3" {% endif %}>
-                <div class="col-1 text-center">
+                <div class="col-2 text-center">
                     <p class="mt-2 mb-2 dark">{{ testDone.date|date('d-m-Y') }} a las {{ testDone.date|date('H:i') }}</p>
                 </div> 
                 <div class="col-9">
@@ -24,7 +24,7 @@
                         <b><a href="{{ path('patient_details', {id: testDone.associatedTest.patient.id}) }}">
                             {{ testDone.associatedTest.patient.name }} {{ testDone.associatedTest.patient.surnames }}</a></b> ha completado el test <span class="fw-bold">{{ testDone.associatedTest.test.name }}</span></p>
                 </div>
-                <div class="col-2 text-center">
+                <div class="col-1 text-center">
                     <a class="btn btn-light primary" href="{{ path('test_done_review', {id: testDone.id}) }}">Ver resultados</a>
                 </div> 
             </div>               

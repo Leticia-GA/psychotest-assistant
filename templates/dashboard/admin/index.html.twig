@@ -20,13 +20,23 @@
                 <div class="col-10 mt-2 mb-4">
                     <p> 
                     {% if notification is associated_test %}
-                        El psicólogo <a href="{{ path('psychologist_details', {id: notification.patient.psychologist.id}) }}">{{ notification.patient.psychologist.name }}</a> 
+                        El psicólogo 
+                        <a href="{{ path('psychologist_details', {id: notification.patient.psychologist.id}) }}">
+                            {{ notification.patient.psychologist.name }} {{ notification.patient.psychologist.surnames }}
+                        </a> 
                         ha asociado el test <a href="{{ path('test_details', {id: notification.test.id}) }}">{{ notification.test.name }}</a>  
-                        al paciente <a href="{{ path('patient_details', {id: notification.patient.id}) }}">{{ notification.patient.name }}</a> 
+                        al paciente 
+                        <a href="{{ path('patient_details', {id: notification.patient.id}) }}">
+                            {{ notification.patient.name }} {{ notification.patient.surnames }}
+                        </a> 
 
                     {% else %}
-                        El paciente <a href="{{ path('patient_details', {id: notification.associatedTest.patient.id}) }}">{{ notification.associatedTest.patient.name }}</a>  
-                        ha realizado el test <a href="{{ path('test_details', {id: notification.associatedTest.test.id}) }}">{{ notification.associatedTest.test.name }}</a>  
+                        El paciente 
+                        <a href="{{ path('patient_details', {id: notification.associatedTest.patient.id}) }}">
+                            {{ notification.associatedTest.patient.name }} {{ notification.associatedTest.patient.surnames }}
+                        </a>  
+                        ha realizado el test 
+                        <a href="{{ path('test_details', {id: notification.associatedTest.test.id}) }}">{{ notification.associatedTest.test.name }}</a>  
                     {% endif %}
                     </p>
                 </div>             
