@@ -1,0 +1,7 @@
+<div class="row m-2 pt-4">
+    <div class="col">
+        {% for patient in patients %}
+            <li><a href="{{ path('patient_details', {id: patient.id}) }}">{{ patient.name }} {{ patient.surnames }}</a></li>
+        {% endfor %}
+    </div>
+</div>

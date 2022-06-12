@@ -49,6 +49,7 @@ class PsychologistController extends AbstractController
         $userRoles = $user->getRoles();
         $repository = $this->entityManager->getRepository(Psychologist::class);
         $psychologist = $repository->find($id);
+        $psychologistPatientsList = $repository->findAllPatients($id);
 
         if(in_array("ROLE_PSYC", $userRoles)) {
             if($user->getId() != $id) {
@@ -65,7 +66,12 @@ class PsychologistController extends AbstractController
             throw new NotFoundHttpException();
         }
 
-        return $this->render('psychologists/details.html.twig', ['psychologist' => $psychologist]);
+        return $this->render(
+            'psychologists/details.html.twig', 
+            [
+                'psychologist' => $psychologist,
+                'patients' => $psychologistPatientsList
+            ]);
     }
 
     /**
@@ -179,5 +185,4 @@ class PsychologistController extends AbstractController
             'form' => $form,
         ]);
     }
-    
 }

@@ -27,6 +27,13 @@
                     Información Académica
                 </button>
             </li>
+            {% if is_granted('ROLE_ADMIN') %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link details-btn" id="profile-tab" data-bs-toggle="tab" data-bs-target="#patients-info-tab-pane" type="button" role="tab" aria-controls="patients-info-tab-pane" aria-selected="false">
+                        Pacientes
+                    </button>
+                </li>
+            {% endif %}
         </ul>
 
         <div class="tab-content" id="psychoDetailsTabContent">
@@ -36,6 +43,9 @@
 
             <div class="tab-pane fade" id="academic-info-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                 {% include 'psychologists/details/academicInfo.html.twig' %}
+            </div>
+            <div class="tab-pane fade" id="patients-info-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                {% include 'psychologists/details/patientsList.html.twig' %}
             </div>
         </div>
 

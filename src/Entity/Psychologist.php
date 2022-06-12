@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\PsychologistRepository")
  * @UniqueEntity(
  *     fields={"collegiateNumber"},
  *     message="Ya existe un usuario con este Número de Colegiado/a"
