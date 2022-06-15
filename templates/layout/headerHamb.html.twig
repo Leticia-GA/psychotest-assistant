@@ -1,0 +1,72 @@
+<div class="hamb">
+    <div class="bg-light">
+        <a href="{{ path('dashboard') }}">
+            <img class="img-fluid mx-auto d-block" src="{{ asset('build/images/logoLight.png') }}" width="200" alt="PSY-A logo">
+        </a>
+    </div>
+    <nav class="navbar navbar-light bg-light static-top mb-4 shadow">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="ps-5">
+                <ul class="navbar-nav text-center">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="nav-item p-1 mt-3">
+                        <a {% if (app.request.get('_route')  == 'psychologists_list' or app.request.get('_route') == 'psychologist_details') %} 
+                            class="nav-link active" aria-current="page" 
+                            {% else %} 
+                            class="nav-link" href="{{ path('psychologists_list') }}" 
+                            {% endif %}>Psicólogos
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
+                    <li class="nav-item p-1">
+                        <a {% if (app.request.get('_route')  == 'patients_list' or app.request.get('_route') == 'patient_details' or app.request.get('_route') == 'associated_test_create') %} 
+                            class="nav-link active" aria-current="page" 
+                            {% else %} 
+                            class="nav-link" href="{{ path('patients_list') }}" 
+                            {% endif %}>Pacientes
+                        </a>               
+                    </li>
+                {% endif %}
+
+
+                {% if has_role(['ROLE_ADMIN', 'ROLE_PSYC']) %}
+                    <li class="nav-item p-1">
+                        <a {% if (app.request.get('_route')  == 'test_list' or app.request.get('_route') == 'test_details') %} 
+                            class="nav-link active" aria-current="page" 
+                            {% else %} 
+                            class="nav-link" href="{{ path('test_list') }}" 
+                            {% endif %}>Test</a>
+                    </li>
+                {% endif %}
+
+                {% if is_patient() %}
+                    <li class="nav-item p-1">
+                        <a {% if (app.request.get('_route') == 'psychologist_details') %} 
+                            class="nav-link active" aria-current="page" 
+                            {% else %} 
+                            class="nav-link" href="{{ path('psychologist_details', {id: app.user.psychologist.id}) }}" 
+                            {% endif %}>Su Psicólogo</a>
+                    </li>
+                {% endif %}
+
+                <li class="nav-item p-1">
+                    <a {% if (app.request.get('_route')  == 'clinic' or app.request.get('_route') == 'clinic') %} 
+                            class="nav-link active" aria-current="page" 
+                        {% else %} 
+                            class="nav-link" href="{{ path('clinic') }}" 
+                        {% endif %}>Contacto</a>
+                </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+</div>
