@@ -38,3 +38,21 @@ a:link, a:visited, a:active {
 a {
     color: #1266F1;
 }
+
+.mapouter{
+    /*position:relative;*/
+    height:100%;
+    width:100%;
+}
+
+.gmap_canvas {
+    overflow:hidden;
+    background:none!important;
+    height:100%;
+    width:100%;
+}
+
+.gmap_canvas iframe {
+    border: 0;
+    width: 100%;
+  }

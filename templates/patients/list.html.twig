@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <main class="container">
+    <main class="container mb-4">
         {% for message in app.flashes('notice') %}
             <div class="row justify-content-md-center">
                 <div class="flash-notice alert alert-success col col-lg-4 m-3 text-center">
@@ -48,7 +48,7 @@
                                     <i class="fa-solid fa-file-signature"></i> Asignar Test
                                 </a>
                                 <a class="btn btn-light warning" href="{{ path('patient_update', {id: patient.id}) }}">
-                                    <i class="fa-solid fa-pen-to-square"></i> Editar
+                                    <i class="fa-solid fa-pen-to-square">  </i> Editar
                                 </a>
                                 <a class="btn btn-light danger"  data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{patient.id}}">
                                     <i class="fa-solid fa-trash"></i> Eliminar
