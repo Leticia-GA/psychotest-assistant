@@ -237,17 +237,21 @@ class AppFixtures extends Fixture
             $psycho2,
             'psico'
         );
+
+        $psycho2->setPassword($hashedPassword);
+
         $hashedPassword = $this->passwordHasher->hashPassword(
             $psycho3,
             'psico'
         );
+
+        $psycho3->setPassword($hashedPassword);
+
         $hashedPassword = $this->passwordHasher->hashPassword(
             $psycho4,
             'psico'
         );
 
-        $psycho2->setPassword($hashedPassword);
-        $psycho3->setPassword($hashedPassword);
         $psycho4->setPassword($hashedPassword);
 
         $manager->persist($psycho2);
@@ -275,7 +279,7 @@ class AppFixtures extends Fixture
 
         $patient2 = new Patient(
             'José María',
-            'Alonso Álvarwez',
+            'Alonso Álvarez',
             '13131313-J',
             new \DateTime('9/2/1952'),
             '698 647 521',
@@ -298,12 +302,12 @@ class AppFixtures extends Fixture
             $patient1,
             'paciente'
         );
-        $patient1->setPassword($hashedPassword);
-
         $hashedPassword = $this->passwordHasher->hashPassword(
             $patient2,
             'paciente'
         );
+
+        $patient1->setPassword($hashedPassword);
         $patient2->setPassword($hashedPassword);
 
         $manager->persist($patient1);

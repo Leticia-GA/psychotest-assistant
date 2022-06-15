@@ -1,7 +1,14 @@
 <div class="row m-2 pt-4">
     <div class="col">
         {% for patient in patients %}
-            <li><a href="{{ path('patient_details', {id: patient.id}) }}">{{ patient.name }} {{ patient.surnames }}</a></li>
+            <div class="row align-items-center mt-3 mb-4">
+                <div class="col-1">
+                    <img class="rounded-circle" src="{{ patient.photo }}" alt="Patient photo" width="50">  
+                </div>
+                <div class="col-11">
+                    <a href="{{ path('patient_details', {id: patient.id}) }}">{{ patient.name }} {{ patient.surnames }}</a>
+                </div>
+            </div>
         {% endfor %}
     </div>
 </div>

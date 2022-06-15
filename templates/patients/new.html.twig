@@ -2,13 +2,50 @@
 {% form_theme form 'bootstrap_5_layout.html.twig' %}
 
 {% block content %}
-    <main class="container">
+    <main class="container mb-4">
         <div class="row">
             <div class="h1 col-9 mt-4 mb-4">Nuevo Paciente</div>
         </div>
 
         <hr>
 
-        {{ form(form) }}
+        {{ form_start(form) }}
+            <div class="row fw-bold">
+                <div class="col">
+                    {{ form_row(form.name) }}
+                </div>
+                <div class="col fw-bold">
+                    {{ form_row(form.surnames) }}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                <div class="col mt-2">
+                    {{ form_row(form.dni) }}
+                </div>
+                <div class="col fw-bold">
+                    {{ form_row(form.birthDate) }}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                <div class="col-3">
+                    {{ form_row(form.phoneNumber) }}
+                </div>
+                <div class="col">
+                    {{ form_row(form.email) }}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                {{ form_row(form.password) }}
+            </div>
+            <div class="row fw-bold">
+                <div class="col">
+                    {{ form_row(form.diagnostic) }}
+                </div>
+            </div>
+            <div class="row fw-bold">
+                {{ form_row(form.caseHistory) }}
+            </div>
+            
+        {{ form_end(form) }}
     </main>
 {% endblock %}

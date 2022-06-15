@@ -30,31 +30,11 @@ h1 {
     background-color: $noreadnotif
 }
 
-/* Test Review */
-.selected-answer {
-    color: black;
-    background-color: $selectedAnswer;
-    border-radius: 0.3em;
+/* Enlaces */
+a:link, a:visited, a:active {
+    text-decoration:none;
 }
 
-/* Notifications */
-.no_read {
-    background-color: $noreadnotif;
-    border-radius: 0.5em;
-}
-
-.btn-floating {
-    border-color: transparent !important;
-}
-
-/* Eliminar sombreado al pinchar en un botón */
-.btn-check:focus + .btn, .btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem transparent;
-}
-
-.table>thead>tr:nth-child(odd)>td, 
-.table>thead>tr:nth-child(odd)>th {
-    background-color: $thead;
-    border-bottom: 2px solid hsl(0, 0%, 87%);;
+a {
+    color: #1266F1;
 }

@@ -26,22 +26,22 @@
             <div class="tab-pane fade show active" id="general-info-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
                 <div class="row m-2 pt-4">
                     <div class="col-2">
-                        <span class="text-primary">Fecha:</span>
+                        <span class="text-primary fw-bold">Fecha:</span>
                         <p>{{ testDone.date|date('d-m-Y') }}</p>
                     </div>
                     <div class="col-10">
-                        <span class="text-primary">Hora:</span>
+                        <span class="text-primary fw-bold">Hora:</span>
                         <p>{{ testDone.date|date('H:i') }}</p>
                     </div>
                 </div>
 
                 <div class="row m-2 pt-4">
                     <div class="col-2">
-                        <span class="text-primary">Puntuación total:</span>
+                        <span class="text-primary fw-bold">Puntuación total:</span>
                         <p>{{ testDone|score }}</p>
                     </div>
                     <div class="col-10">
-                        <span class="text-primary">Resultado:</span>
+                        <span class="text-primary fw-bold">Resultado:</span>
                         <p>{{ testDone|interpretation }}</p>
                     </div>
                 </div>

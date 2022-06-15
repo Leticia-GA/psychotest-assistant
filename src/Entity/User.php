@@ -8,7 +8,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * @ORM\Entity()
@@ -25,6 +24,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public const ROLE_USER = "ROLE_USER";
     public const ROLE_ADMIN = "ROLE_ADMIN";
     public const ROLE_PSYC = "ROLE_PSYC";
+    private const PROFILE_PHOTO = "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png";
 
     /**
      * @ORM\Id
@@ -100,7 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->birthDate = $birthDate;
         $this->phoneNumber = $phoneNumber;
         $this->email = $email;
-        $this->photo = $photo;
+        $this->photo = self::PROFILE_PHOTO;
         $this->roles = $roles;
     }
 
