@@ -1,5 +1,12 @@
 <div class="row m-2 pt-4">
     <div class="col">
+        {% if patients is empty %}
+            <div class="row">
+                <h4 class="mt-4 pt-5 text-center text-muted fw-bold">Aún no tiene pacientes</h4>
+                <i class="fa-solid fa-user-clock fa-4x text-muted mt-3"></i>
+            </div>
+        {% endif %}
+
         {% for patient in patients %}
             <div class="row align-items-center mt-3 mb-4">
                 <div class="col-1">
