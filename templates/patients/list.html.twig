@@ -12,9 +12,9 @@
         {% endfor %}
 
         <div class="row">
-            <div class="h1 col-9 mt-4 mb-4">Pacientes</div>
+            <div class="h1 col-8 mt-4 mb-4">Pacientes</div>
 
-            <div class="col-3 mt-5 mb-4">
+            <div class="col-4 mt-5 mb-4 text-center">
                 {% if is_granted('ROLE_PSYC') %}
                     <a class="btn btn-light primary" href="{{ path('patient_create') }}"><i class="fas fa-user-plus"></i> Añadir nuevo paciente</a>
                 {% endif %}
@@ -28,30 +28,30 @@
                 <tr>
                     <th class="col-2">Nombre</th>
                     <th class="col-2">Apellidos</th>
-                    <th class="col-1">Teléfono</th>
-                    <th class="col-4 text-center">Acciones</th>
+                    <th class="col-2">Teléfono</th>
+                    <th class="col-3 text-center">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
                 {% for patient in patients %}
                     <tr>
-                        <td>{{ patient.name }}</td>
-                        <td>{{ patient.surnames }}</td>
-                        <td >{{ patient.phoneNumber }}</td>
+                        <td class="pt-3">{{ patient.name }}</td>
+                        <td class="pt-3">{{ patient.surnames }}</td>
+                        <td class="pt-3">{{ patient.phoneNumber }}</td>
                         <td class="text-center">
-                            <a class="btn btn-light success" href="{{ path('patient_details', {id: patient.id}) }}">
-                                <i class="fa-solid fa-circle-info"></i> Detalles
+                            <a class="btn btn-light success m-1" href="{{ path('patient_details', {id: patient.id}) }}">
+                                  <i class="fa-solid fa-circle-info"></i>  
                             </a>
                             {% if is_granted('ROLE_PSYC') %}
-                                <a class="btn btn-light test" href="{{ path('associated_test_create', {id: patient.id}) }}">
-                                    <i class="fa-solid fa-file-signature"></i> Asignar Test
+                                <a class="btn btn-light warning m-1" href="{{ path('patient_update', {id: patient.id}) }}">
+                                    <i class="fa-solid fa-pen-to-square"></i> 
                                 </a>
-                                <a class="btn btn-light warning" href="{{ path('patient_update', {id: patient.id}) }}">
-                                    <i class="fa-solid fa-pen-to-square">  </i> Editar
+                                <a class="btn btn-light danger m-1"  data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{patient.id}}">
+                                    <i class="fa-solid fa-trash"></i>
                                 </a>
-                                <a class="btn btn-light danger"  data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{patient.id}}">
-                                    <i class="fa-solid fa-trash"></i> Eliminar
+                                <a class="btn btn-light test m-1 ps-3 pe-3" href="{{ path('associated_test_create', {id: patient.id}) }}">
+                                    <i class="fa-solid fa-file-signature"></i>Asignar Test
                                 </a>
                             {% endif %}
                         </td>

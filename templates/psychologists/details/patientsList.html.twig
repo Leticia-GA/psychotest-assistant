@@ -10,7 +10,7 @@
         {% for patient in patients %}
             <div class="row align-items-center mt-3 mb-4">
                 <div class="col-1">
-                    <img class="rounded-circle" src="{{ patient.photo }}" alt="Patient photo" width="50">  
+                    <img class="img-fluid rounded-circle" src="{{ patient.photo }}" alt="Patient photo" width="50">  
                 </div>
                 <div class="col-11">
                     <a href="{{ path('patient_details', {id: patient.id}) }}">{{ patient.name }} {{ patient.surnames }}</a>

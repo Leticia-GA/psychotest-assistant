@@ -15,14 +15,14 @@
             <tbody>
                 {% for singleTest in test %}
                     <tr>
-                        <td>{{ singleTest.name }}</td>
+                        <td class="pt-3">{{ singleTest.name }}</td>
                         <td class="text-center">
-                            <a class="btn btn-light success" href="{{ path('test_details', {id: singleTest.id}) }}">
-                                <i class="fa-solid fa-circle-info"></i> Detalles
+                            <a class="btn btn-light success m-1" href="{{ path('test_details', {id: singleTest.id}) }}">
+                                <i class="fa-solid fa-circle-info"></i>
                             </a>
                             {% if is_granted('ROLE_PSYC') %}
-                                <a class="btn btn-light test" href="{{ path('associated_test_associate', {id: singleTest.id}) }}">
-                                    <i class="fas fa-user"></i> Asignar a paciente
+                                <a class="btn btn-light test m-1" href="{{ path('associated_test_associate', {id: singleTest.id}) }}">
+                                    <i class="fas fa-user"></i> Asignar
                                 </a>
                             {% endif %}
                         </td>

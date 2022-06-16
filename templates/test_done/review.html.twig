@@ -5,7 +5,7 @@
         <p class="display-6 mt-5 mb-4">{{ testDone.associatedTest.test.name }}</p>
         <p class="fs-3 mb-4">Paciente: 
             <a href="{{ path('patient_details', {id: testDone.associatedTest.patient.id}) }}">
-                <b>{{ testDone.associatedTest.patient.name }} {{ testDone.associatedTest.patient.surnames }}</b>
+                {{ testDone.associatedTest.patient.name }} {{ testDone.associatedTest.patient.surnames }}
             </a>
         </p>
 

@@ -22,30 +22,30 @@
         <table class="table">
             <thead class="table-light">
                 <tr>
-                    <th>Nombre</th>
-                    <th>Apellidos</th>
-                    <th>Teléfono</th>
-                    <th>Especialización</th>
-                    <th class="text-center">Acciones</th>
+                    <th class="col-2">Nombre</th>
+                    <th class="col-2">Apellidos</th>
+                    <th class="col-2">Teléfono</th>
+                    <th class="col-3">Especialización</th>
+                    <th class="col-sm-1 col-md-1 col-lg-3 text-center">Acciones</th>
                 </tr>
             </thead>
 
             <tbody>
                 {% for psychologist in psychologists %}
                     <tr>
-                        <td class="col-2">{{ psychologist.name }}</td>
-                        <td class="col-2">{{ psychologist.surnames }}</td>
-                        <td class="col-2">{{ psychologist.phoneNumber }}</td>
-                        <td class="col-3">{{ psychologist.specialization }}</td>
-                        <td class="col-3 text-center">
-                            <a class="btn btn-light success" href="{{ path('psychologist_details', {id: psychologist.id}) }}">
-                                <i class="fa-solid fa-circle-info"></i> Detalles
+                        <td class="pt-3">{{ psychologist.name }}</td>
+                        <td class="pt-3">{{ psychologist.surnames }}</td>
+                        <td class="pt-3">{{ psychologist.phoneNumber }}</td>
+                        <td class="pt-3">{{ psychologist.specialization }}</td>
+                        <td class="text-center">
+                            <a class="btn btn-light success m-1" href="{{ path('psychologist_details', {id: psychologist.id}) }}">
+                                <i class="fa-solid fa-circle-info"></i>
                             </a>
-                            <a class="btn btn-light warning" href="{{ path('psychologist_update', {id: psychologist.id}) }}">
-                                <i class="fa-solid fa-pen-to-square"></i> Editar
+                            <a class="btn btn-light warning m-1" href="{{ path('psychologist_update', {id: psychologist.id}) }}">
+                                <i class="fa-solid fa-pen-to-square"></i>
                             </a>
-                            <button type="button" class="btn btn-light danger" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{psychologist.id}}">
-                                <i class="fa-solid fa-trash"></i> Eliminar
+                            <button type="button" class="btn btn-light danger m-1" data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{psychologist.id}}">
+                                <i class="fa-solid fa-trash"></i>
                             </button>
                         </td>
                     </tr>

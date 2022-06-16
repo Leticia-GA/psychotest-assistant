@@ -1,0 +1,20 @@
+<div class="d-flex align-items-center mr-5">
+            <div class="position-relative" id="notifications">
+               <a class="text-reset me-3" href="{{ path('dashboard') }}">
+                  <i class="fas fa-bell fs-5 dark"></i>
+               </a>
+            </div>
+
+            <div class="dropdown ml-5">
+                  <button class="btn btn-profile dropdown-toggle ml-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                     {{ app.user.name }}
+                     <img class="img-profile rounded-circle" alt="Imagen de perfil" src="{{ app.user.photo }}" width="40">
+                  </button>
+                  
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                     <li><a class="dropdown-item" href="{{ path('profile') }}">Ver Perfil</a></li>
+                     <hr>
+                     <li><a class="dropdown-item" href="{{ path('app_logout') }}">Cerrar Sesión</a></li>
+                  </ul>
+            </div>
+         </div>
