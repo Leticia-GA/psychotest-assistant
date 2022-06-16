@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <main class="container mb-4">
+        <div class="text-center mt-5 mb-3">
+            <img class="img-fluid text-center" src="{{ asset('build/images/404-error.png') }}" alt="Profile photo" width="170">
+        </div>
+
+        <div class="text-center mb-4">
+            <h1 class="m-3">Página no encontrada</h1>
+            <p class="m-3">No se ha podido encontrar la página.</p>
+            <p>Asegúrese de que la URL es correcta o vuelva a la <a href="{{ path('dashboard') }}">página principal</a>.</p>
+        </div>
+    </main>
+{% endblock %}
