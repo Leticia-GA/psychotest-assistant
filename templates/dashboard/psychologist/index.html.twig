@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-   <main class="container">
+   <main class="container mb-4">
         <div class="row">
             <div class="h1 col-9 mt-4 mb-4">Notificaciones</div>
             <hr>
@@ -19,12 +19,12 @@
                 <div class="col-2 text-center">
                     <p class="mt-2 mb-2 dark">{{ testDone.date|date('d-m-Y') }} a las {{ testDone.date|date('H:i') }}</p>
                 </div> 
-                <div class="col-9">
+                <div class="col-8">
                     <p class="mt-2 mb-2">
                         <b><a href="{{ path('patient_details', {id: testDone.associatedTest.patient.id}) }}">
                             {{ testDone.associatedTest.patient.name }} {{ testDone.associatedTest.patient.surnames }}</a></b> ha completado el test <span class="fw-bold">{{ testDone.associatedTest.test.name }}</span></p>
                 </div>
-                <div class="col-1 text-center">
+                <div class="col-2 text-end">
                     <a class="btn btn-light primary" href="{{ path('test_done_review', {id: testDone.id}) }}">Ver resultados</a>
                 </div> 
             </div>               

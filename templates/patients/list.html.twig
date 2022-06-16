@@ -41,17 +41,17 @@
                         <td class="pt-3">{{ patient.phoneNumber }}</td>
                         <td class="text-center">
                             <a class="btn btn-light success m-1" href="{{ path('patient_details', {id: patient.id}) }}">
-                                  <i class="fa-solid fa-circle-info"></i>  
+                                  <i class="fa-solid fa-circle-info" title="Detalles"></i>  
                             </a>
                             {% if is_granted('ROLE_PSYC') %}
                                 <a class="btn btn-light warning m-1" href="{{ path('patient_update', {id: patient.id}) }}">
-                                    <i class="fa-solid fa-pen-to-square"></i> 
+                                    <i class="fa-solid fa-pen-to-square" title="Editar"></i> 
                                 </a>
                                 <a class="btn btn-light danger m-1"  data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{patient.id}}">
-                                    <i class="fa-solid fa-trash"></i>
+                                    <i class="fa-solid fa-trash" title="Eliminar"></i>
                                 </a>
                                 <a class="btn btn-light test m-1 ps-3 pe-3" href="{{ path('associated_test_create', {id: patient.id}) }}">
-                                    <i class="fa-solid fa-file-signature"></i>Asignar Test
+                                    <i class="fa-solid fa-file-signature" title="Asignar Test"></i>Asignar Test
                                 </a>
                             {% endif %}
                         </td>
