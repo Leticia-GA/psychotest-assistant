@@ -23,61 +23,68 @@
 
         <hr>
 
-        <table class="table">
-            <thead class="table-light">
-                <tr>
-                    <th class="col-2">Nombre</th>
-                    <th class="col-2">Apellidos</th>
-                    <th class="col-2">Teléfono</th>
-                    <th class="col-3 text-center">Acciones</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for patient in patients %}
+        {% if patients is empty %}
+            <div class="row">
+                <h4 class="mt-4 pt-5 text-center text-muted fw-bold">Aún no tiene pacientes</h4>
+                <i class="fa-solid fa-user-clock fa-3x text-muted mt-3"></i>
+            </div>
+        {% else %}
+            <table class="table">
+                <thead class="table-light">
                     <tr>
-                        <td class="pt-3">{{ patient.name }}</td>
-                        <td class="pt-3">{{ patient.surnames }}</td>
-                        <td class="pt-3">{{ patient.phoneNumber }}</td>
-                        <td class="text-center">
-                            <a class="btn btn-light success m-1" href="{{ path('patient_details', {id: patient.id}) }}">
-                                  <i class="fa-solid fa-circle-info" title="Detalles"></i>  
-                            </a>
-                            {% if is_granted('ROLE_PSYC') %}
-                                <a class="btn btn-light warning m-1" href="{{ path('patient_update', {id: patient.id}) }}">
-                                    <i class="fa-solid fa-pen-to-square" title="Editar"></i> 
-                                </a>
-                                <a class="btn btn-light danger m-1"  data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{patient.id}}">
-                                    <i class="fa-solid fa-trash" title="Eliminar"></i>
-                                </a>
-                                <a class="btn btn-light test m-1 ps-3 pe-3" href="{{ path('associated_test_create', {id: patient.id}) }}">
-                                    <i class="fa-solid fa-file-signature" title="Asignar Test"></i>Asignar Test
-                                </a>
-                            {% endif %}
-                        </td>
+                        <th class="col-2">Nombre</th>
+                        <th class="col-2">Apellidos</th>
+                        <th class="col-2">Teléfono</th>
+                        <th class="col-3 text-center">Acciones</th>
                     </tr>
+                </thead>
 
-                    <div class="modal fade" id="delete_confirmation_modal_{{patient.id}}" tabindex="-1" aria-labelledby="delete_confirmation_modal_label" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="delete_confirmation_modal_label">Eliminar Paciente</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    ¿Eliminar definitivamente el Paciente {{ patient.name~' '~patient.surnames }}?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-light primary" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i> Cancelar</button>
-                                    <a class="btn btn-light danger" href="{{ path('patient_remove', {id: patient.id}) }}">
-                                        <i class="fa-solid fa-trash"></i> Eliminar
+                <tbody>
+                    {% for patient in patients %}
+                        <tr>
+                            <td class="pt-3">{{ patient.name }}</td>
+                            <td class="pt-3">{{ patient.surnames }}</td>
+                            <td class="pt-3">{{ patient.phoneNumber }}</td>
+                            <td class="text-center">
+                                <a class="btn btn-light success m-1" href="{{ path('patient_details', {id: patient.id}) }}">
+                                    <i class="fa-solid fa-circle-info" title="Detalles"></i>  
+                                </a>
+                                {% if is_granted('ROLE_PSYC') %}
+                                    <a class="btn btn-light warning m-1" href="{{ path('patient_update', {id: patient.id}) }}">
+                                        <i class="fa-solid fa-pen-to-square" title="Editar"></i> 
                                     </a>
+                                    <a class="btn btn-light danger m-1"  data-bs-toggle="modal" data-bs-target="#delete_confirmation_modal_{{patient.id}}">
+                                        <i class="fa-solid fa-trash" title="Eliminar"></i>
+                                    </a>
+                                    <a class="btn btn-light test m-1 ps-3 pe-3" href="{{ path('associated_test_create', {id: patient.id}) }}">
+                                        <i class="fa-solid fa-file-signature" title="Asignar Test"></i>Asignar Test
+                                    </a>
+                                {% endif %}
+                            </td>
+                        </tr>
+
+                        <div class="modal fade" id="delete_confirmation_modal_{{patient.id}}" tabindex="-1" aria-labelledby="delete_confirmation_modal_label" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="delete_confirmation_modal_label">Eliminar Paciente</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Eliminar definitivamente el Paciente {{ patient.name~' '~patient.surnames }}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-light primary" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i> Cancelar</button>
+                                        <a class="btn btn-light danger" href="{{ path('patient_remove', {id: patient.id}) }}">
+                                            <i class="fa-solid fa-trash"></i> Eliminar
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
-            </tbody>
-        </table>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </main>
 {% endblock %}
